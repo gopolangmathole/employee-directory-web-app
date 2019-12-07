@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+<!-- Fontawesome CSS -->
+<link
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet">
+
+</head>
+
+
+<body>
+	<nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top" style="box-shadow: 0px 2.5px 8px #c1c1c1;">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/employees/list}">Employee Directory</a>
+
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+
+          <div class="collapse navbar-collapse" id="navbarNav">
+
+              <ul class="navbar-nav ml-1 text-center">
+                  <li class="nav-item ml-1">
+                      <a class="nav-link active" th:href="@{/employees/list}">Home <span th:if="${number!=0}" class="badge badge-pill badge-primary rounded" th:text="${number}"></span></a>
+                  </li>
+                  <li  class="nav-item ml-1">
+                      <a class="nav-link" th:href="@{/employees/api}">Api <span class="badge badge-pill badge-success rounded" style ="background-color:#00c853 !important">5</span></a>
+                  </li>
+                  <li  class="nav-item ml-1">
+                      <a class="nav-link" th:href="@{/employees/viewReport}">Reports 
+	                      <span th:if="${reports!=0}" class="badge badge-pill badge-danger rounded" style="background-color:#ff1744  !important" th:text="${reports}"></span>
+                      </a>
+                  </li>
+              </ul>
+          </div>
+        </div>
+    </nav>
+	<div class="container">
+			
+			<div class="d-block mt-4">
+					
+					<a class="btn btn-primary mt-4" th:href="@{/employees/showFormForAdd}">
+						<i class="fa fa-plus-square p-1"></i>
+						Add Employee
+					</a>
+					
+			</div>
+			
+
+		<table class="table  table-bordered mt-5" style="box-shadow: 0px 2.5px 8px #c1c1c1;">
+			<thead class="">
+				<tr>
+					<th>ID</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Email</th>
+					<th>Update</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+
+			<tbody style="background-color:#F2F2F2">
+				<tr th:if="${employees!=null and !employees.isEmpty()}"  th:each="tempEmployee : ${employees}">
+					<td th:text="${tempEmployee.id}" />
+					<td th:text="${tempEmployee.firstName}" />
+					<td th:text="${tempEmployee.lastName}" />
+					<td th:text="${tempEmployee.email}" />
+					<td>
+						<a th:href="@{/employees/edit/{id} (id=${tempEmployee.id})}" class="btn btn-outline-primary btn-sm">
+							<i class="fa fa-pencil" aria-hidden="true"></i> Update
+						</a>
+					</td>
+					<td >
+						<a th:href="@{/employees/delete/{id}(id=${tempEmployee.id})}" class="btn btn-outline-danger btn-sm">
+							<i class="fa fa-trash-o" aria-hidden="true"></i> Delete
+						</a>
+					</td>
+				</tr>
+				
+				<tr th:unless="${employees!=null and !employees.isEmpty()}" style="background-color:#F2F2F2">
+					<td colspan="6">
+						<p class="text-center text-dark">No  employees available</p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+</body>
+</html>
+
+
+

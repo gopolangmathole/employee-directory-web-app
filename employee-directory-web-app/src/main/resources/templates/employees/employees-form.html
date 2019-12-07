@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+<!-- Fontawesome CSS -->
+<link
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet">
+
+<title th:if="${employee.id == 0}">Add Employee</title>
+<title th:unless="${employee.id == 0}">Update Employee</title>
+</head>
+
+<body>
+
+	  <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top" style="box-shadow: 0px 2.5px 8px #c1c1c1;">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/employees/list}">Employee Directory</a>
+
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+
+          <div class="collapse navbar-collapse" id="navbarNav">
+
+              <ul class="navbar-nav ml-1 text-center">
+                  <li class="nav-item ml-1">
+                      <a class="nav-link active" th:href="@{/employees/list}">Home <span th:if="${number!=0}" class="badge badge-pill badge-primary rounded" th:text="${number}"></span></a>
+                  </li>
+                  <li  class="nav-item ml-1">
+                      <a class="nav-link" th:href="@{/employees/api}">Api <span class="badge badge-pill badge-success rounded" style ="background-color:#00c853 !important">5</span></a>
+                  </li>
+                  <li  class="nav-item ml-1">
+                      <a class="nav-link" th:href="@{/employees/viewReport}">Reports 
+	                      <span th:if="${reports!=0}" class="badge badge-pill badge-danger rounded" style="background-color:#ff1744  !important" th:text="${reports}"></span>
+                      </a>
+                  </li>
+              </ul>
+          </div>
+        </div>
+    </nav>
+
+	<div class="container">
+		<div class="mt-4">
+			<a class="btn btn-warning btn-sm" th:href="@{/employees/list}">
+				<i class="fa fa-home"></i>
+				Return
+			</a>
+		</div>
+	</div>
+		
+	<div class="container">
+			
+				<div class="card p-4 mx-auto mb-3 rounded" style="width:50%; box-shadow: 1.5px 2px 8px #c1c1c1;">
+								<div class="col-12 text-center">
+									<p th:if="${employee.id != 0}" class="h5 mb-4">Update Employee</p>
+									<p th:unless="${employee.id != 0}" class="h5 mb-4">Add Employee</p>
+								</div>
+								
+								<form  action="#" th:action="@{/employees/save}"
+											enctype="multipart/form-data" th:object="${employee}" method="POST" >
+								
+								<!-- Image here -->
+									<div class="form-group mx-auto w-75 px-4 py-2 text-center">		
+
+										<img th:if="${employee.image == null || employee.image==0}" class=" w-50 h-50" alt="100x100" src="/static/images/default.png" th:src="@{/images/default.png}"/>
+										
+										<img th:unless="${employee.image == null || employee.image==0}" class=" w-50 h-50"  th:src="@{/images/uploads/}+${employee.image}" style= "box-shadow: 2.8px 2px 5px #c1c1c1;border-radius:10%;"/>
+										
+										<input  type="file"  name="imageFile"   class="d-block mx-auto mt-4 bg-secondary " style="width:60%;"></input>			
+
+									</div>
+								
+									 <div class="form-group hiden">
+										<input type="hidden" th:field="*{id}"
+												class="form-control mb-4  hidden"/>
+									</div>
+								
+									 <div class="form-group mx-auto w-75">
+									   <label for="firstName">First name: </label>
+									   
+										<input type="text" th:field="*{firstName}"
+												class="form-control mb-1" placeholder="John" required/>
+										<p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"
+											class="alert alert-danger mb-2 h-2"></p>
+						
+									</div>
+									
+									 <div class="form-group mx-auto w-75">
+									 	<label for="lastName">Last name: </label>
+									 
+										<input type="text" th:field="*{lastName}"
+												class="form-control mb-1 text-dark" placeholder="Doe" required/>
+										<p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+											class="alert alert-danger mb-2  h-2 "></p>		
+									 </div>
+									 
+									 <div class="form-group" style="width:20%; margin-left:4em;">
+									 	<label for="gender">Gender: </label>
+									    <select th:field="*{gender}" class="form-control">											
+											<option th:if="${employee.gender == null}" value="default"></option>
+											<option 
+												th:if="${employee.gender != null}"
+												th:value="${employee.gender}" 
+												th:text="${employee.gender}"
+												selected>
+											</option>
+											<option
+												th:each="tempGender:${genderSelected}" 
+												th:value="${tempGender}" 
+												th:text="${tempGender}"
+												th:if="${tempGender != employee.gender}">
+											</option>
+										</select>
+									 </div>
+									
+									<div class="form-group mx-auto w-75">	
+										<label for="email">Email: </label>
+											<input type="text" th:field="*{email}"
+													class="form-control mb-1" placeholder="someone@example.com" required/>
+											<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+												class="alert alert-danger mb-2 h-2"></p>
+									</div>
+										
+									<div class="form-group mx-auto w-75">	
+										<label for="email">Street Address: </label>
+											<input type="text" th:field="*{address.streetAddress}"
+													class="form-control mb-1" placeholder="343 Andries Street" required/>
+									</div>
+									
+			
+									<div class="form-row">
+									    <div class="form-group col-md-6">
+									      	<label for="inputCity">City:</label>
+									      	<input type="text" class="form-control" th:field="*{address.city}" placeholder="Pretoria" required>
+									    </div>
+									    <div class="form-group col-md-4">
+									      	<label for="inputState">Country:</label>
+									      <select  th:field="*{address.country}" class="form-control">    											
+											<option th:if="${employee.address.country == null}" value="default">select country</option>
+											<option 
+												th:if="${employee.address.country != null}"
+												th:value="${employee.address.country}" 
+												th:text="${employee.address.country}"
+												selected>
+											</option>
+											
+											<option
+												th:each="tempCountries : ${getCountries}" 
+												th:value="${tempCountries}" 
+												th:text="${tempCountries}"
+												th:if="${tempCountries != employee.address.country}" >
+											</option> 
+									      </select>
+									      
+									    </div>
+									    <div class="form-group col-md-2">
+									      	<label for="inputZip">Zip:</label>
+									      	<input type="text" class="form-control" th:field="*{address.postalCode}" >
+									    </div>
+								  </div>
+									
+									<div class="form-group my-4 mt-2  mx-auto" style="width:40%;">
+										<button type="submit" class="btn btn-primary w-100">
+											<i class="fa fa-floppy-o mr-2" aria-hidden="true"></i>
+											Save
+										</button>
+									</div>
+								</form>
+					</div>
+		</div>
+	
+
+	  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" ></script>
+</body>
+</html>
+
+
+

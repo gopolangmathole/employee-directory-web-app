@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+
+<!-- Fontawesome CSS -->
+<link
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet">
+
+</head>
+
+<body>
+
+		  <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top" style="box-shadow: 0px 2.5px 8px #c1c1c1;">
+	        <div class="container">
+	            <a class="navbar-brand" th:href="@{/employees/list}">Employee Directory</a>
+	
+	            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+	
+	          <div class="collapse navbar-collapse" id="navbarNav">
+	
+	              <ul class="navbar-nav ml-1 text-center">
+	                  <li class="nav-item ml-1">
+	                      <a class="nav-link " th:href="@{/employees/list}">Home <span th:if="${number!=0}" class="badge badge-pill badge-primary rounded" th:text="${number}"></span></a>
+	                  </li>
+	                  <li  class="nav-item ml-1">
+	                      <a class="nav-link active" th:href="@{/employees/api}">Api <span class="badge badge-pill badge-success rounded" style ="background-color:#00c853 !important">5</span></a>
+	                  </li>
+	                  <li  class="nav-item ml-1">
+	                      <a class="nav-link" th:href="@{/employees/viewReport}">Reports 
+		                      <span th:if="${reports!=0}" class="badge badge-pill badge-danger rounded" style="background-color:#ff1744  !important" th:text="${reports}"></span>
+	                      </a>
+	                  </li>
+	              </ul>
+	          </div>
+	        </div>
+	    </nav>
+	    
+	    
+	   <div class="container-fluid">
+	   		
+	   		<div class="section">		
+	   				<div class="row p-4">
+	   					<div class="d-block w-100">
+	   						<h1 class="h1 text-dark pl-3">Employee Directory Documentation</h1>
+	   					</div>
+	   				</div>
+	   				
+	   				<hr class="w-100">
+	   				
+	   				
+	   				<div class="d-block my-2">
+	   					<h4 class="text-dark">Employee -Read data of an employee</h4>
+	   					<p class="ml-2 text-muted">Get an points allow user or developers to get a single employee or a list of employees.</p>
+	   				</div>
+	   				
+	   				<div class="d-block w-10 my-2">
+						   <a class="btn btn-success rounded">GET</a>
+	   				</div>
+	   				<div class="d-block w-10 my-2 w-100">
+						   <div class="bg-dark p2 w-100 rounded">
+						   	<p class="text-white">/api/v1/employees/{id}<p>
+						   </div>
+	   				</div>
+	   		</div>
+	   </div>
+	    
+</body>

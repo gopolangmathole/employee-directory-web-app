@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;employee-directory-web-app/src/main/resources/static/css/animated.css&apos; to &apos;animate.css&apos;" description="Rename resource &apos;animated.css&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/static/css/animated.css" name="animate.css" stamp="1575772050530" updateReferences="true"/>
+</session>

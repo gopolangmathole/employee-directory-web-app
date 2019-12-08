@@ -2,76 +2,503 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
 
-<!-- Fontawesome CSS -->
-<link
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-	rel="stylesheet">
+    <!-- Fontawesome CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    
+    <link href="/static/css/animate.css" th:href="@{/css/animate.css}"  rel="stylesheet" />
+    
+ 
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    
+    
 
 </head>
 
-<body>
+<body style="font-family: 'Open Sans', sans-serif;">
 
-		  <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top" style="box-shadow: 0px 2.5px 8px #c1c1c1;">
-	        <div class="container">
-	            <a class="navbar-brand" th:href="@{/employees/list}">Employee Directory</a>
-	
-	            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
-	
-	          <div class="collapse navbar-collapse" id="navbarNav">
-	
-	              <ul class="navbar-nav ml-1 text-center">
-	                  <li class="nav-item ml-1">
-	                      <a class="nav-link " th:href="@{/employees/list}">Home <span th:if="${number!=0}" class="badge badge-pill badge-primary rounded" th:text="${number}"></span></a>
-	                  </li>
-	                  <li  class="nav-item ml-1">
-	                      <a class="nav-link active" th:href="@{/employees/api}">Api <span class="badge badge-pill badge-success rounded" style ="background-color:#00c853 !important">5</span></a>
-	                  </li>
-	                  <li  class="nav-item ml-1">
-	                      <a class="nav-link" th:href="@{/employees/viewReport}">Reports 
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top" style="box-shadow: 0px 2.5px 8px #c1c1c1;">
+        <div class="container">
+            <a class="navbar-brand" th:href="@{/employees/list}">Employee Directory</a>
+
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <ul class="navbar-nav ml-1 text-center">
+                    <li class="nav-item ml-1">
+                        <a class="nav-link " th:href="@{/employees/list}">Home <span th:if="${number!=0}" class="badge badge-pill badge-primary rounded" th:text="${number}"></span></a>
+                    </li>
+                    <li class="nav-item ml-1">
+                        <a class="nav-link active" th:href="@{/employees/api}">Api <span class="badge badge-pill badge-success rounded" style ="background-color:#00c853 !important">5</span></a>
+                    </li>
+                    <li class="nav-item ml-1">
+                        <a class="nav-link" th:href="@{/employees/viewReport}">Reports 
 		                      <span th:if="${reports!=0}" class="badge badge-pill badge-danger rounded" style="background-color:#ff1744  !important" th:text="${reports}"></span>
 	                      </a>
-	                  </li>
-	              </ul>
-	          </div>
-	        </div>
-	    </nav>
-	    
-	    
-	   <div class="container-fluid">
-	   		
-	   		<div class="section">		
-	   				<div class="row p-4">
-	   					<div class="d-block w-100">
-	   						<h1 class="h1 text-dark pl-3">Employee Directory Documentation</h1>
-	   					</div>
-	   				</div>
-	   				
-	   				<hr class="w-100">
-	   				
-	   				
-	   				<div class="d-block my-2">
-	   					<h4 class="text-dark">Employee -Read data of an employee</h4>
-	   					<p class="ml-2 text-muted">Get an points allow user or developers to get a single employee or a list of employees.</p>
-	   				</div>
-	   				
-	   				<div class="d-block w-10 my-2">
-						   <a class="btn btn-success rounded">GET</a>
-	   				</div>
-	   				<div class="d-block w-10 my-2 w-100">
-						   <div class="bg-dark p2 w-100 rounded">
-						   	<p class="text-white">/api/v1/employees/{id}<p>
-						   </div>
-	   				</div>
-	   		</div>
-	   </div>
-	    
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+
+        <div class="section">
+            <div class="row py-4 px-5 mt-4 animated slideInUp">
+                <div class="d-block w-100">
+                    <h1 class="h1 text-dark pl-3">Employee Directory Documentation</h1>
+                </div>
+            </div>
+
+            <hr class="w-100 animated slideInUp">
+
+            <div class="d-block my-2 animated slideInUp">
+                <div class="row mt-4">
+                    <div class="col-sx-12 col-md-10 col-lg-10 col-xl-10">
+                        <h4 class="text-dark">Employee -Read data of an employee</h4>
+                        <p class="ml-2 text-muted">Get an points allow user or developers to get a single employee or a list of employees.</p>
+                    </div>
+                    <div class="col-sx-12 col-md-2 col-lg-2 m-sx-5 m-md-5 m-lg-0 my-xl-0">
+                        <a th:href="@{/jsondoc-ui.html}" target="_blank" class="btn btn-info">Advanced Doc</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-block w-10 my-2 col-xl-10 wow slideInUp">
+                <a class="btn btn-success rounded text-white col-xs-2 col-sm-2 col-md-1 col-lg-1 col-xl-1">GET</a>
+                <p class="text-muted mt-2">click the following path to get a simple user based on the default employee id provided. </p>
+            </div>
+
+            <div class="d-block w-10 my-3 py-4 w-100 bg-dark w-100 rounded wow slideInUp">
+                <a class="text-white ml-3" th:href="@{/api/v1/employees/1}" target="_blank">/api/v1/employees/{id}</a>
+            </div>
+
+            <div class="d-block mt-3 wow slideInUp">
+                <p class="text-muted ml-2">The above rest-end will fetch a single employee based on the <code>id</code> given.</p>
+            </div>
+            <div class="d-block w-10 my-3 py-4 w-100 bg-dark w-100 rounded wow slideInUp">
+                <a class="text-white ml-3" th:href="@{/api/v1/employees}" target="_blank">/api/v1/employees</a>
+            </div>
+
+            <div class="d-block mt-3 wow slideInUp">
+                <p class="text-muted ml-2">The above rest-end will fetch all the available employees which are currently available.</p>
+            </div>
+
+            <!-- Table and parameters -->
+            <div class="d-block w-100 mt-4 wow slideInUp">
+                <h2 class="text-dark ml-2">Parameters</h2>
+            </div>
+
+            <div class="d-block w-90 mx-2 mt-5">
+                <table class="table table-bordered wow slideInUp" style="box-shadow: 0px 2.5px 8px #c1c1c1;">
+                    <thead style="background-color:#F5F5F5;">
+                        <tr>
+                            <th>Field</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>The employee <code>id</code>.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Status code -->
+
+            <div class="d-block w-100 mt-5 wow slideInUp">
+                <h2 class="text-dark ml-2">Success 200</h2>
+            </div>
+
+            <div class="d-block w-90 mx-2 mt-5">
+                <table class="table table-bordered wow slideInUp" style="box-shadow: 0px 2.5px 8px #c1c1c1;">
+                    <thead style="background-color:#F5F5F5;">
+                        <tr>
+                            <th>Field</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td>int</td>
+                            <td>The employee id.</td>
+                        </tr>
+                        <tr>
+                            <td>firstName</td>
+                            <td>String</td>
+                            <td>The employee's first name.</td>
+                        </tr>
+                        <tr>
+                            <td>lastName</td>
+                            <td>String</td>
+                            <td>The employee's last name.</td>
+                        </tr>
+                        <tr>
+                            <td>gender</td>
+                            <td>String</td>
+                            <td>The employee's sex.</td>
+                        </tr>
+                        <tr>
+                            <td>email</td>
+                            <td>String</td>
+                            <td>The employee's email address.</td>
+                        </tr>
+
+                        <tr>
+                            <td>image</td>
+                            <td>Path</td>
+                            <td>The employee's image.</td>
+                        </tr>
+                        <tr>
+                            <td>address</td>
+                            <td>String</td>
+                            <td>The employee's current address</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Error response -->
+            <div class="d-block w-100 mt-4 wow slideInUp">
+                <h2 class="text-dark ml-2">Errors</h2>
+            </div>
+
+            <div class="d-block w-90 mx-2 mt-5 wow slideInUp">
+                <table class="table table-bordered" style="box-shadow: 0px 2.5px 8px #c1c1c1;">
+                    <thead style="background-color:#F5F5F5;">
+                        <tr>
+                            <th>Status Code</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>404</td>
+                            <td>Not found</td>
+                        </tr>
+                        <tr>
+                            <td>400</td>
+                            <td>Bad request</td>
+                        </tr>
+                        <tr>
+                            <td>500</td>
+                            <td>Internal server issue</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Posting a new user -->
+
+            <section>
+                <div class="d-block mt-5 wow slideInUp">
+                    <div class="mt-5">
+                        <h4 class="text-dark">Employee - Create a new employee</h4>
+                        <p class="ml-2 text-muted">create a new employee using any of your favorite rest client such as post man </p>
+                    </div>
+                </div>
+
+                <div class="d-block w-10 my-2 col-xl-10 wow slideInUp">
+                    <a class="btn btn-primary rounded text-white  col-xs-2 col-sm-2 col-md-1 col-lg-1 col-xl-1">POST</a>
+                    <p class="text-muted mt-3">The following link should be used on the post mapping.</p>
+                </div>
+
+                <div class="d-block w-10 my-3 py-4 w-100 bg-dark w-100 rounded wow slideInUp">
+                    <a class="text-white ml-3" target="_blank">/api/v1/employees</a>
+                </div>
+
+                <div class="d-block w-100 mt-5 wow slideInUp">
+                    <h2 class="text-dark ml-2">Parameter</h2>
+                </div>
+
+                <div class="d-block w-90 mx-2 mt-5 wow slideInUp">
+                    <table class="table table-bordered " style="box-shadow: 0px 2.5px 8px #c1c1c1;">
+                        <thead style="background-color:#F5F5F5;">
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>id</td>
+                                <td>int</td>
+                                <td>The employee id.</td>
+                            </tr>
+                            <tr>
+                                <td>firstName</td>
+                                <td>String</td>
+                                <td>The employee's first name.</td>
+                            </tr>
+                            <tr>
+                                <td>lastName</td>
+                                <td>String</td>
+                                <td>The employee's last name.</td>
+                            </tr>
+                            <tr>
+                                <td>gender</td>
+                                <td>String</td>
+                                <td>The employee's sex.</td>
+                            </tr>
+                            <tr>
+                                <td>email</td>
+                                <td>String</td>
+                                <td>The employee's email address.</td>
+                            </tr>
+
+                            <tr>
+                                <td>image</td>
+                                <td>Path</td>
+                                <td>The employee's image.</td>
+                            </tr>
+                            <tr>
+                                <td>address</td>
+                                <td>String</td>
+                                <td>The employee's current address</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-block w-10 my-5 py-4 pl-4 w-100 bg-dark w-100 rounded wow slideInUp">
+                    <span class="span-http" style="color:white;">HTTP</span>
+                    <span class="span-http" style="color:white;">/</span>
+                    <span class="span-light" style="color:#3387CC;">1.1</span>
+                    <span class="span-http" style="color:white;">200</span>
+                    <span class="span-http"></span>
+                    <span class="span-light" style="color:#89bdff">Ok</span>
+                    <br>
+                    <span class="span-http" style="color:white;">{</span>
+                    <span class="span-green"></span>
+                    <span class="span-green" style="color:#65B042">
+
+						<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id"<span class="span-http" style="color:white;">:</span> 1,
+                    <br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"firstName"
+                    <span class="span-http" style="color:white;">:</span> "Gopolang",
+                    <br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"lastName"
+                    <span class="span-http" style="color:white;">:</span> "Mathole",
+                    <br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"gender"
+                    <span class="span-http" style="color:white;">:</span> "Male",
+                    <br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"email"
+                    <span class="span-http" style="color:white;">:</span> "gopolang.mathole@gmail.com",
+                    <br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"image"
+                    <span class="span-http" style="color:white;">:</span> "1575675581485_forest-438432.jpg",
+                    <br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"address"
+                    <span class="span-http" style="color:white;">:</span> {
+                    <br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"streetAddress": "City lights ",
+                    <br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"city": "Pretoria",
+                    <br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"postalCode": "0001",
+                    <br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"country": "South Africa"
+                    <br/>
+                    </span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="span-http" style="color:#65B042;">}</span>
+                    <br>
+                    <span class="span-http" style="color:white;">}</span>
+                </div>
+
+                <!-- Error response -->
+                <div class="d-block w-100 mt-4 wow slideInUp">
+                    <h2 class="text-dark ml-2">Errors</h2>
+                </div>
+
+                <div class="d-block w-90 mx-2 mt-5 wow slideInUp">
+                    <table class="table table-bordered" style="box-shadow: 0px 2.5px 8px #c1c1c1;">
+                        <thead style="background-color:#F5F5F5;">
+                            <tr>
+                                <th>Status Code</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>404</td>
+                                <td>Not found</td>
+                            </tr>
+                            <tr>
+                                <td>400</td>
+                                <td>Bad request</td>
+                            </tr>
+                            <tr>
+                                <td>500</td>
+                                <td>Internal server issue</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="d-block w-10 my-5 py-4 pl-4 w-100 bg-dark w-100 rounded wow slideInUp">
+                    <span class="span-http" style="color:white;">HTTP</span>
+                    <span class="span-http" style="color:white;">/</span>
+                    <span class="span-light" style="color:#3387CC;">1.1</span>
+                    <span class="span-http" style="color:white;">404</span>
+                    <span class="span-http"></span>
+                    <span class="span-light" style="color:#89bdff">Not found</span>
+                    <br>
+                    <span class="span-http" style="color:white;">{</span>
+                    <span class="span-green"></span>
+                    <span class="span-green" style="color:#65B042">
+
+						<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"statusCode"<span class="span-http" style="color:white;">:</span> 404,
+                    <br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"message"
+                    <span class="span-http" style="color:white;">:</span> "Did not find employee id with id - 100",
+                    <br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"dateTime"
+                    <span class="span-http" style="color:white;">:</span> "2019/12/08 03:45:28",
+                    <br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <br>
+                    <span class="span-http" style="color:white;">}</span>
+
+                    </span>
+                </div>
+            </section>
+
+            <!-- create a put request -->
+
+            <section>
+                <div class="d-block mt-5">
+                    <div class="mt-5 wow slideInUp">
+                        <h4 class="text-dark">Employee - Update an existing employee</h4>
+                        <p class="ml-2 text-muted">The post request gives you full control of modifying and changing employee's details</p>
+                    </div>
+                </div>
+                <div class="d-block w-10 my-2 col-xl-10 wow slideInUp">
+                    <a class="btn btn-warning rounded text-white  col-xs-2 col-sm-2 col-md-1 col-lg-1 col-xl-1">PUT</a>
+                    <p class="text-muted mt-3">The following link should be used on the put mapping.</p>
+                </div>
+
+                <div class="d-block w-10 my-3 py-4 w-100 bg-dark w-100 rounded wow slideInUp">
+                    <p class="text-white ml-3">/api/v1/employees</p>
+                </div>
+
+                <div class="d-block w-100 mt-5 wow slideInUp">
+                    <h2 class="text-dark ml-2">Parameter</h2>
+                </div>
+
+                <div class="d-block w-90 mx-2 mt-5">
+                    <table class="table table-bordered wow slideInUp" style="box-shadow: 0px 2.5px 8px #c1c1c1;">
+                        <thead style="background-color:#F5F5F5;">
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>id</td>
+                                <td>int</td>
+                                <td>The employee id.</td>
+                            </tr>
+                            <tr>
+                                <td>firstName</td>
+                                <td>String</td>
+                                <td>The employee's first name.</td>
+                            </tr>
+                            <tr>
+                                <td>lastName</td>
+                                <td>String</td>
+                                <td>The employee's last name.</td>
+                            </tr>
+                            <tr>
+                                <td>gender</td>
+                                <td>String</td>
+                                <td>The employee's sex.</td>
+                            </tr>
+                            <tr>
+                                <td>email</td>
+                                <td>String</td>
+                                <td>The employee's email address.</td>
+                            </tr>
+
+                            <tr>
+                                <td>image</td>
+                                <td>Path</td>
+                                <td>The employee's image.</td>
+                            </tr>
+                            <tr>
+                                <td>address</td>
+                                <td>String</td>
+                                <td>The employee's current address</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Delete request mapping -->
+            <section style="margin-bottom:10em;">
+                <div class="d-block mt-5 wow slideInUp">
+                    <div class="mt-5">
+                        <h4 class="text-dark">Employee - Delete an existing employee</h4>
+                        <p class="ml-2 text-muted">The delete mapping requires an id of the employee which should be deleted</p>
+                    </div>
+                </div>
+                <div class="d-block w-10 my-2 col-xl-10 wow slideInUp">
+                    <a class="btn btn-danger rounded text-white  col-xs-2 col-sm-2 col-md-1 col-lg-1 col-xl-1">DELETE</a>
+                    <p class="text-muted mt-3">The following link should be used on the delete mapping.</p>
+                </div>
+
+                <div class="d-block w-10 my-3 py-4 w-100 bg-dark w-100 rounded wow slideInUp">
+                    <p class="text-white ml-3">/api/v1/employees/{id}</p>
+                </div>
+
+                <div class="d-block w-100 mt-5 wow slideInUp">
+                    <h2 class="text-dark ml-2">Parameter</h2>
+                </div>
+
+                <div class="d-block w-90 mx-2 mt-5">
+                    <table class="table table-bordered wow slideInUp" style="box-shadow: 0px 2.5px 8px #c1c1c1;">
+                        <thead style="background-color:#F5F5F5;">
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>id</td>
+                                <td>int</td>
+                                <td>The employee id.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+	
+	<footer class="bg-dark py-4 w-100 text-center text-white ">
+		<span>Copyright &copy; Gopolang Kopano Mathole </span><span th:text="${year}"></span>
+	</footer>
+	
+	<script src="/static/js/demo/wow.min.js" th:src="@{/js/demo/wow.min.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script>
+    	new WOW().init();
+    </script>
+  
 </body>
+
+</html>

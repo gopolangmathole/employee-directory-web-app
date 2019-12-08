@@ -13,45 +13,56 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.jsondoc.core.annotation.ApiObject;
+import org.jsondoc.core.annotation.ApiObjectField;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
 @Table(name = "employee")
+@ApiObject
 public class Employee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
+	@ApiObjectField
 	private int id;
 
 	@NotNull
 	@Size(min = 2, max = 50, message = "Length should be between 2 and 50")
 	@Column(name = "first_name")
+	@ApiObjectField(description ="Employee firts name")
 	private String firstName;
 
 	@NotNull
 	@Size(min = 2, max = 50, message = "Length should be between 2 and 50")
 	@Column(name = "last_name")
+	@ApiObjectField(description ="Employee last Name")
 	private String lastName;
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
 	@Column(name="gender")
 	@NotNull
+	@ApiObjectField(description ="Employee's sex")
 	private String gender; 
 
 	@NotNull
 	@Email(regexp = "^(.+)@(.+)$", message = "Invalid email address")
 	@Column(name = "email")
+	@ApiObjectField(description ="Employee's email")
 	private String email;
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
 	@Column(name="image")
+	@ApiObjectField(description ="Employee's image")
 	private String image;
 
 	@JsonIgnoreProperties(ignoreUnknown = true)
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "employee_address_id")
+	@ApiObjectField(description ="Employee's address")
 	private Address address;
 
 	

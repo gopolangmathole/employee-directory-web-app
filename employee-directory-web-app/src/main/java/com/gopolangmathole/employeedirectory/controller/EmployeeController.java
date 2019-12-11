@@ -41,18 +41,16 @@ public class EmployeeController {
 
 	@Autowired
 	private ExceptionService exceptionService;
-	
+
 	@Autowired
 	private EmployeeRepository employeeRepository;
-	
-	private List<String>  selectGender;
-	
+
+	private List<String> selectGender;
+
 	private CountryList countryList;
-	
-	private final String FOLDER= "c:///employee_directory//images///";
-	
-	public static String uploadDirectory = System.getProperty("user.dir") +"/src/main/resources/static/images/uploads";
-	
+
+	public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/images/uploads";
+
 	// add an in-it-binder ... to convert trim input string
 	// remove leading and trailing whitespace
 	// resolve issue
@@ -61,33 +59,32 @@ public class EmployeeController {
 
 		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
 		databinder.registerCustomEditor(String.class, stringTrimmerEditor);
-	
-		//initializing arrayList for gender, and add both genders to list. 
+
+		// initializing arrayList for gender, and add both genders to list.
 		selectGender = new ArrayList<String>();
-		
-		//initializing arrayList of countries
+
+		// initializing arrayList of countries
 		countryList = new CountryList();
-		
-		//adding gender to list
+
+		// adding gender to list
 		selectGender.add("Male");
 		selectGender.add("Female");
 	}
 
-	
 	// add mapping for "/list"
 	@GetMapping("/list")
-	public String listEmployees(Model theModel, @RequestParam(defaultValue="0") int page) {
+	public String listEmployees(Model theModel, @RequestParam(defaultValue = "0") int page) {
 
-		// getting the data from 
+		// getting the data from
 		int countRows = (int) employeeService.count();
 		int errorReport = (int) exceptionService.count();
 
 		// adding entities to the model
 		theModel.addAttribute("number", countRows);
 		theModel.addAttribute("reports", errorReport);
-		theModel.addAttribute("employees", employeeRepository.findAll(PageRequest.of(page,5)));
-		theModel.addAttribute("currentPage",page);
-	
+		theModel.addAttribute("employees", employeeRepository.findAll(PageRequest.of(page, 5)));
+		theModel.addAttribute("currentPage", page);
+
 		return "/employees/list-employees";
 	}
 
@@ -99,74 +96,45 @@ public class EmployeeController {
 		Employee employee = new Employee();
 		int countRows = (int) employeeService.count();
 		int errorReport = (int) exceptionService.count();
-		
-		
-		//adding objects to model
+
+		// adding objects to model
 		model.addAttribute("employee", employee);
 		model.addAttribute("number", countRows);
 		model.addAttribute("reports", errorReport);
-		model.addAttribute("genderSelected",selectGender);
-		model.addAttribute("getCountries",countryList.getCountries());
-	
+		model.addAttribute("genderSelected", selectGender);
+		model.addAttribute("getCountries", countryList.getCountries());
 
-		//System.out.println("Here is the image details "+employee.getImage().toString());
-		
-		
+		// System.out.println("Here is the image details
+		// "+employee.getImage().toString());
+
 		return "/employees/employees-form";
 
 	}
 
 	// save employees
 	@PostMapping("/save")
-	public String saveEmployee(@RequestParam("imageFile") MultipartFile imageFile,@ModelAttribute("employee") @Valid Employee employee, Errors errors) {
+	public String saveEmployee(@RequestParam("imageFile") MultipartFile imageFile,
+			@ModelAttribute("employee") @Valid Employee employee, Errors errors) throws IOException{
 
 		String url = null;
 
 		if (errors.hasErrors()) {
 
 			url = "/employees/employees-form";
-	
+
 		} else {
 
 			// redirect to make sure the user doesn't refresh the page
 			url = "redirect:/employees/list";
-			
-			//saving an image now			
-			byte[] bytes;
-			
-			try {
-				
-				long millis = System.currentTimeMillis();
-				
-				bytes = imageFile.getBytes();
-				
-				String modifiedFileName = (millis+"_"+imageFile.getOriginalFilename()).toLowerCase().replaceAll(" ", "_");
-				
-				//Writing to local disk space
-				Path path = Paths.get(FOLDER + modifiedFileName);
-				
-				//storing image on web application.
-				Path localPath = Paths.get(uploadDirectory,modifiedFileName);
-				
-				//writing the file to specified path 
-				Files.write(path, bytes);
-				
-				//saving to app file
-			    Files.write(localPath, bytes);
-				
-				
-				//saving image to database
-				employee.setImage(modifiedFileName.toString());
-				
-			} catch (IOException e) {
+            
+			//saving an image
+			employeeService.saveImage(imageFile, employee, uploadDirectory);
 
-				e.printStackTrace();
-			}
-			
-			
 			// save the employee
-			employeeService.save(employee);
+			employeeRepository.save(employee);
+
 		}
+
 
 		// return the proper view
 		return url;
@@ -187,11 +155,9 @@ public class EmployeeController {
 
 		model.addAttribute("number", countRows);
 		model.addAttribute("reports", errorReport);
-		model.addAttribute("genderSelected",selectGender);
-		model.addAttribute("getCountries",countryList.getCountries());
-		
-		System.out.println("Here is my direcotry: "+ employee.getImage());
-		
+		model.addAttribute("genderSelected", selectGender);
+		model.addAttribute("getCountries", countryList.getCountries());
+
 		return "/employees/employees-form";
 	}
 
@@ -217,28 +183,26 @@ public class EmployeeController {
 		model.addAttribute("number", countRows);
 		model.addAttribute("reports", errorReport);
 		model.addAttribute("year", Calendar.getInstance().get(Calendar.YEAR));
-		
+
 		return "/employees/list-apis";
 	}
-	
+
 	@GetMapping("/viewReport")
 	public String viewReport() {
-		
+
 		return "/dashboard/report";
 	}
-	
+
 	@GetMapping("/viewReport/charts")
 	public String getCharts() {
-		
+
 		return "/dashboard/charts";
 	}
 
 	@GetMapping("/viewReport/tables")
 	public String getTables() {
-	
+
 		return "/dashboard/tables";
 	}
-	
-	
-	
+
 }

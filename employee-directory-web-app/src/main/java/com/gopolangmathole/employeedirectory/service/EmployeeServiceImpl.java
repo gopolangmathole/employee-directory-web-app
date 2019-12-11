@@ -1,11 +1,16 @@
 package com.gopolangmathole.employeedirectory.service;
 
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.gopolangmathole.employeedirectory.dao.EmployeeRepository;
 import com.gopolangmathole.employeedirectory.entity.Employee;
@@ -16,6 +21,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
+	
+	private final String FOLDER= "c:///employee_directory//images///";
 	
 	@Override
 	public List<Employee> findAll() {
@@ -96,6 +103,42 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public List<Employee> findAllByOrderByFirstNameDesc() {
 		
 		return employeeRepository.findAllByOrderByFirstNameDesc();
+	}
+
+	//save an image here
+	@Override
+	public void saveImage(MultipartFile imageFile, Employee employee, String uploadDirectory) throws IOException {
+		
+		//saving an image now			
+		byte[] bytes;
+
+		long millis = System.currentTimeMillis();
+		
+		bytes = imageFile.getBytes();
+		
+		String modifiedFileName = (millis+"_"+imageFile.getOriginalFilename()).toLowerCase().replaceAll(" ", "_");
+		
+		//Writing to local disk space
+		Path path = Paths.get(FOLDER + modifiedFileName);
+		
+		//storing image on web application.
+		Path localPath = Paths.get(uploadDirectory,modifiedFileName);
+		
+		System.out.println("******************* "+imageFile.getSize()+" *******************");
+		
+	    //checking if the file path is null or empty, we don't want to be saving empty none-existing images
+	    if(imageFile.getSize() > 0) {
+		
+	    	//writing the file to specified path 
+			Files.write(path, bytes);
+			
+			//saving to app file
+		    Files.write(localPath, bytes);
+		    
+	    	//saving image to database
+	    	employee.setImage(modifiedFileName.toString());
+	    }
+		
 	}
 
 

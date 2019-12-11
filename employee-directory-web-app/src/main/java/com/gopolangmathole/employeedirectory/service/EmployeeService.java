@@ -1,6 +1,9 @@
 package com.gopolangmathole.employeedirectory.service;
 
+import java.io.IOException;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.gopolangmathole.employeedirectory.entity.Employee;
 
@@ -28,6 +31,8 @@ public interface EmployeeService {
 	
 	public long count();
 
-	//public 
+	public void saveImage(MultipartFile imageFile, Employee employee, String uploadDirectory) throws IOException;
+
+
 	
 }

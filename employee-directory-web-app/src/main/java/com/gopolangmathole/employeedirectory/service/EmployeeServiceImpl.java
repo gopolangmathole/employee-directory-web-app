@@ -106,40 +106,40 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	//save an image here
-	@Override
-	public void saveImage(MultipartFile imageFile, Employee employee, String uploadDirectory) throws IOException {
-		
-		//saving an image now			
-		byte[] bytes;
-
-		long millis = System.currentTimeMillis();
-		
-		bytes = imageFile.getBytes();
-		
-		String modifiedFileName = (millis+"_"+imageFile.getOriginalFilename()).toLowerCase().replaceAll(" ", "_");
-		
-		//Writing to local disk space
-		Path path = Paths.get(FOLDER + modifiedFileName);
-		
-		//storing image on web application.
-		Path localPath = Paths.get(uploadDirectory,modifiedFileName);
-		
-		System.out.println("******************* "+imageFile.getSize()+" *******************");
-		
-	    //checking if the file path is null or empty, we don't want to be saving empty none-existing images
-	    if(imageFile.getSize() > 0) {
-		
-	    	//writing the file to specified path 
-			Files.write(path, bytes);
+		@Override
+		public void saveImage(MultipartFile imageFile, Employee employee, String uploadDirectory) throws IOException {
 			
-			//saving to app file
-		    Files.write(localPath, bytes);
-		    
-	    	//saving image to database
-	    	employee.setImage(modifiedFileName.toString());
-	    }
-		
-	}
+			//saving an image now			
+			byte[] bytes;
+
+			long millis = System.currentTimeMillis();
+			
+			bytes = imageFile.getBytes();
+			
+			String modifiedFileName = (millis+"_"+imageFile.getOriginalFilename()).toLowerCase().replaceAll(" ", "_");
+			
+			//Writing to local disk space
+			Path path = Paths.get(FOLDER + modifiedFileName);
+			
+			//storing image on web application.
+			Path localPath = Paths.get(uploadDirectory,modifiedFileName);
+			
+			System.out.println("******************* "+imageFile.getSize()+" *******************");
+			
+		    //checking if the file path is null or empty, we don't want to be saving empty none-existing images
+		    if(imageFile.getSize() > 0) {
+			
+		    	//writing the file to specified path 
+				Files.write(path, bytes);
+				
+				//saving to app file
+			    Files.write(localPath, bytes);
+			    
+		    	//saving image to database
+		    	employee.setImage(modifiedFileName.toString());
+		    }
+			
+		}
 
 
 	

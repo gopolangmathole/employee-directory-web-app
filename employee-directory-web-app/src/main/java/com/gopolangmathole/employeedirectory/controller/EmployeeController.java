@@ -126,7 +126,7 @@ public class EmployeeController {
 
 			// redirect to make sure the user doesn't refresh the page
 			url = "redirect:/employees/list";
-            
+        
 			//saving an image
 			employeeService.saveImage(imageFile, employee, uploadDirectory);
 

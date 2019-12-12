@@ -124,8 +124,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 			//storing image on web application.
 			Path localPath = Paths.get(uploadDirectory,modifiedFileName);
 			
-			System.out.println("******************* "+imageFile.getSize()+" *******************");
-			
 		    //checking if the file path is null or empty, we don't want to be saving empty none-existing images
 		    if(imageFile.getSize() > 0) {
 			

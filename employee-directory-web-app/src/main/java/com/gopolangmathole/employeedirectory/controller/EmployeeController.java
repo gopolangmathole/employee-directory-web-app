@@ -50,6 +50,8 @@ public class EmployeeController {
 	private CountryList countryList;
 
 	public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/images/uploads";
+	
+	private String currentImage = null;
 
 	// add an in-it-binder ... to convert trim input string
 	// remove leading and trailing whitespace
@@ -97,15 +99,15 @@ public class EmployeeController {
 		int countRows = (int) employeeService.count();
 		int errorReport = (int) exceptionService.count();
 
+		//making sure a new user doesn't have the profile picture of the previous user
+		currentImage = null;
+		
 		// adding objects to model
 		model.addAttribute("employee", employee);
 		model.addAttribute("number", countRows);
 		model.addAttribute("reports", errorReport);
 		model.addAttribute("genderSelected", selectGender);
 		model.addAttribute("getCountries", countryList.getCountries());
-
-		// System.out.println("Here is the image details
-		// "+employee.getImage().toString());
 
 		return "/employees/employees-form";
 
@@ -128,7 +130,7 @@ public class EmployeeController {
 			url = "redirect:/employees/list";
         
 			//saving an image
-			employeeService.saveImage(imageFile, employee, uploadDirectory);
+			employeeService.saveImage(imageFile, employee, uploadDirectory,currentImage);
 
 			// save the employee
 			employeeRepository.save(employee);
@@ -147,6 +149,10 @@ public class EmployeeController {
 		int countRows = (int) employeeService.count();
 		int errorReport = (int) exceptionService.count();
 
+		//setting and image to the variable to use it later
+		currentImage = null;
+		currentImage = employee.getImage();
+		
 		if (employee != null) {
 
 			model.addAttribute("employee", employee);

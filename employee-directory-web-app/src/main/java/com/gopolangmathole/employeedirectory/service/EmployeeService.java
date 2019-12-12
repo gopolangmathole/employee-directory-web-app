@@ -31,6 +31,6 @@ public interface EmployeeService {
 	
 	public long count();
 
-	public void saveImage(MultipartFile imageFile, Employee employee, String uploadDirectory) throws IOException;
+	public void saveImage(MultipartFile imageFile, Employee employee, String uploadDirectory, String currentImage) throws IOException;
 	
 }

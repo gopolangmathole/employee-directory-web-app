@@ -107,7 +107,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	//save an image here
 		@Override
-		public void saveImage(MultipartFile imageFile, Employee employee, String uploadDirectory) throws IOException {
+		public void saveImage(MultipartFile imageFile, Employee employee, String uploadDirectory, String currentImage) throws IOException {
 			
 			//saving an image now			
 			byte[] bytes;
@@ -137,8 +137,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 			    
 		    	//saving image to database
 		    	employee.setImage(modifiedFileName.toString());
-		    }
+		    
+		    }else {
 			
+		    	//if the path is empty, let us set the old picture
+		    	employee.setImage(currentImage);
+		    
+		    }
 		}
 
 

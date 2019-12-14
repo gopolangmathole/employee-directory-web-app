@@ -46,15 +46,17 @@
     </nav>
 	<div class="container">
 			
-			<div class="d-block mt-4">
-					
-					<a class="btn btn-primary mt-4" th:href="@{/employees/showFormForAdd}">
-						<i class="fa fa-plus-square p-1"></i>
-						Add Employee
-					</a>
-					
-			</div>
-			
+				<div class="clearfix mt-3">
+						<a class="btn btn-primary mt-4 float-left" th:href="@{/employees/showFormForAdd}">
+							<i class="fa fa-plus-square p-1"></i>
+							Add Employee
+						</a>
+						<a class="btn btn-warning mt-4 float-right rounded text-white" th:href="@{/employees/all-employees}">
+							<!-- <i class="fa fa-plus-square p-1"></i> -->
+							<i class="fa fa-list" aria-hidden="true"></i>
+							List Employees
+						</a>
+				</div>
 
 		<table class="table  table-bordered mt-5" style="box-shadow: 0px 2.5px 8px #c1c1c1;">
 			<thead class="">
@@ -95,13 +97,15 @@
 			</tbody>
 		</table>
 
-	<ul class="nav nav-pills"> 
-		<li th:if="${employees!=null and !employees.isEmpty()}" class="nav-item" th:each="pages : ${#numbers.sequence(0,employees.totalPages-1)}">
+	<ul class="nav nav-pills mt-5"> 
+		<li class="page-item mr-3"><a class="page-link" href="#">Previous</a></li>
+		<li th:if="${employees!=null and !employees.isEmpty()}" class="nav-item " th:each="pages : ${#numbers.sequence(0,employees.totalPages-1)}" style="font-size:13px;">
 			<a 
 			th:href="@{/employees/list(page=${pages})}" 
 			th:text="${pages}" class="nav-link" 
 			th:classappend="${currentPage}==${pages}?'active':''"></a>
 		<li>
+		<li class="page-item ml-3"><a class="page-link" href="#">Next</a></li>
 	</ul>
 	</div>
 	

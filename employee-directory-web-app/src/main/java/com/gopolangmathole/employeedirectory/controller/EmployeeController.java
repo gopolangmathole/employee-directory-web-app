@@ -47,7 +47,7 @@ public class EmployeeController {
 	private CountryList countryList;
 
 	public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/images/uploads";
-	
+
 	private String currentImage = null;
 
 	// add an in-it-binder ... to convert trim input string
@@ -59,15 +59,6 @@ public class EmployeeController {
 		StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
 		databinder.registerCustomEditor(String.class, stringTrimmerEditor);
 
-		// initializing arrayList for gender, and add both genders to list.
-		selectGender = new ArrayList<String>();
-
-		// initializing arrayList of countries
-		countryList = new CountryList();
-
-		// adding gender to list
-		selectGender.add("Male");
-		selectGender.add("Female");
 	}
 
 	// add mapping for "/list"
@@ -87,18 +78,42 @@ public class EmployeeController {
 		return "/employees/list-employees";
 	}
 
+	@GetMapping("/all-employees")
+	public String getAllEMployees(Model theModel) {
+		// getting the data from
+		int countRows = (int) employeeService.count();
+		int errorReport = (int) exceptionService.count();
+
+		// adding entities to the model
+		theModel.addAttribute("number", countRows);
+		theModel.addAttribute("reports", errorReport);
+		theModel.addAttribute("employees", employeeRepository.findAll());
+		
+		return "/employees/all-employees";
+	}
+
 	// add a new employee
 	@GetMapping("/showFormForAdd")
 	public String addEmployee(Model model) {
+
+		// initializing arrayList for gender, and add both genders to list.
+		selectGender = new ArrayList<String>();
+
+		// initializing arrayList of countries
+		countryList = new CountryList();
+
+		// adding gender to list
+		selectGender.add("Male");
+		selectGender.add("Female");
 
 		// create model attribute to bind form data
 		Employee employee = new Employee();
 		int countRows = (int) employeeService.count();
 		int errorReport = (int) exceptionService.count();
 
-		//making sure a new user doesn't have the profile picture of the previous user
+		// making sure a new user doesn't have the profile picture of the previous user
 		currentImage = null;
-		
+
 		// adding objects to model
 		model.addAttribute("employee", employee);
 		model.addAttribute("number", countRows);
@@ -113,7 +128,7 @@ public class EmployeeController {
 	// save employees
 	@PostMapping("/save")
 	public String saveEmployee(@RequestParam("imageFile") MultipartFile imageFile,
-			@ModelAttribute("employee") @Valid Employee employee, Errors errors) throws IOException{
+			@ModelAttribute("employee") @Valid Employee employee, Errors errors) throws IOException {
 
 		String url = null;
 
@@ -125,15 +140,14 @@ public class EmployeeController {
 
 			// redirect to make sure the user doesn't refresh the page
 			url = "redirect:/employees/list";
-        
-			//saving an image
-			employeeService.saveImage(imageFile, employee, uploadDirectory,currentImage);
+
+			// saving an image
+			employeeService.saveImage(imageFile, employee, uploadDirectory, currentImage);
 
 			// save the employee
 			employeeRepository.save(employee);
 
 		}
-
 
 		// return the proper view
 		return url;
@@ -146,10 +160,10 @@ public class EmployeeController {
 		int countRows = (int) employeeService.count();
 		int errorReport = (int) exceptionService.count();
 
-		//setting and image to the variable to use it later
+		// setting and image to the variable to use it later
 		currentImage = null;
 		currentImage = employee.getImage();
-		
+
 		if (employee != null) {
 
 			model.addAttribute("employee", employee);

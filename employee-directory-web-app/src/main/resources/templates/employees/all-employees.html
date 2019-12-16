@@ -60,6 +60,7 @@
 				  <img class="card-img-top" th:unless="${tempEmployee.image == null || tempEmployee.image==0}" th:src="@{/images/uploads/}+${tempEmployee.image}" alt="/static/images/default.png" style="heigt:350px; max-height:350px;"/>
 					  <div class="card-body">
 						    <h5 class="card-title" th:text="${tempEmployee.firstName}+', '+${tempEmployee.lastName}"></h5>
+						    <p class="card-title text-muted" th:text="${tempEmployee.gender}"></p>
 						    <p class="card-title text-muted" th:text="${tempEmployee.email}"></p>
 						    <p class="card-text text-muted my-3" th:text="${tempEmployee.address.streetAddress}+', '+${tempEmployee.address.city}+', '+${tempEmployee.address.postalCode}+', '+${tempEmployee.address.country}"></p>
 					  </div>

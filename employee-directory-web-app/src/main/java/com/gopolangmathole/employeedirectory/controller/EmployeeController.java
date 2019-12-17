@@ -28,6 +28,7 @@ import com.gopolangmathole.employeedirectory.entity.Employee;
 import com.gopolangmathole.employeedirectory.service.EmployeeService;
 import com.gopolangmathole.employeedirectory.service.ExceptionService;
 
+
 @Controller
 @RequestMapping("/employees")
 public class EmployeeController {
@@ -50,6 +51,7 @@ public class EmployeeController {
 
 	private String currentImage = null;
 
+	
 	// add an in-it-binder ... to convert trim input string
 	// remove leading and trailing whitespace
 	// resolve issue

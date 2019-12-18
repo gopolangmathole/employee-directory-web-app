@@ -75,12 +75,37 @@ public class EmployeeControllerAdviser {
 
 		return new ResponseEntity<>(employee, HttpStatus.NOT_FOUND);
 	}
+	
+	@ExceptionHandler
+	public ResponseEntity<EmployeeResponse> exceptionHandler(NullPointerException nullPointerException) {
 
+		EmployeeResponse employee = new EmployeeResponse();
+		exceptionReport = new ExceptionReport();
+		getCurrentDateAndTime = new GetCurrentDateAndTime();
+
+		// parsing status code, message and date and time to it.
+		employee.setStatusCode((int) HttpStatus.INTERNAL_SERVER_ERROR.value());
+		employee.setMessage(nullPointerException.getMessage());
+		employee.setDateTime(getCurrentDateAndTime.getCurrentFullDate());
+
+
+		// setting the error response and updating database
+		exceptionReport.setCode((int) employee.getStatusCode());
+		exceptionReport.setException(employee.getMessage().toString());
+		exceptionReport.setTime(employee.getDateTime());
+		
+		// saving all the exceptions to the database (using JPA repository).
+		exceptionService.save(exceptionReport);
+
+		return new ResponseEntity<>(employee, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
 	@ExceptionHandler
 	public ResponseEntity<EmployeeResponse> exceptionHandler(Exception exception) {
 
 		EmployeeResponse employee = new EmployeeResponse();
 		exceptionReport = new ExceptionReport();
+		getCurrentDateAndTime = new GetCurrentDateAndTime();
 
 		// parsing status code, message and date and time to it.
 		employee.setStatusCode((int) HttpStatus.BAD_REQUEST.value());

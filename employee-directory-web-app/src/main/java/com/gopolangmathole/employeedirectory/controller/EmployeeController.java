@@ -1,6 +1,7 @@
 package com.gopolangmathole.employeedirectory.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -82,15 +83,16 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/all-employees")
-	public String getAllEMployees(Model theModel) {
+	public String getAllEMployees(Model theModel) throws ParseException {
 		// getting the data from
 		int countRows = (int) employeeService.count();
 		int errorReport = (int) exceptionService.count();
-
+		
 		// adding entities to the model
 		theModel.addAttribute("number", countRows);
 		theModel.addAttribute("reports", errorReport);
-		theModel.addAttribute("employees", employeeRepository.findAll());
+		theModel.addAttribute("employees", employeeService.findAll());
+		
 
 		return "/employees/all-employees";
 	}

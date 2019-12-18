@@ -97,9 +97,10 @@
 			</tbody>
 		</table>
 
-	<ul class="nav nav-pills mt-5"> 
+	
+	<ul th:if="${employees!=null and !employees.isEmpty()}" class="nav nav-pills mt-5"> 
 		<li class="page-item mr-3"><a class="page-link" href="#">Previous</a></li>
-		<li th:if="${employees!=null and !employees.isEmpty()}" class="nav-item " th:each="pages : ${#numbers.sequence(0,employees.totalPages-1)}" style="font-size:13px;">
+		<li  class="nav-item " th:each="pages : ${#numbers.sequence(0,employees.totalPages-1)}" style="font-size:13px;">
 			<a 
 			th:href="@{/employees/list(page=${pages})}" 
 			th:text="${pages}" class="nav-link" 

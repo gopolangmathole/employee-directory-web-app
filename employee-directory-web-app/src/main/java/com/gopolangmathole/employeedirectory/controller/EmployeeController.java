@@ -25,9 +25,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.gopolangmathole.employeedirectory.dao.EmployeeRepository;
 import com.gopolangmathole.employeedirectory.entity.CountryList;
 import com.gopolangmathole.employeedirectory.entity.Employee;
+import com.gopolangmathole.employeedirectory.entity.GetCurrentDateAndTime;
 import com.gopolangmathole.employeedirectory.service.EmployeeService;
 import com.gopolangmathole.employeedirectory.service.ExceptionService;
-
 
 @Controller
 @RequestMapping("/employees")
@@ -51,7 +51,8 @@ public class EmployeeController {
 
 	private String currentImage = null;
 
-	
+	private GetCurrentDateAndTime getCurrentDateAndTime;
+
 	// add an in-it-binder ... to convert trim input string
 	// remove leading and trailing whitespace
 	// resolve issue
@@ -90,7 +91,7 @@ public class EmployeeController {
 		theModel.addAttribute("number", countRows);
 		theModel.addAttribute("reports", errorReport);
 		theModel.addAttribute("employees", employeeRepository.findAll());
-		
+
 		return "/employees/all-employees";
 	}
 
@@ -134,6 +135,8 @@ public class EmployeeController {
 
 		String url = null;
 
+		getCurrentDateAndTime = new GetCurrentDateAndTime();
+
 		if (errors.hasErrors()) {
 
 			url = "/employees/employees-form";
@@ -145,6 +148,9 @@ public class EmployeeController {
 
 			// saving an image
 			employeeService.saveImage(imageFile, employee, uploadDirectory, currentImage);
+
+			// updating the last update column
+			employee.setLastUpdate(getCurrentDateAndTime.getCurrentFullDate());
 
 			// save the employee
 			employeeRepository.save(employee);
@@ -161,6 +167,15 @@ public class EmployeeController {
 		Employee employee = employeeService.findById(id);
 		int countRows = (int) employeeService.count();
 		int errorReport = (int) exceptionService.count();
+		// initializing arrayList for gender, and add both genders to list.
+		selectGender = new ArrayList<String>();
+
+		// initializing arrayList of countries
+		countryList = new CountryList();
+
+		// adding gender to list
+		selectGender.add("Male");
+		selectGender.add("Female");
 
 		// setting and image to the variable to use it later
 		currentImage = null;

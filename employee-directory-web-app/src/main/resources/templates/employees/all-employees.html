@@ -52,22 +52,31 @@
     
     <div class="container">
     	<div class="row ">
-      			<div class="card mx-auto mt-5 mb-3" style="width: 22rem;" th:each="tempEmployee : ${employees}">
-				  <div  class="text-center">
-				 	<img class=" mt-4" th:if="${tempEmployee.image == null || tempEmployee.image==0}"  src="/static/images/default.png" th:src="@{/images/default.png}" style="width:10em;"/>
-				  </div>
+      			<div class="card mx-auto mt-5 mb-3"  th:each="tempEmployee : ${employees}">
+					<div class="card-header" style="background-color:#434B53;">
+						  <div class="text-center">
+						 	<img th:if="${tempEmployee.image == null || tempEmployee.image==0}"  src="/static/images/default.png" th:src="@{/images/default.png}" style="width:12em;height:12em;"/>
+						  </div>
+						  
+						  <div class="text-center">
+						  	<img class="card-img-top" th:unless="${tempEmployee.image == null || tempEmployee.image==0}" th:src="@{/images/uploads/}+${tempEmployee.image}" alt="/static/images/default.png" style="width:12em;height:12em;border-radius:50%;"/>
+						  </div>	  
+				  	</div>
 				  
-				  <img class="card-img-top" th:unless="${tempEmployee.image == null || tempEmployee.image==0}" th:src="@{/images/uploads/}+${tempEmployee.image}" alt="/static/images/default.png" style="heigt:350px; max-height:350px;"/>
 					  <div class="card-body">
 						    <h5 class="card-title" th:text="${tempEmployee.firstName}+', '+${tempEmployee.lastName}"></h5>
-						    <p class="card-title text-muted" th:text="${tempEmployee.gender}"></p>
-						    <p class="card-title text-muted" th:text="${tempEmployee.email}"></p>
-						    <p class="card-text text-muted my-3" th:text="${tempEmployee.address.streetAddress}+', '+${tempEmployee.address.city}+', '+${tempEmployee.address.postalCode}+', '+${tempEmployee.address.country}"></p>
+						    <p class="card-title text-muted ml-2" th:text="${tempEmployee.gender}"></p>
+						    <p class="card-title text-muted ml-2" th:text="${tempEmployee.email}"></p>
+						    <p class="card-text text-muted ml-2" th:text="${tempEmployee.address.streetAddress}+', '+${tempEmployee.address.city}+', '+${tempEmployee.address.postalCode}+', '+${tempEmployee.address.country}"></p>
 					  </div>
 					  
 					  <div class="carde-footer text-center mb-3">
-					  	<a class="btn btn-primary col-4 mr-2" th:href="@{/employees/edit/{id} (id=${tempEmployee.id})}">Upadte</a>
-					  	<a class="btn btn-danger col-4 ml-2 delBtn" th:href="@{/employees/delete/{id}(id=${tempEmployee.id})}">Delete</a>
+					  	<a class="btn btn-primary col-4 mr-2" th:href="@{/employees/edit/{id} (id=${tempEmployee.id})}"><i class="fa fa-pencil mr-1" aria-hidden="true"></i>Upadte</a>
+					  	<a class="btn btn-danger col-4 ml-2 delBtn" th:href="@{/employees/delete/{id}(id=${tempEmployee.id})}"><i class="fa fa-trash-o mr-1" aria-hidden="true"></i>Delete</a>
+					  </div>
+					  
+					  <div class="card-footer text center" style="font-size:14px">
+					  	<small class="text center" th:text="'last updated: '+${tempEmployee.lastUpdate}"></small>
 					  </div>
 			  </div>
 		 </div>	 

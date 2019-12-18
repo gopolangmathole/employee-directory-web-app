@@ -4,8 +4,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.gopolangmathole.employeedirectory.entity.ExceptionReport;
+import com.gopolangmathole.employeedirectory.entity.GetCurrentDateAndTime;
 import com.gopolangmathole.employeedirectory.entity.HttpServletRequestsLogging;
 import com.gopolangmathole.employeedirectory.service.EmployeeLoggingService;
 
@@ -30,6 +29,8 @@ public class CustomerAspectLogging {
 	private HttpServletRequestsLogging requestsLogging;
 	
 	private ExceptionReport exceptionReport;
+	
+	private GetCurrentDateAndTime getCurrentDateAndTime;
 
 	// should inject database logging for all requests.
 	@Autowired
@@ -48,25 +49,21 @@ public class CustomerAspectLogging {
 	public void beforeAdviceController(JoinPoint jointPoint) {
 
 		requestsLogging = new HttpServletRequestsLogging();
-
-		// get current date and time
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-		LocalDateTime now = LocalDateTime.now();
-		String date = dtf.format(now).toString();
-
+		getCurrentDateAndTime = new GetCurrentDateAndTime();
+		
 		// parsing data to the setters.
-		requestsLogging.setDateTime(date);
+		requestsLogging.setDateTime(getCurrentDateAndTime.getCurrentFullDate());
 
 			//create log file
 			try {
 			
 				requestsLogging.setRequest(request.getRequestURL().toString());
-				applicationLogFiles(jointPoint,date);
+				applicationLogFiles(jointPoint,getCurrentDateAndTime.getCurrentFullDate());
 		
 			} catch (IOException exception) {
 				
 				exceptionReport.setException(exception.getMessage());
-				exceptionReport.setTime(date);
+				exceptionReport.setTime(getCurrentDateAndTime.getCurrentFullDate());
 				exceptionReport.setCode(500);
 			}
 		

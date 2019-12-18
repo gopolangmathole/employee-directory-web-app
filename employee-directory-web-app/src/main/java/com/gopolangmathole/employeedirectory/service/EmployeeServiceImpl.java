@@ -26,11 +26,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 	//setting final path to store the images 
 	private final String FOLDER = "c:///employee_directory//images///";
 
-	// giving the image resolution of 200 by 200
-	private final int WIDTH = 200;
-
-	private final int HEIGHT = 200;
-
 	@Override
 	public List<Employee> findAll() {
 

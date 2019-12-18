@@ -3,6 +3,7 @@ package com.gopolangmathole.employeedirectory.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,41 +34,49 @@ public class Employee {
 	@NotNull
 	@Size(min = 2, max = 50, message = "Length should be between 2 and 50")
 	@Column(name = "first_name")
-	@ApiObjectField(description ="Employee firts name")
+	@ApiObjectField(description = "Employee firts name")
 	private String firstName;
 
 	@NotNull
 	@Size(min = 2, max = 50, message = "Length should be between 2 and 50")
 	@Column(name = "last_name")
-	@ApiObjectField(description ="Employee last Name")
+	@ApiObjectField(description = "Employee last Name")
 	private String lastName;
-	
+
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	@Column(name="gender")
+	@Column(name = "gender")
 	@NotNull
-	@ApiObjectField(description ="Employee's sex")
-	private String gender; 
+	@ApiObjectField(description = "Employee's sex")
+	private String gender;
 
 	@NotNull
 	@Email(regexp = "^(.+)@(.+)$", message = "Invalid email address")
 	@Column(name = "email")
-	@ApiObjectField(description ="Employee's email")
+	@ApiObjectField(description = "Employee's email")
 	private String email;
-	
+
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	@Column(name="image")
-	@ApiObjectField(description ="Employee's image")
+	@Column(name = "image")
+	@ApiObjectField(description = "Employee's image")
 	private String image;
 
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	@OneToOne(cascade = CascadeType.ALL)
+	@Column(name = "last_update")
+	@ApiObjectField(description = "Employee's update")
+	private String lastUpdate;
+
+	@JsonIgnoreProperties(ignoreUnknown = true)
+	@Column(name = "employment_status")
+	@ApiObjectField(description = "Employee's employment status")
+	private boolean employmentStatus;
+
+	@JsonIgnoreProperties(ignoreUnknown = true)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "employee_address_id")
-	@ApiObjectField(description ="Employee's address")
+	@ApiObjectField(description = "Employee's address")
 	private Address address;
 
-	
 	// define constructors
-
 	public Employee() {
 
 	}
@@ -76,32 +85,52 @@ public class Employee {
 
 		this.address = address;
 	}
-	
-	public Employee(int id, String firstName,String image, String lastName,String gender, String email, Address employeeAddress) {
+
+	public Employee(int id, String firstName, String image, String lastName, String gender, String email,
+			String lastUpdate, boolean employmentStatus, Address employeeAddress) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.gender = gender;
 		this.image = image;
+		this.lastUpdate = lastUpdate;
+		this.employmentStatus = employmentStatus;
 		this.address = employeeAddress;
 	}
 
-	public Employee(String firstName, String image,String lastName, String gender, String email, Address employeeAddress) {
+	public Employee(String firstName, String image, String lastName, String gender, String email, String lastUpdate,
+			boolean employmentStatus, Address employeeAddress) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
 		this.email = email;
 		this.image = image;
+		this.lastUpdate = lastUpdate;
+		this.employmentStatus = employmentStatus;
 		this.address = employeeAddress;
 	}
 
 	// define getter/setter
-
 	public int getId() {
 		return id;
 	}
-	
+
+	public boolean isEmploymentStatus() {
+		return employmentStatus;
+	}
+
+	public void setEmploymentStatus(boolean employmentStatus) {
+		this.employmentStatus = employmentStatus;
+	}
+
+	public String getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public void setLastUpdate(String lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
 
 	public String getImage() {
 		return image;
@@ -157,16 +186,12 @@ public class Employee {
 		return address;
 	}
 
-	
 	// define tostring
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender
-				+ ", email=" + email + ", image=" + image + ", address=" + address + "]";
+				+ ", email=" + email + ", image=" + image + ", lastUpdate=" + lastUpdate + ", employmentStatus="
+				+ employmentStatus + ", address=" + address + "]";
 	}
-
-
-	
-
 
 }

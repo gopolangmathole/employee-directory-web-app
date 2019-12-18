@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.gopolangmathole.employeedirectory.exception.EmployeeNotFoundException;
 import com.gopolangmathole.employeedirectory.entity.EmployeeResponse;
 import com.gopolangmathole.employeedirectory.entity.ExceptionReport;
+import com.gopolangmathole.employeedirectory.entity.GetCurrentDateAndTime;
 import com.gopolangmathole.employeedirectory.service.ExceptionService;
 
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @RestControllerAdvice
 public class EmployeeControllerAdviser {
@@ -24,6 +23,8 @@ public class EmployeeControllerAdviser {
 	private ExceptionService exceptionService;
 
 	private ExceptionReport exceptionReport;
+	
+	private GetCurrentDateAndTime getCurrentDateAndTime;
 
 	/*
 	 * Creating controller adviser for All required exceptions
@@ -34,14 +35,11 @@ public class EmployeeControllerAdviser {
 	public ResponseEntity<EmployeeResponse> sqlException(SQLException  sqlException) {
 		EmployeeResponse employee = new EmployeeResponse();
 		exceptionReport = new ExceptionReport();
-
-		// get current date and time
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-		LocalDateTime now = LocalDateTime.now();
+		getCurrentDateAndTime = new GetCurrentDateAndTime();
 
 		employee.setStatusCode((int) HttpStatus.INTERNAL_SERVER_ERROR.value());
 		employee.setMessage(sqlException.getMessage());
-		employee.setDateTime(dtf.format(now).toString());
+		employee.setDateTime(getCurrentDateAndTime.getCurrentFullDate());
 
 		// setting the error response and updating database
 		exceptionReport.setCode((int) employee.getStatusCode());
@@ -58,15 +56,13 @@ public class EmployeeControllerAdviser {
 	public ResponseEntity<EmployeeResponse> employeeNotFoundException(EmployeeNotFoundException  employeeNotFoundException) {
 		EmployeeResponse employee = new EmployeeResponse();
 		exceptionReport = new ExceptionReport();
-
-		// get current date and time
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-		LocalDateTime now = LocalDateTime.now();
-
+		getCurrentDateAndTime = new GetCurrentDateAndTime();
+		
+		
 		// parsing status code, message and date and time to it.
 		employee.setStatusCode((int) HttpStatus.NOT_FOUND.value());
 		employee.setMessage(employeeNotFoundException.getMessage());
-		employee.setDateTime(dtf.format(now).toString());
+		employee.setDateTime(getCurrentDateAndTime.getCurrentFullDate());
 
 
 		// setting the error response and updating database
@@ -86,15 +82,10 @@ public class EmployeeControllerAdviser {
 		EmployeeResponse employee = new EmployeeResponse();
 		exceptionReport = new ExceptionReport();
 
-
-		// get current date and time
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-		LocalDateTime now = LocalDateTime.now();
-
 		// parsing status code, message and date and time to it.
 		employee.setStatusCode((int) HttpStatus.BAD_REQUEST.value());
 		employee.setMessage(exception.getMessage());
-		employee.setDateTime(dtf.format(now).toString());
+		employee.setDateTime(getCurrentDateAndTime.getCurrentFullDate());
 
 
 		// setting the error response and updating database

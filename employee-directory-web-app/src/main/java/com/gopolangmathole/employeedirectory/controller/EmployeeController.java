@@ -11,6 +11,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.SortDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -77,7 +79,7 @@ public class EmployeeController {
 		theModel.addAttribute("number", countRows);
 		theModel.addAttribute("reports", errorReport);
 		theModel.addAttribute("employees", employeeRepository.findAll(PageRequest.of(page, 5)));
-		theModel.addAttribute("currentPage", page);
+		//theModel.addAttribute("currentPage", page);
 
 		return "/employees/list-employees";
 	}
@@ -151,6 +153,9 @@ public class EmployeeController {
 			// saving an image
 			employeeService.saveImage(imageFile, employee, uploadDirectory, currentImage);
 
+			//add employment status
+			employee.setEmploymentStatus(true);
+			
 			// updating the last update column
 			employee.setLastUpdate(getCurrentDateAndTime.getCurrentFullDate());
 

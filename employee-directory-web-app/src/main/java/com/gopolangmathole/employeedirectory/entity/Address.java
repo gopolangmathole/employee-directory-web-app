@@ -7,6 +7,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name="employee_address")
 public class Address {
@@ -16,15 +22,19 @@ public class Address {
 	@Column(name="id")
 	private int id;
 	
+	@JsonIgnoreProperties(ignoreUnknown = true)
 	@Column(name="street_address")
 	private String streetAddress;
 	
+	@JsonIgnoreProperties(ignoreUnknown = true)
 	@Column(name="city")
 	private String city;
 	
+	@JsonIgnoreProperties(ignoreUnknown = true)
 	@Column(name="postal_code")
 	private String postalCode;
 	
+	@JsonIgnoreProperties(ignoreUnknown = true)
 	@Column(name="country")
 	private String country;
 	
@@ -34,8 +44,6 @@ public class Address {
 	 * */
 	
 	public Address() {}
-
-		
 	
 	public Address(String streetAddress, String city, String postalCode, String country) {
 		this.streetAddress = streetAddress;
@@ -53,6 +61,14 @@ public class Address {
 		this.country = country;
 	}
 
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getStreetAddress() {
 		return streetAddress;

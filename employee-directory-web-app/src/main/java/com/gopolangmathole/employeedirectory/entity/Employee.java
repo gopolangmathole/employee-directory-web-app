@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "employee")
 @ApiObject
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Employee {
 
 	@Id
@@ -70,7 +71,7 @@ public class Employee {
 	@ApiObjectField(description = "Employee's employment status")
 	private boolean employmentStatus;
 
-	@JsonIgnoreProperties(ignoreUnknown = true)
+	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "employee_address_id")
 	@ApiObjectField(description = "Employee's address")

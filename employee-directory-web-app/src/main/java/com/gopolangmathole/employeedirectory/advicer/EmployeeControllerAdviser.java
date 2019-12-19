@@ -58,7 +58,6 @@ public class EmployeeControllerAdviser {
 		exceptionReport = new ExceptionReport();
 		getCurrentDateAndTime = new GetCurrentDateAndTime();
 		
-		
 		// parsing status code, message and date and time to it.
 		employee.setStatusCode((int) HttpStatus.NOT_FOUND.value());
 		employee.setMessage(employeeNotFoundException.getMessage());

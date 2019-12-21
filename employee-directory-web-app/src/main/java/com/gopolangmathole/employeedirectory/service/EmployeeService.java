@@ -1,6 +1,7 @@
 package com.gopolangmathole.employeedirectory.service;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -33,4 +34,5 @@ public interface EmployeeService {
 
 	public void saveImage(MultipartFile imageFile, Employee employee, String uploadDirectory, String currentImage) throws IOException;
 	
+	public List<String> getEmployeeLastUpdate() throws ParseException;
 }

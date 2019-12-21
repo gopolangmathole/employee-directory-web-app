@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,19 +17,25 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.gopolangmathole.employeedirectory.dao.EmployeeRepository;
 import com.gopolangmathole.employeedirectory.entity.Employee;
+import com.gopolangmathole.employeedirectory.entity.GetCurrentDateAndTime;
 import com.gopolangmathole.employeedirectory.exception.EmployeeNotFoundException;
-
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-	//injecting the required dependency
+	// injecting the required dependency
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
-	//setting final path to store the images 
+	// setting final path to store the images
 	private final String FOLDER = "c:///employee_directory//images///";
 
+	// getting current date
+	private GetCurrentDateAndTime getCurrentDateAndTime;
+	
+	//the return date
+	List <String> returnDate;
+	
 	@Override
 	public List<Employee> findAll() {
 
@@ -116,7 +126,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		byte[] bytes;
 
 		long millis = System.currentTimeMillis();
-		
+
 		bytes = imageFile.getBytes();
 
 		String modifiedFileName = (millis + "_" + imageFile.getOriginalFilename()).toLowerCase().replaceAll(" ", "_");
@@ -146,6 +156,62 @@ public class EmployeeServiceImpl implements EmployeeService {
 			employee.setImage(currentImage);
 
 		}
+	}
+
+	@Override
+	public List<String> getEmployeeLastUpdate() throws ParseException {
+
+		// initializing current date class
+		getCurrentDateAndTime = new GetCurrentDateAndTime();
+
+		List<String> update = employeeRepository.getEmployeeLastUpdate();
+		String currentDate = getCurrentDateAndTime.getCurrentFullDate();
+		returnDate = new ArrayList<String>(); 
+
+		// HH converts hour in 24 hours format (0-23), day calculation
+		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+
+		
+		Date d1 = null;
+		Date d2 = null;
+		
+		//clearing the list to avoid redundancy 
+		returnDate.clear();
+		
+		for(String date : update ){
+			
+			d1 = format.parse(date);
+			d2 = format.parse(currentDate);
+			
+			long diff = (d2.getTime() - d1.getTime());
+			
+			long diffSeconds = diff / 1000 % 60;
+			long diffMinutes = diff / (60 * 1000) % 60;
+			long diffHours = diff / (60 * 60 * 1000) % 24;
+			long diffDays = diff / (24 * 60 * 60 * 1000);
+		
+			if(diffSeconds <=59 && diffMinutes ==0 && diffHours==0 && diffDays==0) {
+				
+				returnDate.add((diffSeconds)+" seconds ago");
+			
+			}else if(diffMinutes <= 59 && diffHours==0 && diffDays==0) {
+				
+				returnDate.add((diffMinutes)+" minutes ago");
+			
+			}else if(diffHours <=59 && diffMinutes <=59 &&  diffDays==0) {
+				
+				returnDate.add((diffHours)+" hours ago");
+			
+			}else if(diffDays <=7 && diffMinutes <=59) {
+				
+				returnDate.add((diffDays)+" days ago");
+			}else {
+				
+				returnDate.add(date);
+			}
+		}
+		
+		return returnDate;
 	}
 
 }

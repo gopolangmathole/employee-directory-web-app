@@ -11,8 +11,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.SortDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -94,6 +92,7 @@ public class EmployeeController {
 		theModel.addAttribute("number", countRows);
 		theModel.addAttribute("reports", errorReport);
 		theModel.addAttribute("employees", employeeService.findAll());
+		theModel.addAttribute("updateStatus",employeeService.getEmployeeLastUpdate());
 		
 
 		return "/employees/all-employees";

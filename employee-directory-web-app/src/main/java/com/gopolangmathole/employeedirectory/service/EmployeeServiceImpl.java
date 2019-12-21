@@ -33,8 +33,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 	// getting current date
 	private GetCurrentDateAndTime getCurrentDateAndTime;
 	
-	//the return date
-	List <String> returnDate;
 	
 	@Override
 	public List<Employee> findAll() {
@@ -166,12 +164,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 		List<String> update = employeeRepository.getEmployeeLastUpdate();
 		String currentDate = getCurrentDateAndTime.getCurrentFullDate();
-		returnDate = new ArrayList<String>(); 
+		List <String> returnDate = new ArrayList<String>(); 
 
 		// HH converts hour in 24 hours format (0-23), day calculation
 		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
-		
 		Date d1 = null;
 		Date d2 = null;
 		
@@ -190,19 +187,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 			long diffHours = diff / (60 * 60 * 1000) % 24;
 			long diffDays = diff / (24 * 60 * 60 * 1000);
 		
-			if(diffSeconds <=59 && diffMinutes ==0 && diffHours==0 && diffDays==0) {
+			if((diffSeconds > 0 && diffSeconds <=59) && diffMinutes ==0 && diffHours==0 && diffDays==0) {
 				
 				returnDate.add((diffSeconds)+" seconds ago");
 			
-			}else if(diffMinutes <= 59 && diffHours==0 && diffDays==0) {
+			}else if((diffMinutes>0 && diffMinutes <= 59) && diffHours ==0 && diffDays ==0) {
 				
 				returnDate.add((diffMinutes)+" minutes ago");
 			
-			}else if(diffHours <=59 && diffMinutes <=59 &&  diffDays==0) {
+			}else if((diffHours>0 && diffHours <=59 ) && diffDays ==0) {
 				
 				returnDate.add((diffHours)+" hours ago");
 			
-			}else if(diffDays <=7 && diffMinutes <=59) {
+			}else if((diffDays>0 && diffDays <=7)) {
 				
 				returnDate.add((diffDays)+" days ago");
 			}else {

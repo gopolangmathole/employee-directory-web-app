@@ -94,7 +94,8 @@ public class EmployeeController {
 		theModel.addAttribute("employees", employeeService.findAll());
 		theModel.addAttribute("updateStatus",employeeService.getEmployeeLastUpdate());
 		
-
+		System.out.println(employeeService.getEmployeeLastUpdate());
+		
 		return "/employees/all-employees";
 	}
 
@@ -244,5 +245,6 @@ public class EmployeeController {
 
 		return "/dashboard/tables";
 	}
+
 
 }

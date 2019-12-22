@@ -52,7 +52,7 @@
     
     <div class="container">
     	<div class="row ">
-      			<div class="card mx-auto mt-5 mb-3"  th:each="tempEmployee : ${employees}">
+      			<div class="card mx-auto mt-5 mb-3"  th:each="tempEmployee,iterStat  : ${employees}">
 					<div class="card-header" style="background-color:#434B53;">
 						  <div class="text-center">
 						 	<img th:if="${tempEmployee.image == null || tempEmployee.image==0}"  src="/static/images/default.png" th:src="@{/images/default.png}" style="width:12em;height:12em;"/>
@@ -75,8 +75,8 @@
 					  	<a class="btn btn-danger col-4 ml-2 delBtn" th:href="@{/employees/delete/{id}(id=${tempEmployee.id})}"><i class="fa fa-trash-o mr-1" aria-hidden="true"></i>Delete</a>
 					  </div>
 					  
-					  <div class="card-footer text center" style="font-size:14px" th:each="tempStatus : ${updateStatus}">
-					  	<small class="text center" th:text="'last updated: '+${tempStatus}"></small>
+					  <div class="card-footer text center" style="font-size:14px" >
+					  	<small class="text center" th:text="'last updated: '+${updateStatus[__${iterStat.index}__]}"></small>
 					  </div>
 			  </div>
 		 </div>	 

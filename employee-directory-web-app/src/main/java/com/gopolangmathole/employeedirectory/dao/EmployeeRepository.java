@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.gopolangmathole.employeedirectory.entity.Employee;
 
-
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
 	//adding descending or Id

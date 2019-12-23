@@ -24,7 +24,7 @@ global:
   - target: ['127.0.0.0:9090']
   
   - job_name: 'spring-actuator'
-  metris_path: '/actuator/prometheus'
+  metrics_path: '/actuator/prometheus'
   scrape_interval : 5s
   static_config: 
   -targets: ['192.168.99.100:8080']

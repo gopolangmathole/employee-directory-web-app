@@ -50,9 +50,9 @@
         </div>
     </nav>
     
-    <div class="container">
+    <div class="container-fluid">
     	<div class="row ">
-      			<div class="card mx-auto mt-5 mb-3"  th:each="tempEmployee,iterStat  : ${employees}">
+      			<div class="card mx-auto mt-5 mb-3"  th:each="tempEmployee,tempUpdate  : ${employees}">
 					<div class="card-header" style="background-color:#434B53;">
 						  <div class="text-center">
 						 	<img th:if="${tempEmployee.image == null || tempEmployee.image==0}"  src="/static/images/default.png" th:src="@{/images/default.png}" style="width:12em;height:12em;"/>
@@ -76,7 +76,7 @@
 					  </div>
 					  
 					  <div class="card-footer text center" style="font-size:14px" >
-					  	<small class="text center" th:text="'last updated: '+${updateStatus[__${iterStat.index}__]}"></small>
+					  	<small class="text center" th:text="'last updated: '+${updateStatus[__${tempUpdate.index}__]}"></small>
 					  </div>
 			  </div>
 		 </div>	 

@@ -73,6 +73,12 @@
 			<artifactId>thymeleaf-spring-data-dialect</artifactId>
 			<version>3.4.0</version>
 		</dependency>
+		
+		<!-- prometheus -->
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-prometheus</artifactId>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
 		<dependency>

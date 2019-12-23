@@ -21,7 +21,7 @@ global:
   # metrics_path defaults to '/metrics'
   # scheme default to 'http'.
   static_config:
-  - target: ['127.0.0.0:8080']
+  - target: ['127.0.0.0:9090']
   
   - job_name: 'spring-actuator'
   metris_path: '/actuator/prometheus'

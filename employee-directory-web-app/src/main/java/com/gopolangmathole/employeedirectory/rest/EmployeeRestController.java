@@ -68,6 +68,7 @@ public class EmployeeRestController {
 		// this is to force a save of new item...instead of update
 		employee.setId(0);
 
+		employee.getAddress().setId(0);
 		// add employment status
 		// employee.setEmploymentStatus(true);
 

@@ -32,8 +32,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	// getting current date
 	private GetCurrentDateAndTime getCurrentDateAndTime;
-	
-	
+
 	@Override
 	public List<Employee> findAll() {
 
@@ -164,50 +163,68 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 		List<String> update = employeeRepository.getEmployeeLastUpdate();
 		String currentDate = getCurrentDateAndTime.getCurrentFullDate();
-		List <String> returnDate = new ArrayList<String>(); 
+		List<String> returnDate = new ArrayList<String>();
 
-		// HH converts hour in 24 hours format (0-23), day calculation
+		// HH converts hour in 24 hours format day calculation
 		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
 		Date d1 = null;
 		Date d2 = null;
-		
-		//clearing the list to avoid redundancy 
+
+		// clearing the list to avoid redundancy
 		returnDate.clear();
-		
-		for(String date : update ){
-			
+
+		for (String date : update) {
+
 			d1 = format.parse(date);
 			d2 = format.parse(currentDate);
-			
+
 			long diff = (d2.getTime() - d1.getTime());
-			
+
+			// converting the difference between two dates respectively
 			long diffSeconds = diff / 1000 % 60;
 			long diffMinutes = diff / (60 * 1000) % 60;
 			long diffHours = diff / (60 * 60 * 1000) % 24;
 			long diffDays = diff / (24 * 60 * 60 * 1000);
-		
-			if((diffSeconds > 0 && diffSeconds <=59) && diffMinutes ==0 && diffHours==0 && diffDays==0) {
-				
-				returnDate.add((diffSeconds)+" seconds ago");
-			
-			}else if((diffMinutes>0 && diffMinutes <= 59) && diffHours ==0 && diffDays ==0) {
-				
-				returnDate.add((diffMinutes)+" minutes ago");
-			
-			}else if((diffHours>0 && diffHours <=59 ) && diffDays ==0) {
-				
-				returnDate.add((diffHours)+" hours ago");
-			
-			}else if((diffDays>0 && diffDays <=7)) {
-				
-				returnDate.add((diffDays)+" days ago");
-			}else {
-				
+
+			// adding seconds
+			if ((diffSeconds > 0 && diffSeconds <= 59) && diffMinutes == 0 && diffHours == 0 && diffDays == 0) {
+
+				returnDate.add((diffSeconds) + " seconds ago");
+
+				// adding minutes
+			} else if ((diffMinutes > 0 && diffMinutes <= 59) && diffHours == 0 && diffDays == 0) {
+
+				if (diffMinutes == 1) {
+					returnDate.add((diffMinutes) + " minute ago");
+				} else {
+					returnDate.add((diffMinutes) + " minutes ago");
+				}
+
+				// adding hours
+			} else if ((diffHours > 0 && diffHours <= 59) && diffDays == 0) {
+
+				if (diffHours == 1) {
+					returnDate.add((diffHours) + " hour ago");
+				} else {
+					returnDate.add((diffHours) + " hours ago");
+				}
+
+				// adding days
+			} else if ((diffDays > 0 && diffDays <= 7)) {
+
+				if (diffDays == 1) {
+
+					returnDate.add((diffDays) + " day ago");
+				} else {
+					returnDate.add((diffDays) + " days ago");
+				}
+			} else {
+
 				returnDate.add(date);
 			}
 		}
-		
+
 		return returnDate;
 	}
 

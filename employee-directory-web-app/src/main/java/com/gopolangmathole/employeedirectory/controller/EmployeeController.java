@@ -77,7 +77,6 @@ public class EmployeeController {
 		theModel.addAttribute("number", countRows);
 		theModel.addAttribute("reports", errorReport);
 		theModel.addAttribute("employees", employeeRepository.findAll(PageRequest.of(page, 5)));
-		//theModel.addAttribute("currentPage", page);
 
 		return "/employees/list-employees";
 	}

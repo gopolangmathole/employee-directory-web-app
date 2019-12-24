@@ -3,7 +3,6 @@ package com.gopolangmathole.employeedirectory.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,11 +18,10 @@ import org.jsondoc.core.annotation.ApiObjectField;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
 @Entity
 @Table(name = "employee")
 @ApiObject
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Employee {
 
 	@Id
@@ -44,7 +42,6 @@ public class Employee {
 	@ApiObjectField(description = "Employee last Name")
 	private String lastName;
 
-	@JsonIgnoreProperties(ignoreUnknown = true)
 	@Column(name = "gender")
 	@NotNull
 	@ApiObjectField(description = "Employee's sex")
@@ -71,9 +68,8 @@ public class Employee {
 	@ApiObjectField(description = "Employee's employment status")
 	private boolean employmentStatus;
 
-	
-	@OneToOne(cascade = {CascadeType.MERGE,CascadeType.REMOVE})
-	@JoinColumn(name = "employee_address_id",referencedColumnName = "id")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "employee_address_id")
 	@ApiObjectField(description = "Employee's address")
 	private Address address;
 

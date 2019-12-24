@@ -158,7 +158,7 @@ public class EmployeeController {
 			employee.setLastUpdate(getCurrentDateAndTime.getCurrentFullDate());
 
 			// save the employee
-			employeeRepository.save(employee);
+			employeeService.save(employee);
 
 		}
 

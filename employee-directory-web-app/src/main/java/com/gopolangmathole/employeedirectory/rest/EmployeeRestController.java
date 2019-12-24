@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.gopolangmathole.employeedirectory.entity.Employee;
+import com.gopolangmathole.employeedirectory.entity.GetCurrentDateAndTime;
 import com.gopolangmathole.employeedirectory.exception.EmployeeNotFoundException;
 import com.gopolangmathole.employeedirectory.service.EmployeeService;
 
@@ -57,15 +58,27 @@ public class EmployeeRestController {
 	// end-point for adding new user
 	@PostMapping("/employees")
 	@ApiMethod(description = "add a new employee by passing jason data through the body")
-	public Employee addEmployee(@RequestBody Employee employee) {
+	public Employee addEmployee(@RequestBody Employee employee) throws Exception {
 
+		//creating a current date and time object
+		GetCurrentDateAndTime getCurrentDateAndTime = new GetCurrentDateAndTime();
+		
+		
 		// also just in case they pass an id in JSON...set id to 0
 		// this is to force a save of new item...instead of update
 		employee.setId(0);
 		
+		//add employment status
+		employee.setEmploymentStatus(true);
+		
+		// updating the last update column
+		employee.setLastUpdate(getCurrentDateAndTime.getCurrentFullDate());
+
+		
 		// saving new employee
 		employeeService.save(employee);
-
+		
+		
 		return employee;
 	}
 

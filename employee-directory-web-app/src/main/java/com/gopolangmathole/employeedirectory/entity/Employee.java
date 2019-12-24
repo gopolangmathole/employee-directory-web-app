@@ -35,7 +35,7 @@ public class Employee {
 	@NotNull
 	@Size(min = 2, max = 50, message = "Length should be between 2 and 50")
 	@Column(name = "first_name")
-	@ApiObjectField(description = "Employee firts name")
+	@ApiObjectField(description = "Employee first name")
 	private String firstName;
 
 	@NotNull
@@ -72,8 +72,8 @@ public class Employee {
 	private boolean employmentStatus;
 
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "employee_address_id")
+	@OneToOne(cascade = {CascadeType.MERGE,CascadeType.REMOVE})
+	@JoinColumn(name = "employee_address_id",referencedColumnName = "id")
 	@ApiObjectField(description = "Employee's address")
 	private Address address;
 

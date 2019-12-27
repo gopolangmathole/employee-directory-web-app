@@ -76,10 +76,10 @@ public class CustomerAspectLogging {
 	public void applicationLogFiles(JoinPoint jointPoint,String date) throws IOException {
 	
 		// getting method signature
-		MethodSignature methodSignature = (MethodSignature) jointPoint.getSignature();
+		//MethodSignature methodSignature = (MethodSignature) jointPoint.getSignature();
 		
 		//getting date and file path
-		String fileName = "log " + new java.sql.Date(System.currentTimeMillis()).toString()+".txt";
+		//String fileName = "log " + new java.sql.Date(System.currentTimeMillis()).toString()+".txt";
 		File parent = new File("C:///employee_directory");
 		
 		
@@ -108,13 +108,14 @@ public class CustomerAspectLogging {
 				subImages.mkdirs();
 		}
 		
+		/*
 		//passing the file path and file name, enabling the file to allow multiple writes.
 		FileWriter fileWritter = new FileWriter((subLogs +"///"+fileName),true);
 	    BufferedWriter bufferedWriter = new BufferedWriter(fileWritter);
 		
 	    //writing to file and closing the buffered writer
 	    bufferedWriter.write(date + " "+ methodSignature.toString()+"\n");
-	    bufferedWriter.close();
+	    bufferedWriter.close();*/
 
 	}
 }

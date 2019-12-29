@@ -63,11 +63,6 @@ public class Employee {
 	@ApiObjectField(description = "Employee's update")
 	private String lastUpdate;
 
-	@JsonIgnoreProperties(ignoreUnknown = true)
-	@Column(name = "employment_status")
-	@ApiObjectField(description = "Employee's employment status")
-	private boolean employmentStatus;
-
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "employee_address_id")
 	@ApiObjectField(description = "Employee's address")
@@ -84,7 +79,7 @@ public class Employee {
 	}
 
 	public Employee(int id, String firstName, String image, String lastName, String gender, String email,
-			String lastUpdate, boolean employmentStatus, Address employeeAddress) {
+			String lastUpdate, Address employeeAddress) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -92,19 +87,17 @@ public class Employee {
 		this.gender = gender;
 		this.image = image;
 		this.lastUpdate = lastUpdate;
-		this.employmentStatus = employmentStatus;
 		this.address = employeeAddress;
 	}
 
 	public Employee(String firstName, String image, String lastName, String gender, String email, String lastUpdate,
-			boolean employmentStatus, Address employeeAddress) {
+			 Address employeeAddress) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
 		this.email = email;
 		this.image = image;
 		this.lastUpdate = lastUpdate;
-		this.employmentStatus = employmentStatus;
 		this.address = employeeAddress;
 	}
 
@@ -113,14 +106,7 @@ public class Employee {
 		return id;
 	}
 
-	public boolean isEmploymentStatus() {
-		return employmentStatus;
-	}
-
-	public void setEmploymentStatus(boolean employmentStatus) {
-		this.employmentStatus = employmentStatus;
-	}
-
+	
 	public String getLastUpdate() {
 		return lastUpdate;
 	}
@@ -187,8 +173,7 @@ public class Employee {
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender
-				+ ", email=" + email + ", image=" + image + ", lastUpdate=" + lastUpdate + ", employmentStatus="
-				+ employmentStatus + ", address=" + address + "]";
+				+ ", email=" + email + ", image=" + image + ", lastUpdate=" + lastUpdate + ", address=" + address + "]";
 	}
 
 }

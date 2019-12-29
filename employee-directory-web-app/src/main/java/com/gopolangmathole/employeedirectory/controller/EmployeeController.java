@@ -44,15 +44,9 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
-	private List<String> selectGender;
-
-	private CountryList countryList;
-
 	public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/images/uploads";
 
 	private String currentImage = null;
-
-	private GetCurrentDateAndTime getCurrentDateAndTime;
 
 	// add an in-it-binder ... to convert trim input string
 	// remove leading and trailing whitespace
@@ -101,10 +95,10 @@ public class EmployeeController {
 	public String addEmployee(Model model) {
 
 		// initializing arrayList for gender, and add both genders to list.
-		selectGender = new ArrayList<String>();
+		List<String> selectGender = new ArrayList<String>();
 
 		// initializing arrayList of countries
-		countryList = new CountryList();
+		CountryList countryList = new CountryList();
 
 		// adding gender to list
 		selectGender.add("Male");
@@ -136,7 +130,7 @@ public class EmployeeController {
 
 		String url = null;
 
-		getCurrentDateAndTime = new GetCurrentDateAndTime();
+		GetCurrentDateAndTime getCurrentDateAndTime = new GetCurrentDateAndTime();
 
 		if (errors.hasErrors()) {
 
@@ -150,11 +144,12 @@ public class EmployeeController {
 			// saving an image
 			employeeService.saveImage(imageFile, employee, uploadDirectory, currentImage);
 
-			//add employment status
-			employee.setEmploymentStatus(true);
 			
 			// updating the last update column
 			employee.setLastUpdate(getCurrentDateAndTime.getCurrentFullDate());
+			
+			//updating the address table id
+			employee.getAddress().setId(employee.getId());
 
 			// save the employee
 			employeeService.save(employee);
@@ -172,10 +167,10 @@ public class EmployeeController {
 		int countRows = (int) employeeService.count();
 		int errorReport = (int) exceptionService.count();
 		// initializing arrayList for gender, and add both genders to list.
-		selectGender = new ArrayList<String>();
+		List<String> selectGender = new ArrayList<String>();
 
 		// initializing arrayList of countries
-		countryList = new CountryList();
+		CountryList countryList = new CountryList();
 
 		// adding gender to list
 		selectGender.add("Male");

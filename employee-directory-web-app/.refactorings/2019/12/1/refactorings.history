@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;employee-directory-web-app/src/main/resources/static/js/demo/employ-list.js&apos; to &apos;employee-list.js&apos;" description="Rename resource &apos;employ-list.js&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/static/js/demo/employ-list.js" name="employee-list.js" stamp="1577644779246" updateReferences="true"/>
+</session>

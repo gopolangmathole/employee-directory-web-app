@@ -69,9 +69,7 @@ public class EmployeeRestController {
 		employee.setId(0);
 
 		employee.getAddress().setId(0);
-		// add employment status
-		// employee.setEmploymentStatus(true);
-
+		
 		// updating the last update column
 		employee.setLastUpdate(getCurrentDateAndTime.getCurrentFullDate());
 
@@ -98,6 +96,9 @@ public class EmployeeRestController {
 
 		// updating the last update column
 		employee.setLastUpdate(getCurrentDateAndTime.getCurrentFullDate());
+		
+		//updating the address table id
+		employee.getAddress().setId(employee.getId());
 		
 		//saving the object into the service
 		employeeService.save(employee);

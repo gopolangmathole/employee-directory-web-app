@@ -230,21 +230,22 @@
 									</tr>
 								</tfoot>
 								<tbody>
-									<tr>
-										<td>Tiger Nixon</td>
-										<td>System Architect</td>
-										<td>Edinburgh</td>
-										<td>61</td>
-										<td>2011/04/25</td>
-										<td>$320,800</td>
-									</tr>
-									<tr>
-										<td>Garrett Winters</td>
-										<td>Accountant</td>
-										<td>Tokyo</td>
-										<td>63</td>
-										<td>2011/07/25</td>
-										<td>$170,750</td>
+									<tr th:if="${employees!=null and !employees.isEmpty()}"
+										th:each="tempEmployee : ${employees}">
+										<td th:text="${tempEmployee.id}" />
+										<td th:text="${tempEmployee.firstName}" />
+										<td th:text="${tempEmployee.lastName}" />
+										<td th:text="${tempEmployee.email}" />
+										<td><a
+											th:href="@{/employees/edit/{id} (id=${tempEmployee.id})}"
+											class="btn btn-outline-primary btn-sm"> <i
+												class="fa fa-pencil" aria-hidden="true"></i> Update
+										</a></td>
+										<td><a
+											th:href="@{/employees/delete/{id}(id=${tempEmployee.id})}"
+											class="btn btn-outline-danger btn-sm delBtn"> <i
+												class="fa fa-trash-o" aria-hidden="true"></i> Delete
+										</a></td>
 									</tr>
 
 								</tbody>
@@ -279,8 +280,9 @@
 	</a>
 
 
-	<script src="/static/js/sb-data.js"
-		th:src="@{/js/sb-data.js}">	</script>
+	<script src="/static/js/sb-data.js" th:src="@{/js/sb-data.js}">
+		
+	</script>
 
 	<!-- Bootstrap core JavaScript-->
 	<script src="/static/vendor/jquery/jquery.min.js"
@@ -310,7 +312,7 @@
 	<script src="/static/js/demo/chart-area-demo.js"
 		th:src="@{/js/demo/chart-area-demo.js}"></script>
 
-	
+
 
 </body>
 

@@ -221,7 +221,9 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/viewReport")
-	public String viewReport() {
+	public String viewReport(Model theModel) {
+
+		theModel.addAttribute("employees", employeeRepository.findAll());
 
 		return "/dashboard/report";
 	}

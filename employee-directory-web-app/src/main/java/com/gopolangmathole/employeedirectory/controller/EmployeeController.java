@@ -222,8 +222,11 @@ public class EmployeeController {
 
 	@GetMapping("/viewReport")
 	public String viewReport(Model theModel) {
+		
+		int errorReport = (int) exceptionService.count();
 
 		theModel.addAttribute("employees", employeeRepository.findAll());
+		theModel.addAttribute("reports", errorReport);
 
 		return "/dashboard/report";
 	}

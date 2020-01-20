@@ -8,7 +8,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
-<meta name="author" content="">
+<meta name="Gopolang Mathole" content="A dashboard that displays employee directory's performance">
 
 <title>Employee Directory - Dashboard</title>
 
@@ -128,13 +128,14 @@
 								<div class="row no-gutters align-items-center">
 									<div class="col mr-2">
 										<div
-											class="text-xs font-weight-bold text-success text-uppercase mb-1">Disk
-											Space</div>
-										<div class="h5 mb-0 font-weight-bold text-gray-800">125
-											GB</div>
+											class="text-xs font-weight-bold text-success text-uppercase mb-1">
+											Total Errors</div>
+										<div class="h5 mb-0 font-weight-bold text-gray-800">
+											<span id="total-errors"></span>
+										</div>
 									</div>
 									<div class="col-auto">
-										<i class="fas fa-hdd fa-2x text-300"></i>
+										<i class="fa fa-exclamation-circle fa-2x text-300" aria-hidden="true"></i>
 									</div>
 								</div>
 							</div>
@@ -153,7 +154,7 @@
 										<div class="row no-gutters align-items-center">
 											<div class="col-auto">
 												<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-													<span id="mysql-status"></span>
+													<span class="text-center" id="mysql-status"></span>
 												</div>
 											</div>
 
@@ -174,12 +175,12 @@
 								<div class="row no-gutters align-items-center">
 									<div class="col mr-2">
 										<div
-											class="text-xs font-weight-bold text-warning text-uppercase mb-1">CPU
+											class="text-xs font-weight-bold text-warning text-uppercase mb-1">Available Disk Space
 										</div>
-										<div class="h5 mb-0 font-weight-bold text-gray-800">5%</div>
+										<div class="h5 mb-0 font-weight-bold text-gray-800"><span id="disk-space"></span></div>
 									</div>
 									<div class="col-auto">
-										<i class="fas fa-microchip fa-2x text-300"></i>
+										<i class="fas fa-hdd fa-2x text-300"></i>
 									</div>
 								</div>
 							</div>
@@ -196,14 +197,14 @@
 					<div class="card-body">
 						<canvas id="myAreaChart" width="100%" height="30"></canvas>
 					</div>
-					<div class="card-footer small text-muted">Updated yesterday
-						at 11:59 PM</div>
+					<!--  <div class="card-footer small text-muted">Updated yesterday
+						at 11:59 PM</div>-->
 				</div>
 
 				<!-- DataTables Example -->
 				<div class="card mb-3">
 					<div class="card-header">
-						<i class="fas fa-table"></i> Data Table Example
+						<i class="fas fa-table"></i> Application Report
 					</div>
 					<div class="card-body">
 						<div class="table-responsive">

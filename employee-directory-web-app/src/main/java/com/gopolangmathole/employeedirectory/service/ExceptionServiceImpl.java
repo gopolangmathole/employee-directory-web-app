@@ -1,5 +1,7 @@
 package com.gopolangmathole.employeedirectory.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,12 @@ public class ExceptionServiceImpl implements ExceptionService {
 	public long count() {
 		
 		return exceptionRepository.count();
+	}
+
+	@Override
+	public List<ExceptionReport> findAll() {
+		
+		return exceptionRepository.findAll();
 	}
 
 

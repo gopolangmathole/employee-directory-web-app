@@ -8,7 +8,8 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
-<meta name="Gopolang Mathole" content="A dashboard that displays employee directory's performance">
+<meta name="Gopolang Mathole"
+	content="A dashboard that displays employee directory's performance">
 
 <title>Employee Directory - Dashboard</title>
 
@@ -98,7 +99,7 @@
 				</div>
 
 				<!-- Icon Cards-->
-				<div class="row">
+				<div class="row mb-5 mt-3">
 
 					<!-- Earnings (Monthly) Card Example -->
 					<div class="col-xl-3 col-md-6 mb-4">
@@ -135,7 +136,8 @@
 										</div>
 									</div>
 									<div class="col-auto">
-										<i class="fa fa-exclamation-circle fa-2x text-300" aria-hidden="true"></i>
+										<i class="fa fa-exclamation-circle fa-2x text-300"
+											aria-hidden="true"></i>
 									</div>
 								</div>
 							</div>
@@ -175,9 +177,11 @@
 								<div class="row no-gutters align-items-center">
 									<div class="col mr-2">
 										<div
-											class="text-xs font-weight-bold text-warning text-uppercase mb-1">Available Disk Space
+											class="text-xs font-weight-bold text-warning text-uppercase mb-1">Available
+											Disk Space</div>
+										<div class="h5 mb-0 font-weight-bold text-gray-800">
+											<span id="disk-space"></span>
 										</div>
-										<div class="h5 mb-0 font-weight-bold text-gray-800"><span id="disk-space"></span></div>
 									</div>
 									<div class="col-auto">
 										<i class="fas fa-hdd fa-2x text-300"></i>
@@ -189,8 +193,36 @@
 				</div>
 
 
-				<!-- Area Chart Example-->
-				<div class="card mb-3">
+				<!-- Top monitoring -->
+				<div class="container-fluid">
+
+					<div class="row">
+						<!-- Polar chart-->
+						<div class="card mb-3 mx-auto" style="width:45%;">
+							<div class="card-header">
+								<i class="fas fa-chart-area mr-4"></i> <p class="text-primary">Polar chart</p>
+							</div>
+							<div class="card-body">
+								<canvas id="polarArea" width="100%" height="75"></canvas>
+							</div>
+						</div>
+						
+						<!-- Chart starts here -->
+						
+						<div class="card mb-3 mx-auto" style="width:45%;">
+							<div class="card-header">
+								<i class="fas fa-chart-area mr-4"></i><p class="text-primary"> Pie Chart</p>
+							</div>
+							<div class="card-body">
+								<canvas id="pie" width="100%" height="75"></canvas>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<!-- Bottom monitoring -->
+				
+				<div class="card my-5">
 					<div class="card-header">
 						<i class="fas fa-chart-area"></i> Area Chart Example
 					</div>
@@ -198,7 +230,7 @@
 						<canvas id="myAreaChart" width="100%" height="30"></canvas>
 					</div>
 					<!--  <div class="card-footer small text-muted">Updated yesterday
-						at 11:59 PM</div>-->
+										at 11:59 PM</div>-->
 				</div>
 
 				<!-- DataTables Example -->
@@ -212,15 +244,13 @@
 								cellspacing="0">
 								<thead>
 									<tr>
-										<th>Name</th>
-										<th>Position</th>
-										<th>Office</th>
-										<th>Age</th>
-										<th>Start date</th>
-										<th>Salary</th>
+										<th>Id</th>
+										<th>Code</th>
+										<th>Exception</th>
+										<th>Time</th>
 									</tr>
 								</thead>
-								<tfoot>
+								<!--  <tfoot>
 									<tr>
 										<th>Name</th>
 										<th>Position</th>
@@ -229,32 +259,22 @@
 										<th>Start date</th>
 										<th>Salary</th>
 									</tr>
-								</tfoot>
+								</tfoot>-->
 								<tbody>
-									<tr th:if="${employees!=null and !employees.isEmpty()}"
-										th:each="tempEmployee : ${employees}">
-										<td th:text="${tempEmployee.id}" />
-										<td th:text="${tempEmployee.firstName}" />
-										<td th:text="${tempEmployee.lastName}" />
-										<td th:text="${tempEmployee.email}" />
-										<td><a
-											th:href="@{/employees/edit/{id} (id=${tempEmployee.id})}"
-											class="btn btn-outline-primary btn-sm"> <i
-												class="fa fa-pencil" aria-hidden="true"></i> Update
-										</a></td>
-										<td><a
-											th:href="@{/employees/delete/{id}(id=${tempEmployee.id})}"
-											class="btn btn-outline-danger btn-sm delBtn"> <i
-												class="fa fa-trash-o" aria-hidden="true"></i> Delete
-										</a></td>
+									<tr th:if="${exceptions!=null and !exceptions.isEmpty()}"
+										th:each="tempexception : ${exceptions}">
+										<td th:text="${tempexception.id}" />
+										<td th:text="${tempexception.code}" />
+										<td th:text="${tempexception.exception}" />
+										<td th:text="${tempexception.time}" />
 									</tr>
 
 								</tbody>
 							</table>
 						</div>
 					</div>
-					<div class="card-footer small text-muted">Updated yesterday
-						at 11:59 PM</div>
+					<!--  <div class="card-footer small text-muted">Updated yesterday
+						at 11:59 PM</div>-->
 				</div>
 
 			</div>
@@ -264,7 +284,8 @@
 			<footer class="sticky-footer">
 				<div class="container my-auto">
 					<div class="copyright text-center my-auto">
-						<span>Copyright © Your Website 2019</span>
+						<span>Copyright &copy; employee directory </span><span
+							th:text="${year}"></span>
 					</div>
 				</div>
 			</footer>
@@ -312,8 +333,9 @@
 		th:src="@{/js/demo/datatables-demo.js}"></script>
 	<script src="/static/js/demo/chart-area-demo.js"
 		th:src="@{/js/demo/chart-area-demo.js}"></script>
-
-
+	<script src="/static/js/sb-charts-data.js"
+		th:src="@{/js/sb-charts-data.js}"></script>
+	
 
 </body>
 

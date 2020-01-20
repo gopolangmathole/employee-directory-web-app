@@ -61,31 +61,31 @@ public class EmployeeController {
 
 	// add mapping for "/list"
 	@GetMapping("/list")
-	public String listEmployees(Model theModel, @RequestParam(defaultValue = "0") int page) {
+	public String listEmployees(Model model, @RequestParam(defaultValue = "0") int page) {
 
 		// getting the data from
 		int countRows = (int) employeeService.count();
 		int errorReport = (int) exceptionService.count();
 
 		// adding entities to the model
-		theModel.addAttribute("number", countRows);
-		theModel.addAttribute("reports", errorReport);
-		theModel.addAttribute("employees", employeeRepository.findAll(PageRequest.of(page, 5)));
+		model.addAttribute("number", countRows);
+		model.addAttribute("reports", errorReport);
+		model.addAttribute("employees", employeeRepository.findAll(PageRequest.of(page, 5)));
 
 		return "/employees/list-employees";
 	}
 
 	@GetMapping("/all-employees")
-	public String getAllEMployees(Model theModel) throws ParseException {
+	public String getAllEMployees(Model model) throws ParseException {
 		// getting the data from
 		int countRows = (int) employeeService.count();
 		int errorReport = (int) exceptionService.count();
 		
 		// adding entities to the model
-		theModel.addAttribute("number", countRows);
-		theModel.addAttribute("reports", errorReport);
-		theModel.addAttribute("employees", employeeService.findAll());
-		theModel.addAttribute("updateStatus",employeeService.getEmployeeLastUpdate());
+		model.addAttribute("number", countRows);
+		model.addAttribute("reports", errorReport);
+		model.addAttribute("employees", employeeService.findAll());
+		model.addAttribute("updateStatus",employeeService.getEmployeeLastUpdate());
 		
 		return "/employees/all-employees";
 	}
@@ -221,12 +221,14 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/viewReport")
-	public String viewReport(Model theModel) {
+	public String viewReport(Model model) {
 		
 		int errorReport = (int) exceptionService.count();
 
-		theModel.addAttribute("employees", employeeRepository.findAll());
-		theModel.addAttribute("reports", errorReport);
+		model.addAttribute("exceptions", exceptionService.findAll());
+		model.addAttribute("reports", errorReport);
+		model.addAttribute("year", Calendar.getInstance().get(Calendar.YEAR));
+		
 
 		return "/dashboard/report";
 	}

@@ -115,7 +115,7 @@
 						</div>
 					</div>
 
-					<!-- Earnings (Monthly) Card Example -->
+					<!-- Total errors -->
 					<div class="col-xl-3 col-md-6 mb-4">
 						<div class="card border-left-success shadow h-100 py-2">
 							<div class="card-body">
@@ -137,7 +137,7 @@
 						</div>
 					</div>
 
-					<!-- Application health -->
+					<!-- Databse status -->
 					<div class="col-xl-3 col-md-6 mb-4">
 						<div class="card border-left-info shadow h-100 py-2">
 							<div class="card-body">
@@ -163,7 +163,7 @@
 						</div>
 					</div>
 
-					<!-- Pending Requests Card Example -->
+					<!-- Disk space -->
 					<div class="col-xl-3 col-md-6 mb-4">
 						<div class="card border-left-warning shadow h-100 py-2">
 							<div class="card-body">
@@ -191,20 +191,24 @@
 
 					<div class="row">
 						<!-- Polar chart-->
-						<div class="card mb-3 mx-auto" style="width:45%; box-shadow: 0px 2.5px 8px #c1c1c1;">
+						<div class="card mb-3 mx-auto"
+							style="width: 45%; box-shadow: 0px 2.5px 8px #c1c1c1;">
 							<div class="card-header">
-								<i class="fas fa-chart-area mr-4"></i> <p class="text-primary">Polar chart</p>
+								<i class="fas fa-chart-area mr-4"></i>
+								<p class="text-primary">Polar chart</p>
 							</div>
 							<div class="card-body">
 								<canvas id="polarArea" width="100%" height="75"></canvas>
 							</div>
 						</div>
-						
+
 						<!-- Chart starts here -->
-						
-						<div class="card mb-3 mx-auto" style="width:45% ; box-shadow: 0px 2.5px 8px #c1c1c1;">
+
+						<div class="card mb-3 mx-auto"
+							style="width: 45%; box-shadow: 0px 2.5px 8px #c1c1c1;">
 							<div class="card-header">
-								<i class="fas fa-chart-area mr-4"></i><p class="text-primary"> Pie Chart</p>
+								<i class="fas fa-chart-area mr-4"></i>
+								<p class="text-primary">Pie Chart</p>
 							</div>
 							<div class="card-body">
 								<canvas id="pie" width="100%" height="75"></canvas>
@@ -214,7 +218,7 @@
 					</div>
 				</div>
 				<!-- Bottom monitoring -->
-				
+
 				<div class="card my-5">
 					<div class="card-header">
 						<i class="fas fa-chart-area mr-1"></i>(400 -500) Internal Errors
@@ -241,16 +245,7 @@
 										<th>Time</th>
 									</tr>
 								</thead>
-								<!--  <tfoot>
-									<tr>
-										<th>Name</th>
-										<th>Position</th>
-										<th>Office</th>
-										<th>Age</th>
-										<th>Start date</th>
-										<th>Salary</th>
-									</tr>
-								</tfoot>-->
+								
 								<tbody>
 									<tr th:if="${exceptions!=null and !exceptions.isEmpty()}"
 										th:each="tempexception : ${exceptions}">
@@ -319,14 +314,15 @@
 	<script src="/static/js/sb-admin.min.js"
 		th:src="@{/js/sb-admin.min.js}"></script>
 
-	<!-- Demo scripts for this page-->
+	<!-- tables scripts for this page-->
 	<script src="/static/js/demo/datatables-demo.js"
 		th:src="@{/js/demo/datatables-demo.js}"></script>
 	<script src="/static/js/demo/chart-area-demo.js"
 		th:src="@{/js/demo/chart-area-demo.js}"></script>
 	<script src="/static/js/sb-charts-data.js"
 		th:src="@{/js/sb-charts-data.js}"></script>
-	
+<script src="/static/js/demo/chartjs-plugin-labels.min.js"
+		th:src="@{/js/demo/chartjs-plugin-labels.min.js}"></script>
 
 </body>
 

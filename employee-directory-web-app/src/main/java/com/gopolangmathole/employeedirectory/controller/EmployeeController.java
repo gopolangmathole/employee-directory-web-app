@@ -159,12 +159,15 @@ public class EmployeeController {
 		return url;
 	}
 
+	//adding the get mapping for editing 
 	@GetMapping("/edit/{id}")
 	public String editEmployeeById(Model model, @ModelAttribute("id") int id) {
 
+		//getting the employee based on the id given and counting errors.
 		Employee employee = employeeService.findById(id);
 		int countRows = (int) employeeService.count();
 		int errorReport = (int) exceptionService.count();
+		
 		// initializing arrayList for gender, and add both genders to list.
 		List<String> selectGender = new ArrayList<String>();
 
@@ -179,33 +182,41 @@ public class EmployeeController {
 		currentImage = null;
 		currentImage = employee.getImage();
 
+		//adding the returned employee to the model
 		if (employee != null) {
 
 			model.addAttribute("employee", employee);
 
 		}
 
+		//adding respective details to the model.
 		model.addAttribute("number", countRows);
 		model.addAttribute("reports", errorReport);
 		model.addAttribute("genderSelected", selectGender);
 		model.addAttribute("getCountries", countryList.getCountries());
 
+		//returning the view
 		return "/employees/employees-form";
 	}
 
+	//adding delete mapping
 	@GetMapping("/delete/{id}")
 	public String deleteUser(@ModelAttribute("id") int id, Model model) {
 
+		//passing the id of the employee which should be deleted
 		Employee employee = employeeService.findById(id);
 
+		//deleting the employee from the database provided the specified user id was found.
 		if (employee != null) {
 
 			employeeService.deleteById(id);
 		}
 
+		//returning the list view.
 		return "redirect:/employees/list";
 	}
 
+	//setting up api mapping
 	@GetMapping("/api")
 	public String getApis(Model model) {
 
@@ -228,13 +239,13 @@ public class EmployeeController {
 
 		// getting all errors from the database
 		int errorReport = (int) exceptionService.count();
-		
+
 		// adding the object to the model
 		model.addAttribute("exceptions", exceptionService.findAll());
 		model.addAttribute("reports", errorReport);
 		model.addAttribute("year", Calendar.getInstance().get(Calendar.YEAR));
 
-				// returning view
+		// returning view
 		return "/dashboard/report";
 	}
 

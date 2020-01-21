@@ -43,5 +43,21 @@ public class ErrorRestController {
 		// adding the list to the mode
 		return errorCode;
 	}
-
+	
+	@GetMapping("/health/graph_data")
+	public List<Integer> getGraphData(){
+		
+		//adding a list for the graph
+		List <Integer> graphData = new ArrayList<>();
+		
+		//adding data to the list
+		graphData.add((int) exceptionService.getToday());
+		graphData.add((int) exceptionService.getYesterday());
+		graphData.add((int) exceptionService.getThreeDaysBack());
+		graphData.add((int) exceptionService.getFourDaysBack());
+		graphData.add((int) exceptionService.getFiveDaysBack());
+	
+		return graphData;
+	}
+	
 }

@@ -1,6 +1,11 @@
+// Set new default font family and font color to mimic Bootstrap's default styling
+Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+Chart.defaults.global.defaultFontColor = '#292b2c';
 
+//a global variable
 var dataList = [];
 
+//api function
 function restApiCall(){
 	
 	// fetching actuator status
@@ -22,6 +27,7 @@ function polarArea() {
 		//call our api method
         restApiCall();
         
+        //getting the canvas id and setting up the charts data
         const POLARAREA = document.getElementById("polarArea");
         let chart = new Chart(POLARAREA, {
             type: 'polarArea',
@@ -30,13 +36,15 @@ function polarArea() {
                     label: 'Polar Area',
                     data: [dataList[0],dataList[1],dataList[2],dataList[3]],
                     backgroundColor: [
-                    	  'rgba(255, 195, 0, 0.2)',
-                          'rgba(229, 45, 53, 0.2)',
-                          'rgba(127, 15, 63, 0.2)',
-                          'rgba(67, 133, 245, 0.2)'
+         
+                          'rgba(229, 45, 53, 0.6)',
+                          'rgba(255, 195, 0, 0.6)',
+                          'rgba(170, 0, 0, 0.6)',
+                          'rgba(67, 133, 245, 0.6)'
                     ]
                 }],
-                labels: ['400', '404', '500',"other"]
+                labels: ['400', '404', '500',"other"]
+                	    
             },
             zoomEnabled: true,
             options: {
@@ -55,12 +63,13 @@ function polarArea() {
         });
     }
 
-    // calling and starting animation
+    // calling the method and creating a interval
     polarArea();
     window.setInterval(polarArea, 2000);
     
+    
     function Pie() {
-
+        //getting the canvas id and setting up the charts data
         const POLARAREA = document.getElementById("pie");
         let chart = new Chart(POLARAREA, {
             type: 'pie',
@@ -68,9 +77,9 @@ function polarArea() {
                 datasets: [{
                     data: [dataList[0],dataList[1],dataList[2],dataList[3]],
                     backgroundColor: [
+                    	'rgba(229, 45, 53, 0.8)',
                         'rgba(255, 195, 0, 0.8)',
-                        'rgba(229, 45, 53, 0.8)',
-                        'rgba(127, 15, 63, 0.8)',
+                        'rgba(170, 0, 0, 0.8)',
                         'rgba(67, 133, 245, 0.8)'
                     ]
                 }],
@@ -96,5 +105,8 @@ function polarArea() {
     // calling and starting animation
     Pie();
     window.setInterval(Pie, 2000);
+    
+    
+    
     
    

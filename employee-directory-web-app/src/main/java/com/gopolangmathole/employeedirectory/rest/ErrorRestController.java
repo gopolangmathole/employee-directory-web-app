@@ -17,17 +17,19 @@ import com.gopolangmathole.employeedirectory.service.ExceptionService;
 @Api(visibility = ApiVisibility.PRIVATE, description = "", name = "")
 public class ErrorRestController {
 
+	//dependency injection
 	@Autowired
 	ExceptionService exceptionService;
 
 	@GetMapping("/health/error_count")
 
+	//get error count
 	public int getErrorsCount() {
-
 		//returning total error count
 		return (int) exceptionService.count();
 	}
 
+	//health mapping
 	@GetMapping("/health/combined_count")
 	public List<Integer> getCombine() {
 
@@ -59,5 +61,4 @@ public class ErrorRestController {
 	
 		return graphData;
 	}
-	
 }

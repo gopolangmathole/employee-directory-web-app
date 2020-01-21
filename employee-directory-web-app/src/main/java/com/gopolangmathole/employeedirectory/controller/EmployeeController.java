@@ -34,7 +34,7 @@ import com.gopolangmathole.employeedirectory.service.ExceptionService;
 @RequestMapping("/employees")
 public class EmployeeController {
 
-	// property injection to auto wire our dependencies
+	//property injection to auto wire our dependencies
 	@Autowired
 	private EmployeeService employeeService;
 
@@ -44,6 +44,7 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
+	//creating absolute path
 	public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/images/uploads";
 
 	private String currentImage = null;

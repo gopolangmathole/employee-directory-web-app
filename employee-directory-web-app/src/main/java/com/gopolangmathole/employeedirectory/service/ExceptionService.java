@@ -2,6 +2,7 @@ package com.gopolangmathole.employeedirectory.service;
 
 import java.util.List;
 
+
 import com.gopolangmathole.employeedirectory.entity.ExceptionReport;
 
 public interface ExceptionService {
@@ -14,4 +15,16 @@ public interface ExceptionService {
 	
 	//get count
 	public long count();
+
+	// using 400 error code
+	public long get400Error();
+
+	// using 404 error code
+	public long get404Error();
+
+	// using 500 error code
+	public long get500Error();
+
+	// getting other codes
+	public long getOtherError();
 }

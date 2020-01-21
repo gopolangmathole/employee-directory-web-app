@@ -1,26 +1,42 @@
- function polarArea() {
-        var random1 = Math.floor((Math.random() * 100) + 1);
-        var random2 = Math.floor((Math.random() * 100) + 1);
-        var random3 = Math.floor((Math.random() * 100) + 1);
-        var random4 = Math.floor((Math.random() * 100) + 1);
 
+var dataList = [];
+
+function restApiCall(){
+	
+	// fetching actuator status
+	fetch("http://localhost:8080/api/v1/health/combined_count")
+			.then(function(response) {
+
+				return response.json();
+			})
+			.then(
+					function(data) {
+						
+						dataList = JSON.parse(JSON.stringify(data));
+
+					});
+}
+
+function polarArea() {
+ 
+		//call our api method
+        restApiCall();
+        
         const POLARAREA = document.getElementById("polarArea");
         let chart = new Chart(POLARAREA, {
             type: 'polarArea',
             data: {
                 datasets: [{
-                    label: 'Failing Transactions',
-                    data: [random1, random2, random3, random4, random1, random3],
+                    label: 'Polar Area',
+                    data: [dataList[0],dataList[1],dataList[2],dataList[3]],
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.4)',
-                        'rgba(54, 162, 235, 0.4)',
-                        'rgba(255, 206, 86, 0.4)',
-                        'rgba(75, 192, 192, 0.4)',
-                        'rgba(153, 102, 255, 0.4)',
-                        'rgba(255, 159, 64, 0.4)'
+                    	  'rgba(255, 195, 0, 0.2)',
+                          'rgba(229, 45, 53, 0.2)',
+                          'rgba(127, 15, 63, 0.2)',
+                          'rgba(67, 133, 245, 0.2)'
                     ]
                 }],
-                labels: ['Uganda', 'Mozambique', 'Lesotho', 'Botswana', 'Malawi', 'Ghana']
+                labels: ['400', '404', '500',"other"]
             },
             zoomEnabled: true,
             options: {
@@ -31,7 +47,7 @@
                     mode: false
                 },
                 animation: {
-                    duration: 900
+                    duration: 0
                 }
 
             }
@@ -39,33 +55,26 @@
         });
     }
 
-    //calling and starting animation
+    // calling and starting animation
     polarArea();
     window.setInterval(polarArea, 2000);
     
     function Pie() {
-        var random1 = Math.floor((Math.random() * 100) + 1);
-        var random2 = Math.floor((Math.random() * 100) + 1);
-        var random3 = Math.floor((Math.random() * 100) + 1);
-        var random4 = Math.floor((Math.random() * 100) + 1);
 
         const POLARAREA = document.getElementById("pie");
         let chart = new Chart(POLARAREA, {
             type: 'pie',
             data: {
                 datasets: [{
-                    label: 'Failing Transactions',
-                    data: [random1, random2, random3, random4, random1, random3],
+                    data: [dataList[0],dataList[1],dataList[2],dataList[3]],
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.4)',
-                        'rgba(54, 162, 235, 0.4)',
-                        'rgba(255, 206, 86, 0.4)',
-                        'rgba(75, 192, 192, 0.4)',
-                        'rgba(153, 102, 255, 0.4)',
-                        'rgba(255, 159, 64, 0.4)'
+                        'rgba(255, 195, 0, 0.8)',
+                        'rgba(229, 45, 53, 0.8)',
+                        'rgba(127, 15, 63, 0.8)',
+                        'rgba(67, 133, 245, 0.8)'
                     ]
                 }],
-                labels: ['Uganda', 'Mozambique', 'Lesotho', 'Botswana', 'Malawi', 'Ghana']
+                labels: ['400', '404', '500',"other"]
             },
             zoomEnabled: true,
             options: {
@@ -76,7 +85,7 @@
                     mode: false
                 },
                 animation: {
-                    duration: 900
+                    duration: 0
                 }
 
             }
@@ -84,7 +93,7 @@
         });
     }
 
-    //calling and starting animation
+    // calling and starting animation
     Pie();
     window.setInterval(Pie, 2000);
     

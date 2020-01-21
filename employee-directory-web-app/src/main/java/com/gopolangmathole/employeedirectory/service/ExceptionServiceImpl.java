@@ -32,6 +32,30 @@ public class ExceptionServiceImpl implements ExceptionService {
 		return exceptionRepository.findAll();
 	}
 
+	@Override
+	public long get400Error() {
+		
+		return exceptionRepository.get400Error();
+	}
+
+	@Override
+	public long get404Error() {
+		
+		return exceptionRepository.get404Error();
+	}
+
+	@Override
+	public long get500Error() {
+	
+		return exceptionRepository.get500Error();
+	}
+
+	@Override
+	public long getOtherError() {
+		
+		return exceptionRepository.getOtherError();
+	}
+
 
 
 	

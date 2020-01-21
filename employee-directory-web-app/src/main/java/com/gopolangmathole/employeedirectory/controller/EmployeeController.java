@@ -80,13 +80,13 @@ public class EmployeeController {
 		// getting the data from
 		int countRows = (int) employeeService.count();
 		int errorReport = (int) exceptionService.count();
-		
+
 		// adding entities to the model
 		model.addAttribute("number", countRows);
 		model.addAttribute("reports", errorReport);
 		model.addAttribute("employees", employeeService.findAll());
-		model.addAttribute("updateStatus",employeeService.getEmployeeLastUpdate());
-		
+		model.addAttribute("updateStatus", employeeService.getEmployeeLastUpdate());
+
 		return "/employees/all-employees";
 	}
 
@@ -144,11 +144,10 @@ public class EmployeeController {
 			// saving an image
 			employeeService.saveImage(imageFile, employee, uploadDirectory, currentImage);
 
-			
 			// updating the last update column
 			employee.setLastUpdate(getCurrentDateAndTime.getCurrentFullDate());
-			
-			//updating the address table id
+
+			// updating the address table id
 			employee.getAddress().setId(employee.getId());
 
 			// save the employee
@@ -210,40 +209,33 @@ public class EmployeeController {
 	@GetMapping("/api")
 	public String getApis(Model model) {
 
+		// getting the number of rows for errors counts and employee services
 		int countRows = (int) employeeService.count();
 		int errorReport = (int) exceptionService.count();
 
+		// adding the objects to the model
 		model.addAttribute("number", countRows);
 		model.addAttribute("reports", errorReport);
 		model.addAttribute("year", Calendar.getInstance().get(Calendar.YEAR));
 
+		// returning the view
 		return "/employees/list-apis";
 	}
 
+	// adding the get report mapping
 	@GetMapping("/viewReport")
 	public String viewReport(Model model) {
-		
-		int errorReport = (int) exceptionService.count();
 
+		// getting all errors from the database
+		int errorReport = (int) exceptionService.count();
+		
+		// adding the object to the model
 		model.addAttribute("exceptions", exceptionService.findAll());
 		model.addAttribute("reports", errorReport);
 		model.addAttribute("year", Calendar.getInstance().get(Calendar.YEAR));
-		
 
+				// returning view
 		return "/dashboard/report";
 	}
-
-	@GetMapping("/viewReport/charts")
-	public String getCharts() {
-
-		return "/dashboard/charts";
-	}
-
-	@GetMapping("/viewReport/tables")
-	public String getTables() {
-
-		return "/dashboard/tables";
-	}
-
 
 }

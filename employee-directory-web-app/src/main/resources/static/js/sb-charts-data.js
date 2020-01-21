@@ -11,7 +11,7 @@ function restApiCall(){
 			})
 			.then(
 					function(data) {
-						
+			
 						dataList = JSON.parse(JSON.stringify(data));
 
 					});

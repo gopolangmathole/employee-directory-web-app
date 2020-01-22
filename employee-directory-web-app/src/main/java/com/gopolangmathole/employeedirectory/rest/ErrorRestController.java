@@ -46,9 +46,11 @@ public class ErrorRestController {
 		return errorCode;
 	}
 	
+	/*
 	@GetMapping("/health/graph_data")
-	public List<Integer> getGraphData(){
-		
+	public int getGraphData(){
+	
+		/*
 		//adding a list for the graph
 		List <Integer> graphData = new ArrayList<>();
 		
@@ -59,6 +61,8 @@ public class ErrorRestController {
 		graphData.add((int) exceptionService.getFourDaysBack());
 		graphData.add((int) exceptionService.getFiveDaysBack());
 	
-		return graphData;
+	
+		return (int) exceptionService.getToday();
 	}
+	*/
 }

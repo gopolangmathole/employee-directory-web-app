@@ -34,7 +34,7 @@ import com.gopolangmathole.employeedirectory.service.ExceptionService;
 @RequestMapping("/employees")
 public class EmployeeController {
 
-	//property injection to auto wire our dependencies
+	// property injection to auto wire our dependencies
 	@Autowired
 	private EmployeeService employeeService;
 
@@ -44,7 +44,7 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
-	//creating absolute path
+	// creating absolute path
 	public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/images/uploads";
 
 	private String currentImage = null;
@@ -72,7 +72,7 @@ public class EmployeeController {
 		model.addAttribute("number", countRows);
 		model.addAttribute("reports", errorReport);
 		model.addAttribute("employees", employeeRepository.findAll(PageRequest.of(page, 5)));
-
+		
 		return "/employees/list-employees";
 	}
 
@@ -160,15 +160,15 @@ public class EmployeeController {
 		return url;
 	}
 
-	//adding the get mapping for editing 
+	// adding the get mapping for editing
 	@GetMapping("/edit/{id}")
 	public String editEmployeeById(Model model, @ModelAttribute("id") int id) {
 
-		//getting the employee based on the id given and counting errors.
+		// getting the employee based on the id given and counting errors.
 		Employee employee = employeeService.findById(id);
 		int countRows = (int) employeeService.count();
 		int errorReport = (int) exceptionService.count();
-		
+
 		// initializing arrayList for gender, and add both genders to list.
 		List<String> selectGender = new ArrayList<String>();
 
@@ -183,41 +183,42 @@ public class EmployeeController {
 		currentImage = null;
 		currentImage = employee.getImage();
 
-		//adding the returned employee to the model
+		// adding the returned employee to the model
 		if (employee != null) {
 
 			model.addAttribute("employee", employee);
 
 		}
 
-		//adding respective details to the model.
+		// adding respective details to the model.
 		model.addAttribute("number", countRows);
 		model.addAttribute("reports", errorReport);
 		model.addAttribute("genderSelected", selectGender);
 		model.addAttribute("getCountries", countryList.getCountries());
 
-		//returning the view
+		// returning the view
 		return "/employees/employees-form";
 	}
 
-	//adding delete mapping
+	// adding delete mapping
 	@GetMapping("/delete/{id}")
 	public String deleteUser(@ModelAttribute("id") int id, Model model) {
 
-		//passing the id of the employee which should be deleted
+		// passing the id of the employee which should be deleted
 		Employee employee = employeeService.findById(id);
 
-		//deleting the employee from the database provided the specified user id was found.
+		// deleting the employee from the database provided the specified user id was
+		// found.
 		if (employee != null) {
 
 			employeeService.deleteById(id);
 		}
 
-		//returning the list view.
+		// returning the list view.
 		return "redirect:/employees/list";
 	}
 
-	//setting up api mapping
+	// setting up api mapping
 	@GetMapping("/api")
 	public String getApis(Model model) {
 

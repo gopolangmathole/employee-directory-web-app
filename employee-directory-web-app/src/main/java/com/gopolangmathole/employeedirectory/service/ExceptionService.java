@@ -27,9 +27,11 @@ public interface ExceptionService {
 	// getting other codes
 	public long getOtherError();
 
+	
 	// get today's data
-	public long getToday();
+	//public long getToday();
 
+	/*
 	// get yesterday's data
 	public long getYesterday();
 
@@ -41,5 +43,5 @@ public interface ExceptionService {
 
 	// get five day back data
 	public long getFiveDaysBack();
-
+*/
 }

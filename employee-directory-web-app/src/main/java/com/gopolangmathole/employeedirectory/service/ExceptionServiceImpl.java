@@ -57,35 +57,31 @@ public class ExceptionServiceImpl implements ExceptionService {
 		return exceptionRepository.getOtherError();
 	}
 
+	/*
 	@Override
 	public long getToday() {
 
 		return exceptionRepository.getToday();
 	}
 
-	@Override
-	public long getYesterday() {
-		
-		return exceptionRepository.getYesterday();
-	}
-
-	@Override
-	public long getThreeDaysBack() {
-		
-		return exceptionRepository.getThreeDaysBack();
-	}
-
-	@Override
-	public long getFourDaysBack() {
-		
-		return exceptionRepository.getFourDaysBack();
-	}
-
-	@Override
-	public long getFiveDaysBack() {
-		
-		return exceptionRepository.getFiveDaysBack();
-		
-	}
-
+	
+	 * @Override public long getYesterday() {
+	 * 
+	 * return exceptionRepository.getYesterday(); }
+	 * 
+	 * @Override public long getThreeDaysBack() {
+	 * 
+	 * return exceptionRepository.getThreeDaysBack(); }
+	 * 
+	 * @Override public long getFourDaysBack() {
+	 * 
+	 * return exceptionRepository.getFourDaysBack(); }
+	 * 
+	 * @Override public long getFiveDaysBack() {
+	 * 
+	 * return exceptionRepository.getFiveDaysBack();
+	 * 
+	 * }
+	 * 
+	 */
 }

@@ -2,10 +2,15 @@ package com.gopolangmathole.employeedirectory.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.gopolangmathole.employeedirectory.entity.ExceptionReport;
 
 public interface ExceptionRepository extends JpaRepository<ExceptionReport, Integer> {
+
+	/*
+	 * Data for the charts
+	 */
 
 	// doing count for all the rows
 	public long count();
@@ -25,30 +30,12 @@ public interface ExceptionRepository extends JpaRepository<ExceptionReport, Inte
 	@Query("SELECT COUNT(*) FROM ExceptionReport WHERE code != 400 and code != 404 and code <> 500")
 	public long getOtherError();
 
-	// graph queries
-
-	// getting three days back date
-
-	// get today's data
-	//@Query("SELECT COUNT(*) FROM ExceptionReport WHERE TO_DAYS(`time`) < TO_DAYS(NOW())-1")	
-	//public long getToday();
-
 	/*
-	// get yesterday's data
-	@Query("SELECT COUNT(*) FROM ExceptionReport WHERE time between subdate(curdate(), 1)and curdate()")
-	public long getYesterday();
+	 * Data for the Graph
+	 * 
+	 */
 
-	// get three days back data
-	@Query("SELECT COUNT(*) FROM ExceptionReport WHERE TO_DAYS(`time`) < TO_DAYS(NOW())-1")
-	public long getThreeDaysBack();
-
-	// get four days back data
-	@Query("SELECT COUNT(*) FROM ExceptionReport WHERE TO_DAYS(`time`) < TO_DAYS(NOW())-2")
-	public long getFourDaysBack();
-
-	// get five day back data
-	@Query("SELECT COUNT(*) FROM ExceptionReport WHERE TO_DAYS(`time`) < TO_DAYS(NOW())-3")
-	public long getFiveDaysBack();
-
-	*/
+	// get required date data
+	@Query("SELECT COUNT(*) FROM ExceptionReport WHERE time like :date%")
+	public long getTimeCount(@Param("date") String date);
 }

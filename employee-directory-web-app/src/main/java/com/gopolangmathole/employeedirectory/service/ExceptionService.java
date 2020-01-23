@@ -2,6 +2,8 @@ package com.gopolangmathole.employeedirectory.service;
 
 import java.util.List;
 
+import org.springframework.data.repository.query.Param;
+
 import com.gopolangmathole.employeedirectory.entity.ExceptionReport;
 
 public interface ExceptionService {
@@ -27,21 +29,6 @@ public interface ExceptionService {
 	// getting other codes
 	public long getOtherError();
 
-	
-	// get today's data
-	//public long getToday();
-
-	/*
-	// get yesterday's data
-	public long getYesterday();
-
-	// get three days back data
-	public long getThreeDaysBack();
-
-	// get four days back data
-	public long getFourDaysBack();
-
-	// get five day back data
-	public long getFiveDaysBack();
-*/
+	//get error counts for given date
+	public long getTimeCount(@Param("date") String date);
 }

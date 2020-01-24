@@ -2,6 +2,7 @@
 var dataList = [];
 var x_axis = [];
 var y_axis = [];
+
 // api function
 function restApiCall() {
 
@@ -54,8 +55,8 @@ function polarArea() {
 				data : [ dataList[0], dataList[1], dataList[2], dataList[3] ],
 				backgroundColor : [
 
-				'rgba(229, 45, 53, 0.6)', 'rgba(255, 195, 0, 0.6)',
-						'rgba(170, 0, 0, 0.6)', 'rgba(67, 133, 245, 0.6)' ]
+				'rgba(255, 166, 0, 0.6)', 'rgba(47, 75, 124, 0.6)',
+						'rgba(249, 93, 106, 0.6)', 'rgba(67, 133, 245, 0.6)' ]
 			} ],
 			labels : [ '400', '404', '500', "other" ]
 
@@ -67,6 +68,26 @@ function polarArea() {
 			onClick : null,
 			hover : {
 				mode : false
+			},
+			plugins : {
+				labels : {
+					render : 'percentage',
+					// font size, default is defaultFontSize
+					fontSize : 14,
+
+					// font style, default is defaultFontStyle
+					fontStyle : 'normal',
+
+					position: 'outside',
+					
+					// font family, default is defaultFontFamily
+					fontFamily : "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+					// font color, can be color array for each data or
+					// function for dynamic color, default is
+					// defaultFontColor
+					textMargin: 6
+				
+				}
 			},
 			animation : {
 				duration : 0
@@ -84,105 +105,142 @@ window.setInterval(polarArea, 2000);
 function Pie() {
 	// getting the canvas id and setting up the charts data
 	const POLARAREA = document.getElementById("pie");
-	let chart = new Chart(POLARAREA, {
-		type : 'pie',
-		data : {
-			datasets : [ {
-				data : [ dataList[0], dataList[1], dataList[2], dataList[3] ],
-				backgroundColor : [ 'rgba(229, 45, 53, 0.8)',
-						'rgba(255, 195, 0, 0.8)', 'rgba(170, 0, 0, 0.8)',
-						'rgba(67, 133, 245, 0.8)' ]
-			} ],
-			labels : [ '400', '404', '500', "other" ]
-		},
-		zoomEnabled : true,
-		options : {
-			events : [ '' ],
-			onHover : null,
-			onClick : null,
-			hover : {
-				mode : false
-			},
-			animation : {
-				duration : 0
-			}
+	let chart = new Chart(
+			POLARAREA,
+			{
+				type : 'pie',
+				data : {
+					datasets : [ {
+						data : [ dataList[0], dataList[1], dataList[2],
+								dataList[3] ],
+						backgroundColor : [ 'rgba(255, 166, 0, 0.6)',
+								'rgba(47, 75, 124, 0.6)',
+								'rgba(249, 93, 106, 0.6)',
+								'rgba(67, 133, 245, 0.6)' ]
+					} ],
+					labels : [ '400', '404', '500', "other" ]
+				},
+				zoomEnabled : true,
+				options : {
+					
+					events : [ '' ],
+					onHover : null,
+					onClick : null,
+					hover : {
+						mode : false
+					},
+					plugins : {
+						labels : {
+							render : 'percentage',
+							// font size, default is defaultFontSize
+							fontSize : 14,
 
-		}
+							// font style, default is defaultFontStyle
+							fontStyle : 'normal',
 
-	});
+							position: 'outside',
+							
+							// font family, default is defaultFontFamily
+							fontFamily : "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+							// font color, can be color array for each data or
+							// function for dynamic color, default is
+							// defaultFontColor
+							textMargin: 6
+						}
+					},
+					animation : {
+						duration : 0
+					}
+
+				}
+
+			});
 }
 
 // calling and starting animation
 Pie();
 window.setInterval(Pie, 2000);
 
-// line graph
-function lineGraph() {
+/* Creating bar chart */
+function BarGraph() {
 
-	// Set new default font family and font color to mimic Bootstrap's
-	// default styling
-	Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-	Chart.defaults.global.defaultFontColor = '#292b2c';
+	const LINEGRAPH = document.getElementById("barGraph");
+	let chart = new Chart(
+			LINEGRAPH,
+			{
+				type : 'bar',
+				data : {
+					datasets : [ {
+						label : "Total daily errors",
 
-	// Area Chart Example
-	var ctx = document.getElementById("myAreaChart");
-	var myLineChart = new Chart(ctx, {
-		type : 'line',
-		data : {
-			labels : [ x_axis[8], x_axis[7], x_axis[6], x_axis[5], x_axis[4],
-					x_axis[3], x_axis[2], x_axis[1], x_axis[0] ],
-			datasets : [ {
-				label : "Daily log",
-				lineTension : 0.3,
-				backgroundColor : "rgba(2,117,216,0.2)",
-				borderColor : "rgba(2,117,216,1)",
-				pointRadius : 5,
-				pointBackgroundColor : "rgba(2,117,216,1)",
-				pointBorderColor : "rgba(255,255,255,0.8)",
-				pointHoverRadius : 5,
-				pointHoverBackgroundColor : "rgba(2,117,216,1)",
-				pointHitRadius : 50,
-				pointBorderWidth : 2,
-				data : [ y_axis[8], y_axis[7], y_axis[6], y_axis[5], y_axis[4],
-						y_axis[3], y_axis[2], y_axis[1], y_axis[0] ],
-			} ],
-		},
-		options : {
-			scales : {
-				xAxes : [ {
-					time : {
-						unit : 'date'
+						data : [ y_axis[8], y_axis[7], y_axis[6], y_axis[5],
+								y_axis[4], y_axis[3], y_axis[2], y_axis[1],
+								y_axis[0] ],
+
+						backgroundColor : [ 'rgba(249, 93, 106, 1)',
+								'rgba(249, 93, 106, 1)',
+								'rgba(249, 93, 106, 1)',
+								'rgba(249, 93, 106, 1)',
+								'rgba(249, 93, 106, 1)',
+								'rgba(249, 93, 106, 1)',
+								'rgba(249, 93, 106, 1)',
+								'rgba(249, 93, 106, 1)',
+								'rgba(249, 93, 106, 1)' ],
+					} ],
+
+					labels : [ x_axis[8], x_axis[7], x_axis[6], x_axis[5],
+							x_axis[4], x_axis[3], x_axis[2], x_axis[1],
+							x_axis[0] ],
+					render : null,
+				},
+				options : {
+					title : {
+						display : true,
+						text : 'Daily Report',
+						fontSize : 18
+
 					},
-					gridLines : {
-						display : false
+					plugins : {
+						labels : {
+							render : 'value',
+							// font size, default is defaultFontSize
+							fontSize : 13,
+
+							// font style, default is defaultFontStyle
+							fontStyle : 'normal',
+
+							// font family, default is defaultFontFamily
+							fontFamily : "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+
+						}
 					},
-					ticks : {
-						maxTicksLimit : 9
+					events : [ '' ],
+					onHover : null,
+					onClick : null,
+					legend : {
+						display : true
+					},
+					hover : {
+						mode : false,
+
+					},
+					animation : {
+						duration : 0,
+
+					},
+					scales : {
+						yAxes : [ {
+
+							ticks : {
+								beginAtZero : true
+							}
+						} ],
+
 					}
-				} ],
-				yAxes : [ {
-					ticks : {
-						min : 0,
-
-						maxTicksLimit : 10
-					},
-					gridLines : {
-						color : "rgba(0, 0, 0, .125)",
-					}
-				} ],
-			},
-			legend : {
-				display : false
-			},
-			animation : {
-				duration : 0
-			},
-			hover: {mode: null},
-
-		}
-	});
+				}
+			});
 }
 
 // calling and starting animation
-lineGraph();
-window.setInterval(lineGraph, 2000);
+BarGraph();
+window.setInterval(BarGraph, 2000);

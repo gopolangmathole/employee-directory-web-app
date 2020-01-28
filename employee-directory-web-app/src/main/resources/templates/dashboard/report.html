@@ -34,12 +34,9 @@
 	<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
 		<a class="navbar-brand mr-1" th:href="@{/employees/list}">Employee
-			Directory</a>
+			Directory
+		</a>
 
-		<button class="btn btn-link btn-sm text-white order-1 order-sm-0"
-			id="sidebarToggle" href="#">
-			<i class="fas fa-bars"></i>
-		</button>
 
 		<!-- Navbar Search -->
 		<form
@@ -79,12 +76,14 @@
 					<h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
 
 
-					<div class="btn-group" role="group">
+					<div class="dropdown">
 						<button id="btnGroupDrop1" type="button"
 							class="btn btn-sm btn-primary shadow-sm dropdown-toggle"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Generate
+							data-toggle="dropdown" data-placement="left"
+							title="Download report in pdf, docx and text"
+							aria-haspopup="true" aria-expanded="false">Generate
 							Report</button>
-						<div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 							<a class="dropdown-item" href="#">As PDF</a> <a
 								class="dropdown-item" href="#">As TXT</a> <a
 								class="dropdown-item" href="#">As WORD</a>
@@ -95,7 +94,7 @@
 				<!-- Icon Cards-->
 				<div class="row mb-5 mt-3">
 
-					<!-- Earnings (Monthly) Card Example -->
+					<!--Application health status -->
 					<div class="col-xl-3 col-md-6 mb-4">
 						<div class="card border-left-primary shadow h-100 py-2">
 							<div class="card-body">
@@ -109,7 +108,7 @@
 										</div>
 									</div>
 									<div class="col-auto">
-										<i class="fa fa-heartbeat fa-2x text-300"></i></i>
+										<i class="fa fa-heartbeat fa-2x text-300"></i>
 									</div>
 								</div>
 							</div>
@@ -138,7 +137,7 @@
 						</div>
 					</div>
 
-					<!-- Databse status -->
+					<!-- Database status -->
 					<div class="col-xl-3 col-md-6 mb-4">
 						<div class="card border-left-info shadow h-100 py-2">
 							<div class="card-body">
@@ -237,7 +236,7 @@
 					<div class="card-body">
 						<div class="table-responsive">
 							<table class="table table-bordered" id="dataTable" width="100%"
-								cellspacing="0">
+								scellspacing="0">
 								<thead>
 									<tr>
 										<th>Id</th>
@@ -246,7 +245,7 @@
 										<th>Time</th>
 									</tr>
 								</thead>
-								
+
 								<tbody>
 									<tr th:if="${exceptions!=null and !exceptions.isEmpty()}"
 										th:each="tempexception : ${exceptions}">
@@ -320,10 +319,16 @@
 		th:src="@{/js/demo/datatables-demo.js}"></script>
 	<script src="/static/js/sb-charts-data.js"
 		th:src="@{/js/sb-charts-data.js}"></script>
-<script src="/static/js/demo/chartjs-plugin-labels.min.js"
+	<script src="/static/js/demo/chartjs-plugin-labels.min.js"
 		th:src="@{/js/demo/chartjs-plugin-labels.min.js}"></script>
-		
-		
+
+
+	<script>
+		$(function() {
+			$('[data-toggle="dropdown"]').tooltip()
+		})
+	</script>
+
 
 </body>
 

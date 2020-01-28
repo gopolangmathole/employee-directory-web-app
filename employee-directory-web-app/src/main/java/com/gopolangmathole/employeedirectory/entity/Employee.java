@@ -13,14 +13,15 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.jsondoc.core.annotation.ApiObject;
+import org.jsondoc.core.annotation.Api;
 import org.jsondoc.core.annotation.ApiObjectField;
+import org.jsondoc.core.pojo.ApiVisibility;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "employee")
-@ApiObject
+@Api(visibility = ApiVisibility.PRIVATE, description = "", name = "")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Employee {
 

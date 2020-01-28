@@ -47,55 +47,66 @@ function polarArea() {
 
 	// getting the canvas id and setting up the charts data
 	const POLARAREA = document.getElementById("polarArea");
-	let chart = new Chart(POLARAREA, {
-		type : 'polarArea',
-		data : {
-			datasets : [ {
-				label : 'Polar Area',
-				data : [ dataList[0], dataList[1], dataList[2], dataList[3] ],
-				backgroundColor : [
+	let chart = new Chart(
+			POLARAREA,
+			{
+				type : 'polarArea',
+				data : {
+					datasets : [ {
+						label : 'Polar Area',
+						data : [ dataList[0], dataList[1], dataList[2],
+								dataList[3] ],
+						backgroundColor : [
 
-				'rgba(255, 166, 0, 0.6)', 'rgba(47, 75, 124, 0.6)',
-						'rgba(249, 93, 106, 0.6)', 'rgba(67, 133, 245, 0.6)' ]
-			} ],
-			labels : [ '400', '404', '500', "other" ]
+						'rgba(255, 166, 0, 0.6)', 'rgba(47, 75, 124, 0.6)',
+								'rgba(249, 93, 106, 0.6)',
+								'rgba(67, 133, 245, 0.6)' ]
+					} ],
+					labels : [ '400', '404', '500', "other" ]
 
-		},
-		zoomEnabled : true,
-		options : {
-			events : [ '' ],
-			onHover : null,
-			onClick : null,
-			hover : {
-				mode : false
-			},
-			plugins : {
-				labels : {
-					render : 'percentage',
-					// font size, default is defaultFontSize
-					fontSize : 14,
+				},
+				zoomEnabled : false,
+				options : {
+					events : [ '' ],
+					onClick : null,
+					animation : {
+						duration : 0
+					// general animation time
+					},
+					hover : {
+						animationDuration : 0
+					// duration of animations when hovering an item
+					},
+					responsiveAnimationDuration : 0 // animation duration after
+					// a resize
+					,
+					plugins : {
+						labels : {
+							render : 'percentage',
+							// font size, default is defaultFontSize
+							fontSize : 14,
 
-					// font style, default is defaultFontStyle
-					fontStyle : 'normal',
+							// font style, default is defaultFontStyle
+							fontStyle : 'normal',
 
-					position: 'outside',
-					
-					// font family, default is defaultFontFamily
-					fontFamily : "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-					// font color, can be color array for each data or
-					// function for dynamic color, default is
-					// defaultFontColor
-					textMargin: 6
-				
+							position : 'outside',
+
+							// font family, default is defaultFontFamily
+							fontFamily : "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+							// font color, can be color array for each data or
+							// function for dynamic color, default is
+							// defaultFontColor
+							textMargin : 6
+
+						}
+					},
+					animation : {
+						duration : 0
+					}
+
 				}
-			},
-			animation : {
-				duration : 0
-			}
 
-		}
-
-	});
+			});
 }
 
 // calling the method and creating a interval
@@ -120,15 +131,21 @@ function Pie() {
 					} ],
 					labels : [ '400', '404', '500', "other" ]
 				},
-				zoomEnabled : true,
+				zoomEnabled : false,
 				options : {
-					
 					events : [ '' ],
-					onHover : null,
 					onClick : null,
-					hover : {
-						mode : false
+					animation : {
+						duration : 0
+					// general animation time
 					},
+					hover : {
+						animationDuration : 0
+					// duration of animations when hovering an item
+					},
+					responsiveAnimationDuration : 0 // animation duration after
+					// a resize
+					,
 					plugins : {
 						labels : {
 							render : 'percentage',
@@ -138,14 +155,14 @@ function Pie() {
 							// font style, default is defaultFontStyle
 							fontStyle : 'normal',
 
-							position: 'outside',
-							
+							position : 'outside',
+
 							// font family, default is defaultFontFamily
 							fontFamily : "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
 							// font color, can be color array for each data or
 							// function for dynamic color, default is
 							// defaultFontColor
-							textMargin: 6
+							textMargin : 6
 						}
 					},
 					animation : {
@@ -200,6 +217,19 @@ function BarGraph() {
 						fontSize : 18
 
 					},
+					events : [ '' ],
+					onClick : null,
+					animation : {
+						duration : 0
+					// general animation time
+					},
+					hover : {
+						animationDuration : 0
+					// duration of animations when hovering an item
+					},
+					responsiveAnimationDuration : 0 // animation duration after
+					// a resize
+					,
 					plugins : {
 						labels : {
 							render : 'value',

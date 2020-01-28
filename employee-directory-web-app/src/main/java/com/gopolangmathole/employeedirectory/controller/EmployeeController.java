@@ -31,7 +31,6 @@ import com.gopolangmathole.employeedirectory.entity.GetCurrentDateAndTime;
 import com.gopolangmathole.employeedirectory.service.EmployeeService;
 import com.gopolangmathole.employeedirectory.service.ExceptionService;
 
-
 @Controller
 @RequestMapping("/employees")
 public class EmployeeController {
@@ -74,10 +73,10 @@ public class EmployeeController {
 		model.addAttribute("number", countRows);
 		model.addAttribute("reports", errorReport);
 		model.addAttribute("employees", employeeRepository.findAll(PageRequest.of(page, 5)));
-		
+
 		return "/employees/list-employees";
 	}
-	
+
 	@GetMapping("/all-employees")
 	public String getAllEMployees(Model model) throws ParseException {
 		// getting the data from
@@ -100,8 +99,16 @@ public class EmployeeController {
 		// initializing arrayList for gender, and add both genders to list.
 		List<String> selectGender = new ArrayList<String>();
 
+		// initializing arrayList for contract, and contracts to list.
+		List<String> selectedContract = new ArrayList<>();
+
 		// initializing arrayList of countries
 		CountryList countryList = new CountryList();
+
+		// adding contracts type to list
+		selectedContract.add("Contract");
+		selectedContract.add("Permanent");
+		selectedContract.add("Internship");
 
 		// adding gender to list
 		selectGender.add("Male");
@@ -121,6 +128,7 @@ public class EmployeeController {
 		model.addAttribute("reports", errorReport);
 		model.addAttribute("genderSelected", selectGender);
 		model.addAttribute("getCountries", countryList.getCountries());
+		model.addAttribute("selectedContract", selectedContract);
 
 		return "/employees/employees-form";
 
@@ -173,9 +181,17 @@ public class EmployeeController {
 
 		// initializing arrayList for gender, and add both genders to list.
 		List<String> selectGender = new ArrayList<String>();
+		
+		// initializing arrayList for contract, and contracts to list.
+		List<String> selectedContract = new ArrayList<>();
 
 		// initializing arrayList of countries
 		CountryList countryList = new CountryList();
+
+		// adding contracts type to list
+		selectedContract.add("Contract");
+		selectedContract.add("Permanent");
+		selectedContract.add("Internship");
 
 		// adding gender to list
 		selectGender.add("Male");
@@ -197,7 +213,7 @@ public class EmployeeController {
 		model.addAttribute("reports", errorReport);
 		model.addAttribute("genderSelected", selectGender);
 		model.addAttribute("getCountries", countryList.getCountries());
-
+		model.addAttribute("selectedContract", selectedContract);
 		// returning the view
 		return "/employees/employees-form";
 	}
@@ -252,5 +268,5 @@ public class EmployeeController {
 		// returning view
 		return "/dashboard/report";
 	}
-	
+
 }

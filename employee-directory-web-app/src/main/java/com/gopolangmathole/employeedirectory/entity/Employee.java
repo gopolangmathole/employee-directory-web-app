@@ -43,6 +43,11 @@ public class Employee {
 	@ApiObjectField(description = "Employee last Name")
 	private String lastName;
 
+	@Column(name = "employment_contract")
+	@ApiObjectField(description = "Employee contract")
+	@JsonIgnoreProperties(ignoreUnknown = true)
+	private String employmentContract;
+
 	@Column(name = "gender")
 	@NotNull
 	@ApiObjectField(description = "Employee's sex")
@@ -79,24 +84,26 @@ public class Employee {
 		this.address = address;
 	}
 
-	public Employee(int id, String firstName, String image, String lastName, String gender, String email,
-			String lastUpdate, Address employeeAddress) {
+	public Employee(int id, String firstName, String image, String employmentContract, String lastName, String gender,
+			String email, String lastUpdate, Address employeeAddress) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.gender = gender;
+		this.employmentContract = employmentContract;
 		this.image = image;
 		this.lastUpdate = lastUpdate;
 		this.address = employeeAddress;
 	}
 
-	public Employee(String firstName, String image, String lastName, String gender, String email, String lastUpdate,
-			 Address employeeAddress) {
+	public Employee(String firstName, String image, String lastName, String employmentContract, String gender,
+			String email, String lastUpdate, Address employeeAddress) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
 		this.email = email;
+		this.employmentContract = employmentContract;
 		this.image = image;
 		this.lastUpdate = lastUpdate;
 		this.address = employeeAddress;
@@ -107,7 +114,14 @@ public class Employee {
 		return id;
 	}
 
-	
+	public String getEmploymentContract() {
+		return employmentContract;
+	}
+
+	public void setEmploymentContract(String employmentContract) {
+		this.employmentContract = employmentContract;
+	}
+
 	public String getLastUpdate() {
 		return lastUpdate;
 	}
@@ -170,11 +184,13 @@ public class Employee {
 		return address;
 	}
 
-	// define tostring
+	// define to string
+	// for debugging purpose
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender
-				+ ", email=" + email + ", image=" + image + ", lastUpdate=" + lastUpdate + ", address=" + address + "]";
+				+ ", email=" + email + ", employmentContract=" + employmentContract + ", image=" + image
+				+ ", lastUpdate=" + lastUpdate + ", address=" + address + "]";
 	}
 
 }

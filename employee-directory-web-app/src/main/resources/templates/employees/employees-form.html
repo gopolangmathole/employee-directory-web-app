@@ -8,8 +8,8 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/css/bootstrap.css"
+	th:href="@{/css/bootstrap.css}"/>
 
 <!-- Fontawesome CSS -->
 <link
@@ -95,6 +95,7 @@
 						
 									</div>
 									
+									
 									 <div class="form-group mx-auto w-75">
 									 	<label for="lastName">Last name: </label>
 									 
@@ -104,10 +105,30 @@
 											class="alert alert-danger mb-2  h-2 "></p>		
 									 </div>
 									 
+									 <div class="form-group mx-auto w-75">
+									   <label for="employmentContract">Contract: </label>
+									    <select th:field="*{employmentContract}" class="form-control">											
+											<option th:if="${employee.employmentContract == null}" value="default">------------select------------</option>
+											<option 
+												th:if="${employee.employmentContract != null}"
+												th:value="${employee.employmentContract}" 
+												th:text="${employee.employmentContract}"
+												selected>
+											</option>
+											<option
+												th:if="${tempEmploymentContract != employee.employmentContract}"
+												th:each="tempEmploymentContract:${selectedContract}" 
+												th:value="${tempEmploymentContract}" 
+												th:text="${tempEmploymentContract}"
+												>
+											</option>
+										</select>
+									</div>
+									 
 									 <div class="form-group" style="width:20%; margin-left:4em;">
 									 	<label for="gender">Gender: </label>
 									    <select th:field="*{gender}"  id="invalidCheck" class="form-control">											
-											<option th:if="${employee.gender == null}" value="default"></option>
+											<option th:if="${employee.gender == null}" value="default">---select---</option>
 											<option 
 												th:if="${employee.gender != null}"
 												th:value="${employee.gender}" 
@@ -183,7 +204,9 @@
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" ></script>
+    <script
+		src="/static/vendor/bootstrap/js/bootstrap.min.js" th:src="@{/vendor/bootstrap/js/bootstrap.min.js}">
+	</script>
 </body>
 </html>
 

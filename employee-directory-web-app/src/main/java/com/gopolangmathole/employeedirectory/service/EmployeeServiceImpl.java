@@ -84,12 +84,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeRepository.count();
 	}
 
-	/*
-	 * @Override public List<Employee> findAllByIdDesc() {
-	 * 
-	 * return employeeRepository.findAllByIdDesc(); }
-	 */
-
 	@Override
 	public List<Employee> findAllByOrderByLastNameAsc() {
 
@@ -225,7 +219,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			}
 		}
 		
-		//returning th date difference list
+		//returning the date difference list
 		return returnDate;
 	}
 

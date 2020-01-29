@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.gopolangmathole.employeedirectory.controller.EmployeeController;
 import com.gopolangmathole.employeedirectory.entity.Employee;
 import com.gopolangmathole.employeedirectory.entity.GetCurrentDateAndTime;
 import com.gopolangmathole.employeedirectory.exception.EmployeeNotFoundException;
@@ -59,7 +62,8 @@ public class EmployeeRestController {
 	// end-point for adding new user
 	@PostMapping("/employees")
 	@ApiMethod(description = "add a new employee by passing jason data through the body")
-	public Employee addEmployee(@RequestBody Employee employee) throws Exception {
+	public Employee addEmployee(@RequestParam("imageFile") MultipartFile imageFile, @RequestBody Employee employee)
+			throws Exception {
 
 		// creating a current date and time object
 		GetCurrentDateAndTime getCurrentDateAndTime = new GetCurrentDateAndTime();
@@ -70,6 +74,11 @@ public class EmployeeRestController {
 
 		employee.getAddress().setId(0);
 		
+		String currentImage = null;
+
+		// saving an image
+		employeeService.saveImage(imageFile, employee, EmployeeController.uploadDirectory, currentImage);
+
 		// updating the last update column
 		employee.setLastUpdate(getCurrentDateAndTime.getCurrentFullDate());
 
@@ -82,7 +91,8 @@ public class EmployeeRestController {
 	// end-point for updating new user
 	@PutMapping("/employees")
 	@ApiMethod(description = "update an existing employee by id")
-	public Employee updateEmployee(@RequestBody Employee employee) throws Exception {
+	public Employee updateEmployee(@RequestParam("imageFile") MultipartFile imageFile, @RequestBody Employee employee)
+			throws Exception {
 
 		// creating a current date and time object
 		GetCurrentDateAndTime getCurrentDateAndTime = new GetCurrentDateAndTime();
@@ -96,11 +106,17 @@ public class EmployeeRestController {
 
 		// updating the last update column
 		employee.setLastUpdate(getCurrentDateAndTime.getCurrentFullDate());
-		
-		//updating the address table id
+
+		// updating the address table id
 		employee.getAddress().setId(employee.getId());
-		
-		//saving the object into the service
+
+		// getting the image and storing it
+		String currentImage = employee.getImage();
+
+		// saving an image
+		employeeService.saveImage(imageFile, employee, EmployeeController.uploadDirectory, currentImage);
+
+		// saving the object into the service
 		employeeService.save(employee);
 
 		// return the updated employee

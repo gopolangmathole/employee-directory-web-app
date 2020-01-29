@@ -96,5 +96,14 @@ public class CustomerAspectLogging {
 			subImages.mkdirs();
 		}
 
+		// creating reports path
+		File subReports = new File("C:///employee_directory///reports");
+
+		// if it doesn't exist let us make it
+		if (!(subReports.exists())) {
+
+			subReports.mkdirs();
+		}
+
 	}
 }

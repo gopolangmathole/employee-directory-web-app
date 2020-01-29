@@ -34,9 +34,12 @@
 	<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
 		<a class="navbar-brand mr-1" th:href="@{/employees/list}">Employee
-			Directory
-		</a>
-
+			Directory </a>
+			
+		<button class="btn btn-link btn-sm text-white order-1 order-sm-0"
+			id="sidebarToggle" href="#">
+			<i class="fa fa-bars"></i>
+		</button>
 
 		<!-- Navbar Search -->
 		<form
@@ -64,6 +67,7 @@
 				th:href="@{/employees/viewReport}"> <i
 					class="fas fa-fw fa-tachometer-alt"></i> <span>Dashboard</span>
 			</a></li>
+
 		</ul>
 
 		<div id="content-wrapper">
@@ -104,7 +108,7 @@
 											class="text-xs font-weight-bold text-primary text-uppercase mb-1">App
 											Health</div>
 										<div class="h5 mb-0 font-weight-bold text-gray-800">
-											<span id="actuator-status"></span>
+											<span class="h5" id="actuator-status"></span>
 										</div>
 									</div>
 									<div class="col-auto">
@@ -125,7 +129,7 @@
 											class="text-xs font-weight-bold text-success text-uppercase mb-1">
 											Total Errors</div>
 										<div class="h5 mb-0 font-weight-bold text-gray-800">
-											<span id="total-errors"></span>
+											<span class="h5" id="total-errors"></span>
 										</div>
 									</div>
 									<div class="col-auto">
@@ -149,7 +153,7 @@
 										<div class="row no-gutters align-items-center">
 											<div class="col-auto">
 												<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-													<span class="text-center" id="mysql-status"></span>
+													<span class="text-center h5" id="mysql-status"></span>
 												</div>
 											</div>
 
@@ -173,7 +177,7 @@
 											class="text-xs font-weight-bold text-warning text-uppercase mb-1">Available
 											Disk Space</div>
 										<div class="h5 mb-0 font-weight-bold text-gray-800">
-											<span id="disk-space"></span>
+											<span class="h5" id="disk-space"></span>
 										</div>
 									</div>
 									<div class="col-auto">

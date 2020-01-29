@@ -1,3 +1,5 @@
+//global variable
+var totalStorage = 0;
 
 // using try and catch
 try {
@@ -5,7 +7,7 @@ try {
 	// calling the method on-load
 	applicationHelath();
 
-	// calling the method and sleeping for 1 seconds
+	// calling the method and sleeping for 3 seconds
 	window.setInterval(applicationHelath, 3000);
 
 	// logging the error onto the console
@@ -30,6 +32,18 @@ function applicationHelath() {
 						// database status
 						document.getElementById("mysql-status").innerText = data.details.db.status;
 
+					});
+	
+	// fetching total storage
+	fetch("http://localhost:8080/actuator/health")
+			.then(function(response) {
+
+				return response.json();
+			})
+			.then(
+					function(data) {
+
+						totalStorage = data.details.diskSpace.details.total;
 					});
 
 	// fetch error counts
@@ -56,8 +70,9 @@ function applicationHelath() {
 		return response.json();
 	}).then(function(data) {
 
+		//getting the data and storing it on a variable
 		bytes = data.details.diskSpace.details.free;
-		document.getElementById("disk-space").innerText = bytesToSize(bytes);
+		document.getElementById("disk-space").innerText = bytesToSize(bytes)+' / '+bytesToSize(totalStorage);
 
 	});
 

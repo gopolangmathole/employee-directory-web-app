@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -62,8 +62,7 @@ public class EmployeeRestController {
 	// end-point for adding new user
 	@PostMapping("/employees")
 	@ApiMethod(description = "add a new employee by passing jason data through the body")
-	public Employee addEmployee(@RequestParam("imageFile") MultipartFile imageFile, @RequestBody Employee employee)
-			throws Exception {
+	public Employee addEmployee(@RequestBody Employee employee) throws Exception {
 
 		// creating a current date and time object
 		GetCurrentDateAndTime getCurrentDateAndTime = new GetCurrentDateAndTime();
@@ -73,11 +72,6 @@ public class EmployeeRestController {
 		employee.setId(0);
 
 		employee.getAddress().setId(0);
-		
-		String currentImage = null;
-
-		// saving an image
-		employeeService.saveImage(imageFile, employee, EmployeeController.uploadDirectory, currentImage);
 
 		// updating the last update column
 		employee.setLastUpdate(getCurrentDateAndTime.getCurrentFullDate());
@@ -91,8 +85,7 @@ public class EmployeeRestController {
 	// end-point for updating new user
 	@PutMapping("/employees")
 	@ApiMethod(description = "update an existing employee by id")
-	public Employee updateEmployee(@RequestParam("imageFile") MultipartFile imageFile, @RequestBody Employee employee)
-			throws Exception {
+	public Employee updateEmployee(@RequestBody Employee employee) throws Exception {
 
 		// creating a current date and time object
 		GetCurrentDateAndTime getCurrentDateAndTime = new GetCurrentDateAndTime();
@@ -102,6 +95,7 @@ public class EmployeeRestController {
 		if (theEmployee == null) {
 
 			throw new EmployeeNotFoundException("Employee with id - " + employee.getId() + " doesn't exist");
+
 		}
 
 		// updating the last update column
@@ -110,17 +104,46 @@ public class EmployeeRestController {
 		// updating the address table id
 		employee.getAddress().setId(employee.getId());
 
-		// getting the image and storing it
-		String currentImage = employee.getImage();
-
-		// saving an image
-		employeeService.saveImage(imageFile, employee, EmployeeController.uploadDirectory, currentImage);
-
 		// saving the object into the service
 		employeeService.save(employee);
 
 		// return the updated employee
 		return employee;
+
+	}
+
+	// end-point for updating user image
+	@PutMapping("/employees/{empId}")
+	@ApiMethod(description = "update an existing employee's image by id")
+	public Employee updateEmployee(@PathVariable int empId, @RequestPart("imageFile") MultipartFile imageFile)
+			throws Exception {
+
+		// creating a current date and time object
+		GetCurrentDateAndTime getCurrentDateAndTime = new GetCurrentDateAndTime();
+		Employee getEmployee = employeeService.findById(empId);
+
+		if (getEmployee == null) {
+
+			throw new EmployeeNotFoundException("Employee with id - " + empId + " doesn't exist");
+
+		}
+
+		// updating the last update column
+		getEmployee.setLastUpdate(getCurrentDateAndTime.getCurrentFullDate());
+
+		// updating the address table id
+		getEmployee.getAddress().setId(getEmployee.getId());
+
+		String currentImage = null;
+		
+		// saving an image
+		employeeService.saveImage(imageFile, getEmployee, EmployeeController.uploadDirectory, currentImage);
+
+		// saving the object into the service
+		employeeService.save(getEmployee);
+
+		// return the updated employee
+		return getEmployee;
 
 	}
 

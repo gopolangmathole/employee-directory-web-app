@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 4 elements from project &apos;employee-directory-web-app&apos;&#x0D;&#x0A;- Original project: &apos;employee-directory-web-app&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     1576973483145_gopolang.jpg&#x0D;&#x0A;     1580406184723_gopolang.jpg&#x0D;&#x0A;     1580407269234_picture1.png&#x0D;&#x0A;     1580409626202_picture1.png" description="Delete elements" element1="src/main/resources/static/images/uploads/1576973483145_gopolang.jpg" element2="src/main/resources/static/images/uploads/1580406184723_gopolang.jpg" element3="src/main/resources/static/images/uploads/1580409626202_picture1.png" element4="src/main/resources/static/images/uploads/1580407269234_picture1.png" elements="0" flags="589830" id="org.eclipse.jdt.ui.delete" resources="4" stamp="1580411059785" subPackages="false" version="1.0"/>
+</session>

@@ -19,7 +19,7 @@ import com.gopolangmathole.employeedirectory.service.EmployeeLoggingService;
 
 @Aspect
 @Component
-public class CustomerAspectLogging {
+public class EmployeeAspectLogging {
 
 	// declaring the polo or entity so we can populate the setter and getters.
 	private HttpServletRequestsLogging requestsLogging;

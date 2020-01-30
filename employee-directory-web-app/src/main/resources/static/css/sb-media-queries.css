@@ -1,0 +1,48 @@
+.bootstrap-charts {
+	width: 40%;
+}
+#barGraph{
+	
+	width:100%;
+	hight:50%;
+}
+@media ( max-width : 991.98px) {
+	.bootstrap-charts {
+		width: 75%;
+		hight:25em;
+	}
+	
+	#barGraph{
+	
+	width:100%;
+	hight:70%;
+}
+	
+}
+
+@media (max-width: 575.98px) {
+
+.bootstrap-charts {
+		width: 85%;
+		hight:28em;
+	}
+	
+	#barGraph{
+	
+	width:100%;
+	hight:90%;
+}
+
+}
+
+@media (max-width: 1199.98px) {
+	hight:28em;
+}
+
+@media (max-width: 393px) {
+
+.bootstrap-charts {
+		width: 90%;
+		hight:45em;
+	}
+}

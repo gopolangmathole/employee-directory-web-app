@@ -73,11 +73,18 @@
 			<artifactId>thymeleaf-spring-data-dialect</artifactId>
 			<version>3.4.0</version>
 		</dependency>
-		
+
 		<!-- prometheus -->
 		<dependency>
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-registry-prometheus</artifactId>
+		</dependency>
+
+		<!-- jasperreports -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.1.0</version>
 		</dependency>
 
 	</dependencies>

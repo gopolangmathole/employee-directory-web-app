@@ -18,6 +18,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +31,8 @@ import com.gopolangmathole.employeedirectory.entity.Employee;
 import com.gopolangmathole.employeedirectory.entity.GetCurrentDateAndTime;
 import com.gopolangmathole.employeedirectory.service.EmployeeService;
 import com.gopolangmathole.employeedirectory.service.ExceptionService;
+
+import net.sf.jasperreports.engine.JRException;
 
 @Controller
 @RequestMapping("/employees")
@@ -181,7 +184,7 @@ public class EmployeeController {
 
 		// initializing arrayList for gender, and add both genders to list.
 		List<String> selectGender = new ArrayList<String>();
-		
+
 		// initializing arrayList for contract, and contracts to list.
 		List<String> selectedContract = new ArrayList<>();
 
@@ -269,4 +272,13 @@ public class EmployeeController {
 		return "/dashboard/report";
 	}
 
+	// adding the get report mapping
+	@GetMapping("/viewReport/{format}")
+	public String downloadReport(@PathVariable String format) throws IOException, JRException {
+		
+		employeeService.generateReport(format);
+		
+		// redirecting back to the dashboard
+		return "redirect:/employees/viewReport";
+	}
 }

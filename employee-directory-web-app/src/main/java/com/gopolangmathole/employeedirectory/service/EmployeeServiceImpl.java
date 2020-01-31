@@ -1,5 +1,6 @@
 package com.gopolangmathole.employeedirectory.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -8,17 +9,28 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gopolangmathole.employeedirectory.dao.EmployeeRepository;
 import com.gopolangmathole.employeedirectory.entity.Employee;
 import com.gopolangmathole.employeedirectory.entity.GetCurrentDateAndTime;
 import com.gopolangmathole.employeedirectory.exception.EmployeeNotFoundException;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -28,7 +40,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private EmployeeRepository employeeRepository;
 
 	// setting final path to store the images
-	private final String FOLDER = "c:///employee_directory//images///";
+	private final String FOLDER = "c:\\employee_directory\\images\\";
 
 	// getting current date
 	private GetCurrentDateAndTime getCurrentDateAndTime;
@@ -189,6 +201,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 				// adding minutes
 			} else if ((diffMinutes > 0 && diffMinutes <= 59) && diffHours == 0 && diffDays == 0) {
 
+				// adding the singular and plural for of minute and minutes
 				if (diffMinutes == 1) {
 					returnDate.add((diffMinutes) + " minute ago");
 				} else {
@@ -198,6 +211,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 				// adding hours
 			} else if ((diffHours > 0 && diffHours <= 59) && diffDays == 0) {
 
+				// adding the singular and plural for of hour and hours
 				if (diffHours == 1) {
 					returnDate.add((diffHours) + " hour ago");
 				} else {
@@ -207,6 +221,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 				// adding days
 			} else if ((diffDays > 0 && diffDays <= 7)) {
 
+				// adding the singular and plural for of day and days
 				if (diffDays == 1) {
 
 					returnDate.add((diffDays) + " day ago");
@@ -215,12 +230,48 @@ public class EmployeeServiceImpl implements EmployeeService {
 				}
 			} else {
 
+				// adding to a list if the date difference is above 7 days
 				returnDate.add(date);
 			}
 		}
-		
-		//returning the date difference list
+
+		// returning the date difference list
 		return returnDate;
+	}
+
+	// adding a method jasper reports
+	@Override
+	public void generateReport(String requiredFormat) throws IOException, JRException {
+
+		String reportDestination = "c:\\employee_directory\\reports\\";
+
+		// calling the all method and assigning it to a list of object employees
+		List<Employee> employees = findAll();
+
+		// creating hashmap for created by
+		Map<String, Object> parameters = new HashMap<>();
+		parameters.put("createdBy", "Employee Directory");
+
+		// loading the file and compiling it
+		File filePath = ResourceUtils.getFile("classpath:employees.jrxml");
+
+		// Jasper report
+		JasperReport jasperReport = JasperCompileManager.compileReport(filePath.getAbsolutePath());
+		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(employees);
+
+		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+		// generating the pdf report
+		if (requiredFormat.equalsIgnoreCase("PDF")) {
+
+			JasperExportManager.exportReportToPdfFile(jasperPrint, reportDestination + "\\employees.pdf");
+
+			// generating the html report
+		} else if (requiredFormat.equalsIgnoreCase("HTML")) {
+
+			JasperExportManager.exportReportToHtmlFile(jasperPrint, reportDestination + "\\employees.html");
+		}
+
 	}
 
 }

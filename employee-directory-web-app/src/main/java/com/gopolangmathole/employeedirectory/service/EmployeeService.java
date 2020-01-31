@@ -8,6 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.gopolangmathole.employeedirectory.entity.Employee;
 
+import net.sf.jasperreports.engine.JRException;
+
 
 public interface EmployeeService {
 
@@ -35,4 +37,6 @@ public interface EmployeeService {
 	public void saveImage(MultipartFile imageFile, Employee employee, String uploadDirectory, String currentImage) throws IOException;
 	
 	public List<String> getEmployeeLastUpdate() throws ParseException;
+	
+	public void generateReport(String requiredFormat) throws IOException,JRException;
 }

@@ -35,6 +35,7 @@ public class CountryList {
 		contries.add("Namibia");
 		contries.add("Madagascar");
 		contries.add("Kenya");
+		contries.add("Congo");
 		contries.add("Switzerland");
 		contries.add("Japan");
 		contries.add("Canada");

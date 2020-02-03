@@ -140,7 +140,29 @@ public class EmployeeController {
 	// save employees
 	@PostMapping("/save")
 	public String saveEmployee(@RequestParam("imageFile") MultipartFile imageFile,
-			@ModelAttribute("employee") @Valid Employee employee, Errors errors) throws IOException {
+			@ModelAttribute("employee") @Valid Employee employee, Errors errors, Model model) throws IOException {
+
+		// getting the data from
+		int countRows = (int) employeeService.count();
+		int errorReport = (int) exceptionService.count();
+
+		// initializing arrayList for gender, and add both genders to list.
+		List<String> selectGender = new ArrayList<String>();
+
+		// initializing arrayList for contract, and contracts to list.
+		List<String> selectedContract = new ArrayList<>();
+
+		// initializing arrayList of countries
+		CountryList countryList = new CountryList();
+
+		// adding contracts type to list
+		selectedContract.add("Contract");
+		selectedContract.add("Permanent");
+		selectedContract.add("Internship");
+
+		// adding gender to list
+		selectGender.add("Male");
+		selectGender.add("Female");
 
 		String url = null;
 
@@ -149,6 +171,14 @@ public class EmployeeController {
 		if (errors.hasErrors()) {
 
 			url = "/employees/employees-form";
+
+			// adding objects to model
+			model.addAttribute("employee", employee);
+			model.addAttribute("number", countRows);
+			model.addAttribute("reports", errorReport);
+			model.addAttribute("genderSelected", selectGender);
+			model.addAttribute("getCountries", countryList.getCountries());
+			model.addAttribute("selectedContract", selectedContract);
 
 		} else {
 
@@ -275,9 +305,9 @@ public class EmployeeController {
 	// adding the get report mapping
 	@GetMapping("/viewReport/{format}")
 	public String downloadReport(@PathVariable String format) throws IOException, JRException {
-		
+
 		employeeService.generateReport(format);
-		
+
 		// redirecting back to the dashboard
 		return "redirect:/employees/viewReport";
 	}

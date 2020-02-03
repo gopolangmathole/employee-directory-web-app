@@ -7,7 +7,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
+<meta name="description"
+	content="Get all the errors and performance of the employee directory">
 <meta name="Gopolang Mathole"
 	content="A dashboard that displays employee directory's performance">
 
@@ -16,20 +17,25 @@
 <!-- Custom fonts for this template-->
 <link href="/static/vendor/fontawesome-free/css/all.min.css"
 	th:href="@{/vendor/fontawesome-free/css/all.min.css}" rel="stylesheet"
-	type="text/css">
+	type="text/css" />
 
 <!-- Page level plugin CSS-->
 <link href="/static/vendor/datatables/dataTables.bootstrap4.css"
 	th:href="@{/vendor/datatables/dataTables.bootstrap4.css}"
-	rel="stylesheet">
+	rel="stylesheet" />
 
 <!-- Custom styles for this template-->
 <link href="/static/css/sb-admin.css" th:href="@{/css/sb-admin.css}"
-	rel="stylesheet">
+	rel="stylesheet" />
 
 <!-- media queries-->
-<link href="/static/css/sb-media-queries.css" th:href="@{/css/sb-media-queries.css}"
-	rel="stylesheet">
+<link href="/static/css/sb-media-queries.css"
+	th:href="@{/css/sb-media-queries.css}" rel="stylesheet" />
+
+<!-- Sweet alerts   -->
+
+<link href="/static/css/sweetalert2.min.css"
+	th:href="@{/css/sweetalert2.min.css}" rel="stylesheet" />
 
 </head>
 
@@ -92,8 +98,9 @@
 							aria-haspopup="true" aria-expanded="false">Generate
 							Report</button>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a class="dropdown-item" th:href="@{/employees/viewReport/pdf}">As PDF</a> <a
-								class="dropdown-item" th:href="@{/employees/viewReport/html}">As HTML</a> 
+							<a id = "pdf" class="dropdown-item" th:href="@{/employees/viewReport/pdf}" >As
+								PDF</a> <a id = "html" class="dropdown-item"
+								th:href="@{/employees/viewReport/html}">As HTML</a>
 						</div>
 					</div>
 				</div>
@@ -328,7 +335,10 @@
 	<script src="/static/js/demo/chartjs-plugin-labels.min.js"
 		th:src="@{/js/demo/chartjs-plugin-labels.min.js}"></script>
 
-
+	<script src="/static/js/demo/sweetalert2.js"
+		th:src="@{/js/demo/sweetalert2.js}"></script>
+		<script src="/static/js/sb-sweetalerts.js"
+			th:src="@{/js/sb-sweetalerts.js}"></script>
 	<script>
 		$(function() {
 			$('[data-toggle="dropdown"]').tooltip()

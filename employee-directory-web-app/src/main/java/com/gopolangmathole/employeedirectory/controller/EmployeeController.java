@@ -108,7 +108,7 @@ public class EmployeeController {
 		// initializing arrayList of countries
 		CountryList countryList = new CountryList();
 
-		// adding contracts type to list
+		// adding contracts  to list
 		selectedContract.add("Contract");
 		selectedContract.add("Permanent");
 		selectedContract.add("Internship");
@@ -117,7 +117,7 @@ public class EmployeeController {
 		selectGender.add("Male");
 		selectGender.add("Female");
 
-		// create model attribute to bind form data
+		// create model attribute typeto bind form data
 		Employee employee = new Employee();
 		int countRows = (int) employeeService.count();
 		int errorReport = (int) exceptionService.count();

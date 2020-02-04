@@ -96,30 +96,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeRepository.count();
 	}
 
-	@Override
-	public List<Employee> findAllByOrderByLastNameAsc() {
-
-		return employeeRepository.findAllByOrderByLastNameAsc();
-	}
-
-	@Override
-	public List<Employee> findAllByOrderByLastNameDesc() {
-
-		return employeeRepository.findAllByOrderByLastNameDesc();
-	}
-
-	@Override
-	public List<Employee> findAllByOrderByFirstNameAsc() {
-
-		return employeeRepository.findAllByOrderByFirstNameAsc();
-	}
-
-	@Override
-	public List<Employee> findAllByOrderByFirstNameDesc() {
-
-		return employeeRepository.findAllByOrderByFirstNameDesc();
-	}
-
 	// save an image here
 	@Override
 	public void saveImage(MultipartFile imageFile, Employee employee, String uploadDirectory, String currentImage)

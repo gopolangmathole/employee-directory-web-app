@@ -66,6 +66,10 @@
 			<div class="card mx-auto mt-5 mb-3"
 				th:each="tempEmployee,tempUpdate  : ${employees}">
 				<div class="card-header" style="background-color: #434B53;">
+				
+				<!--showing badge  -->
+				<span class="badge badge-pill badge-primary" th:text="${tempEmployee.id}"></span>
+				
 					<div class="text-center">
 						<img
 							th:if="${tempEmployee.image == null || tempEmployee.image==0}"
@@ -80,6 +84,7 @@
 							alt="/static/images/default.png"
 							style="width: 12em; height: 12em; border-radius: 50%;" />
 					</div>
+					
 				</div>
 
 				<div class="card-body">

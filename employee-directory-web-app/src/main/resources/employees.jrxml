@@ -56,6 +56,7 @@
 				<reportElement mode="Opaque" x="0" y="0" width="39" height="29" forecolor="#343A40" backcolor="#E6E6E6" uuid="7c222251-9718-45a9-ad78-7a0a1c6d2de5">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="71c7cbfe-1b9f-4b63-b2bd-1f7d1de50bdc"/>
 				</reportElement>
+				<box topPadding="5" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -65,6 +66,7 @@
 				<reportElement mode="Opaque" x="39" y="0" width="90" height="29" forecolor="#343A40" backcolor="#E6E6E6" uuid="c9c2967d-b8d7-4eb1-a681-fa6b0b85ce98">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="88be8ac4-3911-4e3d-91de-fced198a449e"/>
 				</reportElement>
+				<box topPadding="5" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -74,6 +76,7 @@
 				<reportElement mode="Opaque" x="130" y="0" width="99" height="29" forecolor="#343A40" backcolor="#E6E6E6" uuid="03c56a25-1ca1-48c2-8140-2ff9179160ba">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f4200aee-d249-4205-b6f5-165dbcae6718"/>
 				</reportElement>
+				<box topPadding="5" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -83,6 +86,7 @@
 				<reportElement mode="Opaque" x="230" y="0" width="89" height="29" forecolor="#343A40" backcolor="#E6E6E6" uuid="08c58d19-421a-4e1f-a25d-32df1f6cc764">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="815267cd-a49c-43b7-8a05-a20ecd9fdc93"/>
 				</reportElement>
+				<box topPadding="5" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -92,6 +96,7 @@
 				<reportElement mode="Opaque" x="320" y="0" width="110" height="29" forecolor="#343A40" backcolor="#E6E6E6" uuid="7d62d8ef-f175-4e9a-9708-9e73cb71a74f">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b12a23a4-28f0-405b-a067-4a8922e973d6"/>
 				</reportElement>
+				<box topPadding="5" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -101,6 +106,7 @@
 				<reportElement mode="Opaque" x="430" y="0" width="144" height="29" forecolor="#343A40" backcolor="#E6E6E6" uuid="3ba8cf51-b44f-47a1-8e82-2a5e30438634">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="88c6b38c-081e-438b-8051-cf86adc08ce3"/>
 				</reportElement>
+				<box topPadding="5" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -110,6 +116,7 @@
 				<reportElement mode="Opaque" x="575" y="0" width="164" height="30" forecolor="#343A40" backcolor="#E6E6E6" uuid="3a626111-9a97-4189-a10b-dbe29e075b7d">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="348098b8-7c6d-4de4-b285-005545c0f042"/>
 				</reportElement>
+				<box topPadding="5" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -119,6 +126,7 @@
 				<reportElement mode="Opaque" x="740" y="0" width="110" height="30" forecolor="#343A40" backcolor="#E6E6E6" uuid="420b0be9-7859-4287-9f29-1ccdbe514c1f">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bd2cc603-ec79-4fc7-9fca-86d993d1cd7e"/>
 				</reportElement>
+				<box topPadding="5" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -128,6 +136,7 @@
 				<reportElement mode="Opaque" x="850" y="0" width="130" height="29" forecolor="#343A40" backcolor="#E6E6E6" uuid="0499ad97-5562-4409-82f0-1c5cf09fa860">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5ed3b75a-6dc3-45ae-8de6-1daaf5794fd2"/>
 				</reportElement>
+				<box topPadding="5" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -137,6 +146,7 @@
 				<reportElement mode="Opaque" x="980" y="0" width="170" height="30" forecolor="#343A40" backcolor="#E6E6E6" uuid="08177c85-50c7-4faf-b995-959b05fe8376">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ae3212ac-e836-4a0a-9467-27414c199fcd"/>
 				</reportElement>
+				<box topPadding="5" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
@@ -154,6 +164,7 @@
 				<reportElement x="0" y="-1" width="38" height="49" uuid="eb62d4d6-5cab-4daf-a196-1e4b3d973762">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="71c7cbfe-1b9f-4b63-b2bd-1f7d1de50bdc"/>
 				</reportElement>
+				<box topPadding="8" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
@@ -163,6 +174,7 @@
 				<reportElement x="38" y="-1" width="90" height="49" uuid="72e66829-7c56-498f-a110-04bdfbcbd047">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="88be8ac4-3911-4e3d-91de-fced198a449e"/>
 				</reportElement>
+				<box topPadding="8" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
@@ -172,7 +184,7 @@
 				<reportElement x="129" y="1" width="99" height="47" uuid="74e1e59d-cf9d-4482-81f6-d574eba80b17">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f4200aee-d249-4205-b6f5-165dbcae6718"/>
 				</reportElement>
-				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<box topPadding="8" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
@@ -182,7 +194,7 @@
 				<reportElement x="228" y="1" width="91" height="47" uuid="18fb6722-5c3b-4e3d-b5fb-b25d2cedd425">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="815267cd-a49c-43b7-8a05-a20ecd9fdc93"/>
 				</reportElement>
-				<box padding="0"/>
+				<box topPadding="8" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
@@ -192,6 +204,7 @@
 				<reportElement x="320" y="1" width="109" height="47" uuid="213c2699-e5ca-415a-8ae8-149ac96d053d">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b12a23a4-28f0-405b-a067-4a8922e973d6"/>
 				</reportElement>
+				<box topPadding="8" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
@@ -201,6 +214,7 @@
 				<reportElement x="429" y="1" width="144" height="47" uuid="ad940646-2052-4b2d-9edd-bf7cbeb4c2b7">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="88c6b38c-081e-438b-8051-cf86adc08ce3"/>
 				</reportElement>
+				<box topPadding="8" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
@@ -210,6 +224,7 @@
 				<reportElement x="573" y="1" width="165" height="47" uuid="04d54e99-1fd6-412e-ad58-1edfcb6c4bb7">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="348098b8-7c6d-4de4-b285-005545c0f042"/>
 				</reportElement>
+				<box topPadding="8" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
@@ -220,6 +235,7 @@
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bd2cc603-ec79-4fc7-9fca-86d993d1cd7e"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
+				<box topPadding="8" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
@@ -229,7 +245,7 @@
 				<reportElement x="850" y="-1" width="129" height="49" uuid="be39546c-cff7-454d-ac6f-281f62a6241b">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5ed3b75a-6dc3-45ae-8de6-1daaf5794fd2"/>
 				</reportElement>
-				<box padding="0"/>
+				<box topPadding="8" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>
@@ -239,6 +255,7 @@
 				<reportElement x="979" y="0" width="170" height="48" uuid="cd8f291a-fae3-47f4-a94f-ef1da6b02f2c">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ae3212ac-e836-4a0a-9467-27414c199fcd"/>
 				</reportElement>
+				<box topPadding="8" leftPadding="0" bottomPadding="0" rightPadding="0"/>
 				<textElement textAlignment="Center">
 					<font size="12"/>
 				</textElement>

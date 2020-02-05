@@ -98,9 +98,10 @@
 							aria-haspopup="true" aria-expanded="false">Generate
 							Report</button>
 						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-							<a id = "pdf" class="dropdown-item" th:href="@{/employees/viewReport/pdf}" >As
-								PDF</a> <a id = "html" class="dropdown-item"
-								th:href="@{/employees/viewReport/html}">As HTML</a>
+							<a id="pdf" class="dropdown-item"
+								th:href="@{/employees/viewReport/pdf}">As PDF</a> <a id="html"
+								class="dropdown-item" th:href="@{/employees/viewReport/html}">As
+								HTML</a>
 						</div>
 					</div>
 				</div>
@@ -337,8 +338,11 @@
 
 	<script src="/static/js/demo/sweetalert2.js"
 		th:src="@{/js/demo/sweetalert2.js}"></script>
-		<script src="/static/js/sb-sweetalerts.js"
-			th:src="@{/js/sb-sweetalerts.js}"></script>
+
+	<script src="/static/js/sb-sweetalerts.js"
+		th:src="@{/js/sb-sweetalerts.js}"></script>
+
+
 	<script>
 		$(function() {
 			$('[data-toggle="dropdown"]').tooltip()

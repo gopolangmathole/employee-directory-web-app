@@ -304,10 +304,11 @@ public class EmployeeController {
 
 	// adding the get report mapping
 	@GetMapping("/viewReport/{format}")
-	public String downloadReport(@PathVariable String format) throws IOException, JRException {
+	public String downloadReport(@PathVariable String format, Model model) throws IOException, JRException {
 
+		//parsing in the file format we want to generate.
 		employeeService.generateReport(format);
-
+		
 		// redirecting back to the dashboard
 		return "redirect:/employees/viewReport";
 	}

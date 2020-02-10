@@ -22,7 +22,7 @@ CREATE TABLE `employee` (
   `gender` varchar(6) NOT NULL,
   `email` nvarchar(150) NOT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `last_update`varchar(45) DEFAULT NULL,
+  `last_update` datetime NOT NULL,
   `employee_address_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_DETAIL_idx` (`employee_address_id`),

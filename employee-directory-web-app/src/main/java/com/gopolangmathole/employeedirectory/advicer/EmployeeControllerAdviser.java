@@ -1,5 +1,6 @@
 package com.gopolangmathole.employeedirectory.advicer;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import com.gopolangmathole.employeedirectory.entity.GetCurrentDateAndTime;
 import com.gopolangmathole.employeedirectory.exception.EmployeeNotFoundException;
 import com.gopolangmathole.employeedirectory.service.ExceptionService;
 
+import net.sf.jasperreports.engine.JRException;
+
 @RestControllerAdvice
 public class EmployeeControllerAdviser {
 
@@ -27,26 +30,6 @@ public class EmployeeControllerAdviser {
 	 * Creating controller adviser for All required exceptions
 	 * 
 	 */
-
-	@ExceptionHandler
-	public ResponseEntity<EmployeeResponse> sqlException(SQLException sqlException) {
-		EmployeeResponse employee = new EmployeeResponse();
-		ExceptionReport exceptionReport = new ExceptionReport();
-
-		employee.setStatusCode((int) HttpStatus.INTERNAL_SERVER_ERROR.value());
-		employee.setMessage(sqlException.getMessage());
-		employee.setDateTime(getCurrentDateAndTime.getCurrentFullDate());
-
-		// setting the error response and updating database
-		exceptionReport.setCode((int) employee.getStatusCode());
-		exceptionReport.setException(employee.getMessage().toString());
-		exceptionReport.setTime(employee.getDateTime());
-
-		// saving all the exceptions to the database (using JPA repository).
-		exceptionService.save(exceptionReport);
-
-		return new ResponseEntity<>(employee, HttpStatus.INTERNAL_SERVER_ERROR);
-	}
 
 	@ExceptionHandler
 	public ResponseEntity<EmployeeResponse> employeeNotFoundException(
@@ -71,14 +54,80 @@ public class EmployeeControllerAdviser {
 	}
 
 	@ExceptionHandler
-	public ResponseEntity<EmployeeResponse> exceptionHandler(NullPointerException nullPointerException) {
+	public ResponseEntity<EmployeeResponse> nullPointerHandler(NullPointerException nullPointerException) {
 
 		EmployeeResponse employee = new EmployeeResponse();
 		ExceptionReport exceptionReport = new ExceptionReport();
 
 		// parsing status code, message and date and time to it.
-		employee.setStatusCode((int) HttpStatus.INTERNAL_SERVER_ERROR.value());
+		employee.setStatusCode((int) HttpStatus.BAD_REQUEST.value());
 		employee.setMessage(nullPointerException.getMessage());
+		employee.setDateTime(getCurrentDateAndTime.getCurrentFullDate());
+
+		// setting the error response and updating database
+		exceptionReport.setCode((int) employee.getStatusCode());
+		exceptionReport.setException(employee.getMessage().toString());
+		exceptionReport.setTime(employee.getDateTime());
+
+		// saving all the exceptions to the database (using JPA repository).
+		exceptionService.save(exceptionReport);
+
+		return new ResponseEntity<>(employee, HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler
+	public ResponseEntity<EmployeeResponse> jRExceptionHandler(JRException jRException) {
+
+		EmployeeResponse employee = new EmployeeResponse();
+		ExceptionReport exceptionReport = new ExceptionReport();
+		getCurrentDateAndTime = new GetCurrentDateAndTime();
+
+		// parsing status code, message and date and time to it.
+		employee.setStatusCode((int) HttpStatus.INTERNAL_SERVER_ERROR.value());
+		employee.setMessage(jRException.getMessage());
+		employee.setDateTime(getCurrentDateAndTime.getCurrentFullDate());
+
+		// setting the error response and updating database
+		exceptionReport.setCode((int) employee.getStatusCode());
+		exceptionReport.setException(employee.getMessage().toString());
+		exceptionReport.setTime(employee.getDateTime());
+
+		// saving all the exceptions to the database (using JPA repository).
+		exceptionService.save(exceptionReport);
+
+		return new ResponseEntity<>(employee, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@ExceptionHandler
+	public ResponseEntity<EmployeeResponse> iOExceptionHandler(IOException iOException) {
+
+		EmployeeResponse employee = new EmployeeResponse();
+		ExceptionReport exceptionReport = new ExceptionReport();
+		getCurrentDateAndTime = new GetCurrentDateAndTime();
+
+		// parsing status code, message and date and time to it.
+		employee.setStatusCode((int) HttpStatus.INTERNAL_SERVER_ERROR.value());
+		employee.setMessage(iOException.getMessage());
+		employee.setDateTime(getCurrentDateAndTime.getCurrentFullDate());
+
+		// setting the error response and updating database
+		exceptionReport.setCode((int) employee.getStatusCode());
+		exceptionReport.setException(employee.getMessage().toString());
+		exceptionReport.setTime(employee.getDateTime());
+
+		// saving all the exceptions to the database (using JPA repository).
+		exceptionService.save(exceptionReport);
+
+		return new ResponseEntity<>(employee, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@ExceptionHandler
+	public ResponseEntity<EmployeeResponse> sqlException(SQLException sqlException) {
+		EmployeeResponse employee = new EmployeeResponse();
+		ExceptionReport exceptionReport = new ExceptionReport();
+
+		employee.setStatusCode((int) HttpStatus.INTERNAL_SERVER_ERROR.value());
+		employee.setMessage(sqlException.getMessage());
 		employee.setDateTime(getCurrentDateAndTime.getCurrentFullDate());
 
 		// setting the error response and updating database
@@ -114,4 +163,5 @@ public class EmployeeControllerAdviser {
 
 		return new ResponseEntity<>(employee, HttpStatus.BAD_REQUEST);
 	}
+
 }

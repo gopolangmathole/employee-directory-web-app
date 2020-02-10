@@ -148,7 +148,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		List<String> returnDate = new ArrayList<String>();
 
 		// HH converts hour in 24 hours format day calculation
-		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 		Date d1 = null;
 		Date d2 = null;

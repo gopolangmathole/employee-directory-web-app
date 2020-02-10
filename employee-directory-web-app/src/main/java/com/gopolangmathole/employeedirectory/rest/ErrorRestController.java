@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gopolangmathole.employeedirectory.entity.GetRequiredDate;
+import com.gopolangmathole.employeedirectory.entity.GetCurrentDateAndTime;
 import com.gopolangmathole.employeedirectory.service.ExceptionService;
 
 @RestController()
@@ -52,7 +52,7 @@ public class ErrorRestController {
 	public List<Integer> getYaxisGraphData() {
 
 		// getting the date converter class
-		GetRequiredDate date = new GetRequiredDate();
+		GetCurrentDateAndTime date = new GetCurrentDateAndTime();
 
 		// adding a list for the graph
 		List<Integer> dataY = new ArrayList<>();
@@ -76,7 +76,7 @@ public class ErrorRestController {
 	@GetMapping("/health/graph_data/x-axis")
 	public List<String> getXaxisGraphData() {
 		// getting the date converter class
-		GetRequiredDate date = new GetRequiredDate();
+		GetCurrentDateAndTime date = new GetCurrentDateAndTime();
 
 		// adding a list for the graph
 		List<String> dataX = new ArrayList<>();

@@ -24,6 +24,9 @@ import com.gopolangmathole.employeedirectory.entity.Employee;
 import com.gopolangmathole.employeedirectory.entity.GetCurrentDateAndTime;
 import com.gopolangmathole.employeedirectory.exception.EmployeeNotFoundException;
 
+import net.coobird.thumbnailator.Thumbnailator;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.name.Rename;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -107,9 +110,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 		long millis = System.currentTimeMillis();
 
 		bytes = imageFile.getBytes();
-
-		String modifiedFileName = (millis + "_" + imageFile.getOriginalFilename()).toLowerCase().replaceAll(" ", "_");
-
+		
+		String modifiedFileName = (millis + "_" + imageFile.getOriginalFilename()).toLowerCase().replaceAll(" ", "_");		
+		
 		// Writing to local disk space
 		Path path = Paths.get(FOLDER + modifiedFileName);
 
@@ -123,9 +126,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 			// writing the file to specified path
 			Files.write(path, bytes);
 
+			//resizing  specific path
+			Thumbnails.of(new File(uploadDirectory).listFiles())
+		    .size(200, 200)
+		    .outputFormat("jpg")
+		    .toFiles(Rename.NO_CHANGE);
+			
 			// saving to app file
 			Files.write(localPath, bytes);
 
+			//resizing local images
+			Thumbnails.of(new File(FOLDER).listFiles())
+		    .size(200, 200)
+		    .outputFormat("jpg")
+		    .toFiles(Rename.NO_CHANGE);
+			
+			
 			// saving image to database
 			employee.setImage(modifiedFileName.toString());
 

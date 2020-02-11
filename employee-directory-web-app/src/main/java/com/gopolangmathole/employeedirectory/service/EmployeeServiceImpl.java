@@ -24,7 +24,6 @@ import com.gopolangmathole.employeedirectory.entity.Employee;
 import com.gopolangmathole.employeedirectory.entity.GetCurrentDateAndTime;
 import com.gopolangmathole.employeedirectory.exception.EmployeeNotFoundException;
 
-import net.coobird.thumbnailator.Thumbnailator;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.name.Rename;
 import net.sf.jasperreports.engine.JRException;

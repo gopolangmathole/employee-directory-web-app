@@ -24,11 +24,21 @@
 	href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
 	rel="stylesheet">
 
+<link
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet">
 
 
+<link href="/static/css/scroll-up.css" th:href="@{/css/scroll-up.css}"
+	rel="stylesheet" />
 </head>
 
 <body style="font-family: 'Open Sans', sans-serif;">
+
+	<button class="btn btn-primary" onclick="topFunction()" id="myBtn"
+		title="Go to top">
+		<i class="fa fa-arrow-circle-up"></i>
+	</button>
 
 	<nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top"
 		style="box-shadow: 0px 2.5px 8px #c1c1c1;">
@@ -515,12 +525,14 @@
 					<div class="mt-5 wow slideInUp">
 						<h4 class="text-dark">Employee - Update an existing
 							employee's image</h4>
-						<p class="ml-2 text-muted">The post request gives you full
-							control of modifying and changing employee's image.<br>
-							<b>N.B</b> When using postman make sure the <b>header</b> 
-							is empty and left as <b>content-type</b> without any type.<br>
-							on the body, give a key value of <b>imageFile</b> and choose file as type, remember to specify the id of the user you want to change.
-							</p>
+						<p class="ml-2 text-muted">
+							The post request gives you full control of modifying and changing
+							employee's image.<br> <b>N.B</b> When using postman make
+							sure the <b>header</b> is empty and left as <b>content-type</b>
+							without any type.<br> on the body, give a key value of <b>imageFile</b>
+							and choose file as type, remember to specify the id of the user
+							you want to change.
+						</p>
 					</div>
 				</div>
 				<div class="d-block w-10 my-2 col-xl-10 wow slideInUp">
@@ -632,6 +644,9 @@
 	</script>
 	<script src="/static/js/demo/wow-new-load.js"
 		th:src="@{/js/demo/wow-new-load.js}"></script>
+
+	<script src="/static/js/demo/scroll-up.js"
+		th:src="@{/js/demo/scroll-up.js}"></script>
 
 </body>
 

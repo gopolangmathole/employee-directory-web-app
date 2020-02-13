@@ -67,13 +67,6 @@
 			<version>1.2.22</version>
 		</dependency>
 
-		<!-- Thymeleaf Spring Data Dialect -->
-		<dependency>
-			<groupId>io.github.jpenren</groupId>
-			<artifactId>thymeleaf-spring-data-dialect</artifactId>
-			<version>3.4.0</version>
-		</dependency>
-
 		<!-- prometheus -->
 		<dependency>
 			<groupId>io.micrometer</groupId>

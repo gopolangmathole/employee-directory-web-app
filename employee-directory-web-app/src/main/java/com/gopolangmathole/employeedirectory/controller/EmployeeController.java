@@ -45,9 +45,6 @@ public class EmployeeController {
 	@Autowired
 	private ExceptionService exceptionService;
 
-	@Autowired
-	private EmployeeRepository employeeRepository;
-
 	// creating absolute path
 	public static String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/images/uploads";
 
@@ -66,7 +63,7 @@ public class EmployeeController {
 
 	// add mapping for "/list"
 	@GetMapping("/list")
-	public String listEmployees(Model model, @RequestParam(defaultValue = "0") int page) {
+	public String listEmployees(Model model) {
 
 		// getting the data from
 		int countRows = (int) employeeService.count();
@@ -75,7 +72,7 @@ public class EmployeeController {
 		// adding entities to the model
 		model.addAttribute("number", countRows);
 		model.addAttribute("reports", errorReport);
-		model.addAttribute("employees", employeeRepository.findAll(PageRequest.of(page, 5)));
+		model.addAttribute("employees", employeeService.findAll());
 
 		return "/employees/list-employees";
 	}

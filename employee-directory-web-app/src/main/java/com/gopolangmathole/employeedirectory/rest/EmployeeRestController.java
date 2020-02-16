@@ -94,7 +94,7 @@ public class EmployeeRestController {
 
 		if (theEmployee == null) {
 
-			throw new EmployeeNotFoundException("Employee with id - " + employee.getId() + " doesn't exist");
+			throw new EmployeeNotFoundException("Employee with id - " + employee.getId() + " does not exist");
 
 		}
 

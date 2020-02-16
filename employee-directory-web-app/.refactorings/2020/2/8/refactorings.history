@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete element from project &apos;employee-directory-web-app&apos;&#x0D;&#x0A;- Original project: &apos;employee-directory-web-app&apos;&#x0D;&#x0A;- Original element: &apos;1581868909145_gopolang.jpg&apos;" description="Delete element" element1="src/main/resources/static/images/uploads/1581868909145_gopolang.jpg" elements="0" flags="589830" id="org.eclipse.jdt.ui.delete" resources="1" stamp="1581869128109" subPackages="false" version="1.0"/>
+</session>

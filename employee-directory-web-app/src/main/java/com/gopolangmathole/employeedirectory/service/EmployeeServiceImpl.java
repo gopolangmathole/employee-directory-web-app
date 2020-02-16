@@ -124,6 +124,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 			// writing the file to specified path
 			Files.write(path, bytes);
+			
+			// saving to app file
+			Files.write(localPath, bytes);
+			
+			// saving image to database
+			employee.setImage(modifiedFileName.toString());
 
 			//resizing  specific path
 			Thumbnails.of(new File(uploadDirectory).listFiles())
@@ -131,19 +137,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 		    .outputFormat("jpg")
 		    .toFiles(Rename.NO_CHANGE);
 			
-			// saving to app file
-			Files.write(localPath, bytes);
-
 			//resizing local images
 			Thumbnails.of(new File(FOLDER).listFiles())
 		    .size(200, 200)
 		    .outputFormat("jpg")
 		    .toFiles(Rename.NO_CHANGE);
 			
-			
-			// saving image to database
-			employee.setImage(modifiedFileName.toString());
-
 		} else {
 
 			// if the path is empty, let us set the old picture

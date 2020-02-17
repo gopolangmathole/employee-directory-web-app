@@ -21,7 +21,9 @@
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
 
-
+<!-- Animate css -->
+<link href="/static/css/animate.css" th:href="@{/css/animate.css}"
+	rel="stylesheet" />
 
 <style>
 table {
@@ -116,10 +118,10 @@ label {
 						class="btn btn-outline-primary btn-sm"> <i
 							class="fa fa-pencil" aria-hidden="true"></i> Update
 					</a></td>
-					<td><a
-						th:href="@{/employees/delete/{id}(id=${tempEmployee.id})}"
-						class="btn btn-outline-danger btn-sm delBtn"> <i
-							class="fa fa-trash-o" aria-hidden="true"></i> Delete
+					<td><a  
+					class="btn btn-outline-danger btn-sm delBtn" 
+					th:href="@{/employees/delete/{id}(id=${tempEmployee.id})}">
+							<i class="fa fa-trash-o" aria-hidden="true"></i> Delete
 					</a></td>
 				</tr>
 			</tbody>
@@ -155,45 +157,46 @@ label {
 		</div>
 	</div>
 
+	<script
+		src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<script>
+		$(document).ready(function() {
+
+			$(function() {
+				$('[data-toggle="tooltip"]').tooltip()
+			})
+
+			$('#example').DataTable(
+
+			{
+
+				"aLengthMenu" : [ [ 5, 30, 150, 300, -1 ], [ 5, 10, 25,300, "All" ] ],
+				"iDisplayLength" : 5
+			});
+		});
+	</script>
+
 
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 	<script src="/static/vendor/bootstrap/js/bootstrap.min.js"
 		th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
-	<script th:src="@{/js/demo/employee-list.js}"
-		src="/static/js/demo/employee-list.js"></script>
 
-	<script
-		src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<script
-		src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-	<script>
-		$(function() {
-			$('[data-toggle="tooltip"]').tooltip()
-		})
-	</script>
-
-
-	
-	<script>
-		$(document).ready(function() {
-			$('#example').DataTable(
-
-			{
-
-				"aLengthMenu" : [ [ 5, 10, 25, -1 ], [ 5, 10, 25, "All" ] ],
-				"iDisplayLength" : 5
-			});
-		});
-	</script>
-	
 	<script
 		src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 	<script
 		src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
-	
+
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+
+
+
+	<script th:src="@{/js/demo/employee-list.js}"
+		src="/static/js/demo/employee-list.js"></script>
+
 </body>
 </html>
 

@@ -101,6 +101,7 @@ label {
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Gender</th>
+					<th>Contract</th>
 					<th>Email</th>
 					<th>Update</th>
 					<th>Delete</th>
@@ -112,6 +113,7 @@ label {
 					<td th:text="${tempEmployee.firstName}" />
 					<td th:text="${tempEmployee.lastName}" />
 					<td th:text="${tempEmployee.gender}" />
+					<td th:text="${tempEmployee.employmentContract}" />
 					<td th:text="${tempEmployee.email}" />
 					<td><a
 						th:href="@{/employees/edit/{id} (id=${tempEmployee.id})}"
